@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Duct Calculator</title>
+    <title>Duct Calculator - Complete</title>
     <style>
         :root {
             /* Light Theme - Clean Professional */
@@ -26,6 +26,9 @@
             --error-bg: #fed7d7;
             --error-border: #e53e3e;
             --error-text: #c53030;
+            --danger-bg: #fff5f5;
+            --danger-text: #c53030;
+            --danger-border: #fed7d7;
         }
 
         [data-theme="dark"] {
@@ -49,29 +52,48 @@
             --error-bg: #1a202c;
             --error-border: #f56565;
             --error-text: #fc8181;
+            --danger-bg: #2d3748;
+            --danger-text: #fc8181;
+            --danger-border: #4a5568;
         }
 
-        [data-theme="midnight"] {
-            /* Midnight Theme - Ultra Professional */
-            --bg-primary: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-            --bg-secondary: #0d1117;
-            --bg-tertiary: #161b22;
-            --bg-card: #21262d;
-            --text-primary: #f0f6fc;
-            --text-secondary: #c9d1d9;
-            --text-muted: #8b949e;
-            --border-color: #30363d;
-            --accent-color: #58a6ff;
-            --accent-secondary: #1f6feb;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.5);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.6);
-            --success-bg: #0d1117;
-            --success-border: #3fb950;
-            --success-text: #56d364;
-            --error-bg: #0d1117;
-            --error-border: #f85149;
-            --error-text: #ff7b72;
+        /* "Acid Trip" Cyberpunk Theme */
+        [data-theme="cyberpunk"] {
+            --bg-primary: linear-gradient(270deg, #ff00c8, #f7ff00, #6fff00, #00d7ff, #ff00c8);
+            --bg-secondary: rgba(15, 0, 25, 0.9);
+            --bg-tertiary: #1d002c;
+            --bg-card: rgba(15, 0, 25, 0.9);
+            --text-primary: #6fff00;
+            --text-secondary: #ff00f7;
+            --text-muted: #00d7ff;
+            --border-color: rgba(102, 255, 0, 0.6);
+            --accent-color: #ff00c8;
+            --accent-secondary: #f7ff00;
+            --success-bg: rgba(0, 64, 0, 0.9);
+            --success-border: #00ff88;
+            --success-text: #00ff9d;
+            --error-bg: rgba(64, 0, 0, 0.9);
+            --error-border: #ff0055;
+            --error-text: #ff0066;
+            --danger-bg: rgba(64, 0, 0, 0.9);
+            --danger-text: #ff0066;
+            --danger-border: #ff0055;
+            --shadow-sm: 0 0 4px var(--accent-color), 0 0 8px var(--accent-secondary);
+            --shadow-md: 0 0 10px rgba(255, 0, 200, 0.5), 0 0 15px rgba(102, 255, 0, 0.4);
+            --shadow-lg: 0 0 15px rgba(255, 0, 200, 0.6), 0 0 25px rgba(247, 255, 0, 0.4), inset 0 0 10px rgba(102, 255, 0, 0.5);
+            --neon-glow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent-color), 0 0 20px var(--accent-color), 0 0 25px var(--accent-color), 0 0 30px var(--accent-color), 0 0 35px var(--accent-color);
+        }
+
+        /* Add animation for the cyberpunk theme */
+        [data-theme="cyberpunk"] body {
+            background-size: 400% 400%;
+            animation: acid-trip-bg 15s ease infinite;
+        }
+
+        @keyframes acid-trip-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         * {
@@ -119,7 +141,7 @@
 
         .theme-light { background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
         .theme-dark { background: linear-gradient(135deg, #1a202c, #2d3748); }
-        .theme-midnight { background: linear-gradient(135deg, #0d1117, #161b22); }
+        .theme-cyberpunk { background: linear-gradient(135deg, #ff00c8, #6fff00); }
 
         .container {
             max-width: 1400px;
@@ -173,16 +195,22 @@
             box-shadow: var(--shadow-lg);
         }
 
+        [data-theme="cyberpunk"] .card {
+            border: 1px solid var(--border-color);
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .card-title {
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             color: var(--text-primary);
         }
-
         .tabs {
             display: flex;
             margin-bottom: 24px;
@@ -200,12 +228,21 @@
             text-align: center;
             color: var(--text-muted);
             transition: all 0.2s ease;
+            font-size: 0.875rem;
         }
 
         .tab.active {
             background: var(--accent-color);
             color: white;
             box-shadow: var(--shadow-sm);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         .form-group {
@@ -220,6 +257,10 @@
 
         .form-row.single {
             grid-template-columns: 1fr;
+        }
+
+        .form-row.triple {
+            grid-template-columns: 1fr 1fr 1fr;
         }
 
         label {
@@ -260,11 +301,40 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            margin-right: 8px;
         }
 
         .btn:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
+        }
+
+        [data-theme="cyberpunk"] .btn {
+            text-shadow: 0 0 8px currentColor;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="cyberpunk"] .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 0, 200, 0.4),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: scan 3s infinite linear;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-200%) rotate(45deg); }
+            100% { transform: translateY(200%) rotate(45deg); }
         }
 
         .btn-secondary {
@@ -273,8 +343,15 @@
             border: 1px solid var(--border-color);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, #48bb78, #38a169);
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+        }
+
+        .btn-danger {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+            border: 1px solid var(--danger-border);
         }
 
         .constraint-group {
@@ -315,139 +392,128 @@
 
         .result-label {
             font-size: 0.75rem;
+            font-weight: 600;
             color: var(--text-muted);
-            margin-bottom: 4px;
-            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.025em;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
         }
 
         .result-value {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
+            margin-bottom: 2px;
         }
 
-        .batch-section {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-        }
-
-        .scenario-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .scenario-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .scenario-header h4 {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .remove-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
+        .result-unit {
+            font-size: 0.875rem;
+            color: var(--text-muted);
         }
 
         .status-message {
-            padding: 12px 16px;
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
             border-radius: 8px;
-            margin: 16px 0;
-            font-size: 0.875rem;
             font-weight: 500;
-            display: none;
+            z-index: 1001;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .status-message.show {
+            opacity: 1;
         }
 
         .status-success {
             background: var(--success-bg);
-            border: 1px solid var(--success-border);
             color: var(--success-text);
+            border: 1px solid var(--success-border);
         }
 
         .status-error {
             background: var(--error-bg);
-            border: 1px solid var(--error-border);
             color: var(--error-text);
+            border: 1px solid var(--error-border);
         }
 
-        .loading {
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .advanced-toggle {
-            text-align: center;
-            margin: 16px 0;
-        }
-
-        .advanced-toggle button {
-            background: none;
-            border: none;
-            color: var(--accent-color);
-            font-weight: 500;
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .advanced-toggle button:hover {
+        .sizing-method-info {
             background: var(--bg-tertiary);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent-color);
         }
 
-        .advanced-results {
-            display: none;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px dashed var(--border-color);
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px 20px;
+            font-size: 1rem;
         }
 
-        .dimension-toggle {
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* History Panel Styles */
+        .history-item {
             display: flex;
-            gap: 16px;
-            margin: 8px 0;
-        }
-
-        .dimension-toggle label {
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-size: 0.875rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            gap: 16px;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        .history-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            font-size: 0.8rem;
+        }
+        .history-detail {
+            color: var(--text-secondary);
+        }
+        .history-detail strong {
+            color: var(--text-primary);
+        }
+        .history-timestamp {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
 
         @media (max-width: 768px) {
-            .container { padding: 16px; }
-            .main-grid { grid-template-columns: 1fr; gap: 16px; }
-            .form-row { grid-template-columns: 1fr; }
-            .tabs { flex-direction: column; }
-            .theme-selector { position: relative; top: 0; right: 0; margin-bottom: 16px; justify-content: center; }
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .tab {
+                margin-bottom: 4px;
+            }
+            .theme-selector {
+                top: 12px;
+                right: 12px;
+            }
+            .history-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -455,776 +521,828 @@
     <div class="theme-selector">
         <div class="theme-btn theme-light active" onclick="setTheme('light')" title="Light Theme"></div>
         <div class="theme-btn theme-dark" onclick="setTheme('dark')" title="Dark Theme"></div>
-        <div class="theme-btn theme-midnight" onclick="setTheme('midnight')" title="Midnight Theme"></div>
+        <div class="theme-btn theme-cyberpunk" onclick="setTheme('cyberpunk')" title="Cyberpunk Theme"></div>
     </div>
+
+    <div class="status-message" id="statusMessage"></div>
 
     <div class="container">
         <div class="header">
-            <h1>🏗️ Professional Duct Calculator</h1>
-            <p>Advanced HVAC Duct Sizing & Analysis Tool</p>
+            <h1>JR's Duct Calculator</h1>
+            <p>My ductulator because sometimes it's quicker to build your own tool than find a decent one online.
+                This ductulator was created out of necessity and bordem and shared because good tools
+            should be accessible and free.
+
+            Note: Double-check all calculations and verify against local codes. Use at your
+            own discretion. Feel free to share - no ads, no tracking, just a useful tool.
+
+            Email - jesse@obandco.com.au if you have any suggestions for addition features</p>
         </div>
 
         <div class="main-grid">
-            <!-- Input Section -->
             <div class="card">
-                <h2 class="card-title">⚙️ Input Parameters</h2>
-
-                <div class="tabs">
-                    <div class="tab active" onclick="switchTab('manual-tab')">Manual</div>
-                    <div class="tab" onclick="switchTab('auto-tab')">Auto Size</div>
-                    <div class="tab" onclick="switchTab('semi-auto-tab')">Semi-Auto</div>
+                <div class="card-title">
+                    <span>📊 Duct Sizing Parameters</span>
                 </div>
 
-                <!-- Manual Tab -->
-                <div id="manual-tab" class="tab-content active">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div>
-                                <label for="flowrate">Flow Rate</label>
-                                <input type="number" id="flowrate" step="0.01" placeholder="500">
-                            </div>
-                            <div>
-                                <label for="flowUnits">Units</label>
-                                <select id="flowUnits">
-                                    <option value="L/s" selected>L/s</option>
-                                    <option value="m³/s">m³/s</option>
-                                    <option value="CFM">CFM</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div>
-                                <label for="width">Width (mm)</label>
-                                <input type="number" id="width" step="1" placeholder="250">
-                            </div>
-                            <div>
-                                <label for="height">Height (mm)</label>
-                                <input type="number" id="height" step="1" placeholder="200">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div>
-                                <label for="temperature">Temperature (°C)</label>
-                                <input type="number" id="temperature" step="0.1" value="20">
-                            </div>
-                            <div>
-                                <label for="material">Material</label>
-                                <select id="material">
-                                    <option value="Galvanized Steel">Galvanized Steel</option>
-                                    <option value="Aluminum">Aluminum</option>
-                                    <option value="Stainless Steel">Stainless Steel</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn" onclick="calculateSingle()">
-                            <span id="calcLoadingIcon" class="loading" style="display: none;"></span>
-                            Calculate
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
-                    </div>
-                </div>
-
-                <!-- Auto Tab -->
-                <div id="auto-tab" class="tab-content" style="display: none;">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div>
-                                <label for="auto-flowrate">Flow Rate</label>
-                                <input type="number" id="auto-flowrate" step="0.01" placeholder="500">
-                            </div>
-                            <div>
-                                <label for="auto-flowUnits">Units</label>
-                                <select id="auto-flowUnits">
-                                    <option value="L/s" selected>L/s</option>
-                                    <option value="m³/s">m³/s</option>
-                                    <option value="CFM">CFM</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="constraint-group">
-                        <div class="constraint-title">⚡ Constraints</div>
-                        <div class="form-row">
-                            <div>
-                                <label for="max-velocity">Max Velocity (m/s)</label>
-                                <input type="number" id="max-velocity" step="0.1" value="7.5">
-                            </div>
-                            <div>
-                                <label for="aspect-ratio">Aspect Ratio</label>
-                                <input type="number" id="aspect-ratio" step="0.1" value="1.5" min="1" max="4">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn" onclick="calculateAutoSize()">
-                            <span id="autoCalcLoadingIcon" class="loading" style="display: none;"></span>
-                            Find Optimal Size
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="clearAutoForm()">Clear</button>
-                    </div>
-                </div>
-
-                <!-- Semi-Auto Tab -->
-                <div id="semi-auto-tab" class="tab-content" style="display: none;">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div>
-                                <label for="semi-flowrate">Flow Rate</label>
-                                <input type="number" id="semi-flowrate" step="0.01" placeholder="500">
-                            </div>
-                            <div>
-                                <label for="locked-value">Fixed Dimension (mm)</label>
-                                <input type="number" id="locked-value" step="1" value="300">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="constraint-group">
-                        <div class="constraint-title">📐 Lock Dimension</div>
-                        <div class="dimension-toggle">
-                            <label><input type="radio" name="locked-dimension" value="width" checked> Width</label>
-                            <label><input type="radio" name="locked-dimension" value="height"> Height</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn" onclick="calculateSemiAutoSize()">
-                            <span id="semiAutoCalcLoadingIcon" class="loading" style="display: none;"></span>
-                            Calculate Size
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="clearSemiAutoForm()">Clear</button>
-                    </div>
-                </div>
-
-                <div id="statusMessage" class="status-message"></div>
-            </div>
-
-            <!-- Results Section -->
-            <div class="card">
-                <h2 class="card-title">📊 Results</h2>
-
-                <div id="resultsContainer">
-                    <p style="text-align: center; color: var(--text-muted); padding: 40px;">
-                        Enter parameters and calculate to see results
-                    </p>
-                </div>
-
-                <div class="advanced-toggle" id="advancedToggle" style="display: none;">
-                    <button onclick="toggleAdvancedResults()">
-                        Show Advanced Results ▼
-                    </button>
-                </div>
-
-                <div class="advanced-results" id="advancedResultsContainer"></div>
-
-                <div style="margin-top: 20px;">
-                    <button type="button" class="btn btn-success" onclick="exportResults()" id="exportBtn" disabled>
-                        📄 Export CSV
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Batch Section -->
-        <div class="batch-section">
-            <h2 class="card-title">🚀 Batch Calculations</h2>
-            
-            <div id="scenariosContainer">
-                <div class="scenario-card" data-scenario="0">
-                    <div class="scenario-header">
-                        <h4>Scenario 1</h4>
-                        <button type="button" class="remove-btn" onclick="removeScenario(0)" style="display: none;">Remove</button>
-                    </div>
+                <div class="constraint-group">
+                    <div class="constraint-title">Global Sizing Constraints</div>
                     <div class="form-row">
-                        <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
-                        <input type="number" placeholder="Width (mm)" class="scenario-width">
-                        <input type="number" placeholder="Height (mm)" class="scenario-height">
-                        <input type="number" placeholder="Temperature (°C)" class="scenario-temperature" value="20">
+                        <div>
+                            <label>Max Aspect Ratio</label>
+                            <input type="number" id="global-aspect-ratio" value="1.5" step="0.1">
+                        </div>
+                        <div>
+                            <label>Sizing Step (mm)</label>
+                            <select id="global-step-size">
+                                <option value="25">25</option>
+                                <option value="50" selected>50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs" style="margin-top: 24px;">
+                    <div class="tab active" onclick="switchTab('single')">Single Calc</div>
+                    <div class="tab" onclick="switchTab('velocity')">Velocity Size</div>
+                    <div class="tab" onclick="switchTab('pressure')">Pressure Size</div>
+                    <div class="tab" onclick="switchTab('combined')">Combined Size</div>
+                </div>
+
+                <div id="single-tab" class="tab-content active">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label>Duct Shape</label>
+                                <select id="single-shape" onchange="toggleShapeInputs('single')">
+                                    <option value="rectangular">Rectangular</option>
+                                    <option value="circular">Circular</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Air Flow Rate (L/s)</label>
+                                <input type="number" id="single-flow" value="500" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="single-rectangular-inputs">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div>
+                                    <label>Width (mm)</label>
+                                    <input type="number" id="single-width" value="300" step="1">
+                                </div>
+                                <div>
+                                    <label>Height (mm)</label>
+                                    <input type="number" id="single-height" value="200" step="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="single-circular-inputs" style="display: none;">
+                        <div class="form-group">
+                            <div class="form-row single">
+                                <div>
+                                    <label>Diameter (mm)</label>
+                                    <input type="number" id="single-diameter" value="250" step="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn" onclick="calculateSingle()">Calculate</button>
+                        <button class="btn btn-secondary" onclick="clearSingleForm()">Clear</button>
+                    </div>
+                </div>
+
+                <div id="velocity-tab" class="tab-content">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label>Duct Shape</label>
+                                <select id="velocity-shape" onchange="toggleShapeInputs('velocity')">
+                                    <option value="rectangular">Rectangular</option>
+                                    <option value="circular">Circular</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Air Flow Rate (L/s)</label>
+                                <input type="number" id="velocity-flow" value="500" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="constraint-group">
+                        <div class="constraint-title">Velocity Constraints</div>
+                        <div class="form-row">
+                            <div>
+                                <label>Max Velocity (m/s)</label>
+                                <input type="number" id="velocity-max" value="6" step="0.1">
+                            </div>
+                            <div>
+                                <label>Preferred Velocity (m/s)</label>
+                                <input type="number" id="velocity-preferred" value="4" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="velocity-rectangular-constraints">
+                        <div class="constraint-group">
+                            <div class="constraint-title">Size Constraints (Rectangular)</div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Width (mm)</label>
+                                    <input type="number" id="velocity-min-width" value="250" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Width (mm)</label>
+                                    <input type="number" id="velocity-max-width" value="1000" step="50">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Height (mm)</label>
+                                    <input type="number" id="velocity-min-height" value="250" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Height (mm)</label>
+                                    <input type="number" id="velocity-max-height" value="800" step="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="velocity-circular-constraints" style="display: none;">
+                        <div class="constraint-group">
+                            <div class="constraint-title">Size Constraints (Circular)</div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Diameter (mm)</label>
+                                    <input type="number" id="velocity-min-diameter" value="200" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Diameter (mm)</label>
+                                    <input type="number" id="velocity-max-diameter" value="800" step="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn" onclick="calculateSizing('velocity')">Size Duct</button>
+                        <button class="btn btn-secondary" onclick="clearVelocityForm()">Clear</button>
+                    </div>
+                </div>
+
+                <div id="pressure-tab" class="tab-content">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label>Duct Shape</label>
+                                <select id="pressure-shape" onchange="toggleShapeInputs('pressure')">
+                                    <option value="rectangular">Rectangular</option>
+                                    <option value="circular">Circular</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Air Flow Rate (L/s)</label>
+                                <input type="number" id="pressure-flow" value="500" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="constraint-group">
+                        <div class="constraint-title">Pressure Drop Constraints</div>
+                        <div class="form-row">
+                            <div>
+                                <label>Max Pressure Drop (Pa/m)</label>
+                                <input type="number" id="pressure-max" value="1.0" step="0.1">
+                            </div>
+                            <div>
+                                <label>Preferred Pressure Drop (Pa/m)</label>
+                                <input type="number" id="pressure-preferred" value="0.8" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pressure-rectangular-constraints">
+                        <div class="constraint-group">
+                            <div class="constraint-title">Size Constraints (Rectangular)</div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Width (mm)</label>
+                                    <input type="number" id="pressure-min-width" value="250" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Width (mm)</label>
+                                    <input type="number" id="pressure-max-width" value="1000" step="50">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Height (mm)</label>
+                                    <input type="number" id="pressure-min-height" value="250" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Height (mm)</label>
+                                    <input type="number" id="pressure-max-height" value="800" step="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pressure-circular-constraints" style="display: none;">
+                        <div class="constraint-group">
+                            <div class="constraint-title">Size Constraints (Circular)</div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Diameter (mm)</label>
+                                    <input type="number" id="pressure-min-diameter" value="100" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Diameter (mm)</label>
+                                    <input type="number" id="pressure-max-diameter" value="800" step="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn" onclick="calculateSizing('pressure')">Size Duct</button>
+                        <button class="btn btn-secondary" onclick="clearPressureForm()">Clear</button>
+                    </div>
+                </div>
+
+                <div id="combined-tab" class="tab-content">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label>Duct Shape</label>
+                                <select id="combined-shape" onchange="toggleShapeInputs('combined')">
+                                    <option value="rectangular">Rectangular</option>
+                                    <option value="circular">Circular</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Air Flow Rate (L/s)</label>
+                                <input type="number" id="combined-flow" value="500" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="constraint-group">
+                        <div class="constraint-title">Sizing Method</div>
+                        <div class="form-row single">
+                            <div>
+                                <label>Constraint Method</label>
+                                <select id="combined-method">
+                                    <option value="velocity">Velocity Constraint Only</option>
+                                    <option value="pressure">Pressure Drop Constraint Only</option>
+                                    <option value="both-restrictive" selected>Most Restrictive (Larger Duct)</option>
+                                    <option value="both-efficient">Most Efficient (Smaller Duct)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="sizing-method-info">
+                            <strong>Most Restrictive:</strong> Satisfies both constraints (may result in a larger duct).<br>
+                            <strong>Most Efficient:</strong> Satisfies at least one constraint (may result in a smaller duct).
+                        </div>
+                    </div>
+
+                    <div class="constraint-group">
+                        <div class="constraint-title">Velocity & Pressure Constraints</div>
+                        <div class="form-row">
+                            <div>
+                                <label>Max Velocity (m/s)</label>
+                                <input type="number" id="combined-velocity-max" value="6" step="0.1">
+                            </div>
+                            <div>
+                                <label>Max Pressure Drop (Pa/m)</label>
+                                <input type="number" id="combined-pressure-max" value="1.0" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="combined-rectangular-constraints">
+                        <div class="constraint-group">
+                            <div class="constraint-title">Size Constraints (Rectangular)</div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Width (mm)</label>
+                                    <input type="number" id="combined-min-width" value="250" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Width (mm)</label>
+                                    <input type="number" id="combined-max-width" value="1000" step="50">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Height (mm)</label>
+                                    <input type="number" id="combined-min-height" value="250" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Height (mm)</label>
+                                    <input type="number" id="combined-max-height" value="800" step="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="combined-circular-constraints" style="display: none;">
+                        <div class="constraint-group">
+                            <div class="constraint-title">Size Constraints (Circular)</div>
+                            <div class="form-row">
+                                <div>
+                                    <label>Min Diameter (mm)</label>
+                                    <input type="number" id="combined-min-diameter" value="100" step="50">
+                                </div>
+                                <div>
+                                    <label>Max Diameter (mm)</label>
+                                    <input type="number" id="combined-max-diameter" value="800" step="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn" onclick="calculateSizing('combined')">Size Duct</button>
+                        <button class="btn btn-secondary" onclick="clearCombinedForm()">Clear</button>
                     </div>
                 </div>
             </div>
 
-            <div style="margin-top: 20px;">
-                <button type="button" class="btn btn-secondary" onclick="addScenario()">+ Add Scenario</button>
-                <button type="button" class="btn" onclick="runBatchCalculations()">
-                    <span id="batchLoadingIcon" class="loading" style="display: none;"></span>
-                    Run Batch
-                </button>
+            <div class="card">
+                <div class="card-title">
+                    <span>📈 Results & Analysis</span>
+                </div>
+                <div id="results-container">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔧</div>
+                        <p>Enter parameters and calculate to see detailed results</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span>📜 Calculation History</span>
+                <button class="btn btn-sm btn-danger" onclick="clearHistory()">Clear History</button>
+            </div>
+            <div id="history-container">
+                 <div class="empty-state">
+                    <p>Your calculation history will appear here.</p>
+                </div>
+            </div>
+        </div>
+        </div>
 
     <script>
-        // Theme Management
+        // --- Global State ---
+        let calculationHistory = [];
+        let currentTab = 'single';
+
+        // --- Event Listeners & Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHistory();
+            renderHistory();
+        });
+
+
+        // --- UI & State Management ---
+
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
             document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`.theme-${theme}`).classList.add('active');
-            localStorage.setItem('theme', theme);
         }
 
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            setTheme(savedTheme);
-        });
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            const tabIndex = ['single', 'velocity', 'pressure', 'combined'].indexOf(tab);
+            document.querySelector(`.tab:nth-child(${tabIndex + 1})`).classList.add('active');
 
-        // Calculator Variables
-        let scenarioCount = 1;
-        let currentResults = null;
-        let advancedResultsVisible = false;
-
-        // Tab Management
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            
-            document.getElementById(tabId).style.display = 'block';
-            
-            const tabIndex = tabId === 'manual-tab' ? 0 : tabId === 'auto-tab' ? 1 : 2;
-            document.querySelectorAll('.tab')[tabIndex].classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tab}-tab`).classList.add('active');
         }
 
-        // Main Calculation Function
-        async function calculateSingle() {
-            const loadingIcon = document.getElementById('calcLoadingIcon');
-            
-            try {
-                loadingIcon.style.display = 'inline-block';
-                showStatus('Calculating...', 'info');
+        function toggleShapeInputs(prefix) {
+            const shape = document.getElementById(`${prefix}-shape`).value;
+            const isRect = shape === 'rectangular';
 
-                const params = getFormParameters();
-                
-                if (!validateInputs(params)) {
-                    showStatus('Please fill in all required fields.', 'error');
-                    return;
-                }
+            // This condition seems to be targeting elements that don't exist in the 'single' tab context.
+            // Let's ensure these elements exist before trying to modify their style.
+            const rectangularInputs = document.getElementById(`${prefix}-rectangular-inputs`);
+            const circularInputs = document.getElementById(`${prefix}-circular-inputs`);
+            if (rectangularInputs) rectangularInputs.style.display = isRect ? 'block' : 'none';
+            if (circularInputs) circularInputs.style.display = isRect ? 'none' : 'block';
 
-                const result = performCalculation(params);
-                displaySingleResult(result);
-                currentResults = result;
-                showStatus('Calculation completed!', 'success');
-                document.getElementById('exportBtn').disabled = false;
-                document.getElementById('advancedToggle').style.display = 'block';
-
-            } catch (error) {
-                console.error('Calculation error:', error);
-                showStatus('Calculation failed. Please check inputs.', 'error');
-            } finally {
-                loadingIcon.style.display = 'none';
+            if (prefix !== 'single') {
+                const rectangularConstraints = document.getElementById(`${prefix}-rectangular-constraints`);
+                const circularConstraints = document.getElementById(`${prefix}-circular-constraints`);
+                if (rectangularConstraints) rectangularConstraints.style.display = isRect ? 'block' : 'none';
+                if (circularConstraints) circularConstraints.style.display = isRect ? 'none' : 'block';
             }
         }
 
-        // Auto Size Calculation
-        async function calculateAutoSize() {
-            const loadingIcon = document.getElementById('autoCalcLoadingIcon');
-            
-            try {
-                loadingIcon.style.display = 'inline-block';
-                showStatus('Finding optimal size...', 'info');
 
-                const params = getAutoSizeParameters();
-                
-                if (!params.flowrate) {
-                    showStatus('Please enter a flow rate.', 'error');
-                    return;
-                }
-
-                const optimalDimensions = findOptimalDuctSize(params);
-                
-                // Apply to manual form
-                document.getElementById('flowrate').value = params.flowrate;
-                document.getElementById('flowUnits').value = params.flowUnits;
-                document.getElementById('width').value = optimalDimensions.width;
-                document.getElementById('height').value = optimalDimensions.height;
-                
-                switchTab('manual-tab');
-                calculateSingle();
-                
-                showStatus('Optimal size found!', 'success');
-
-            } catch (error) {
-                showStatus('Auto sizing failed.', 'error');
-            } finally {
-                loadingIcon.style.display = 'none';
-            }
+        function showStatus(message, type = 'success') {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status-message status-${type} show`;
+            setTimeout(() => statusEl.classList.remove('show'), 3000);
         }
 
-        // Semi-Auto Calculation
-        async function calculateSemiAutoSize() {
-            const loadingIcon = document.getElementById('semiAutoCalcLoadingIcon');
-            
-            try {
-                loadingIcon.style.display = 'inline-block';
-                showStatus('Calculating with fixed dimension...', 'info');
+        // --- Form Clearing Functions ---
 
-                const params = getSemiAutoSizeParameters();
-                
-                if (!params.flowrate || !params.lockedValue) {
-                    showStatus('Please enter flow rate and fixed dimension.', 'error');
-                    return;
-                }
-
-                const result = findSemiOptimalSize(params);
-                
-                // Apply to manual form
-                document.getElementById('flowrate').value = params.flowrate;
-                document.getElementById('width').value = result.width;
-                document.getElementById('height').value = result.height;
-                
-                switchTab('manual-tab');
-                calculateSingle();
-                
-                showStatus('Semi-auto sizing completed!', 'success');
-
-            } catch (error) {
-                showStatus('Semi-auto sizing failed.', 'error');
-            } finally {
-                loadingIcon.style.display = 'none';
-            }
+        function clearSingleForm() {
+            document.getElementById('single-flow').value = '500';
+            document.getElementById('single-width').value = '300';
+            document.getElementById('single-height').value = '200';
+            document.getElementById('single-diameter').value = '250';
+            showStatus('Form cleared');
         }
 
-        // Helper Functions
-        function getFormParameters() {
-            return {
-                flowrate: parseFloat(document.getElementById('flowrate').value) || 0,
-                width: parseFloat(document.getElementById('width').value) || 0,
-                height: parseFloat(document.getElementById('height').value) || 0,
-                temperature: parseFloat(document.getElementById('temperature').value) || 20,
-                material: document.getElementById('material').value,
-                flowUnits: document.getElementById('flowUnits').value
-            };
+        function clearVelocityForm() {
+            document.getElementById('velocity-flow').value = '500';
+            document.getElementById('velocity-max').value = '6';
+            document.getElementById('velocity-preferred').value = '4';
+            showStatus('Form cleared');
         }
 
-        function getAutoSizeParameters() {
-            return {
-                flowrate: parseFloat(document.getElementById('auto-flowrate').value) || 0,
-                maxVelocity: parseFloat(document.getElementById('max-velocity').value) || 7.5,
-                aspectRatio: parseFloat(document.getElementById('aspect-ratio').value) || 1.5,
-                flowUnits: document.getElementById('auto-flowUnits').value
-            };
+        function clearPressureForm() {
+            document.getElementById('pressure-flow').value = '500';
+            document.getElementById('pressure-max').value = '1.0';
+            document.getElementById('pressure-preferred').value = '0.8';
+            showStatus('Form cleared');
         }
 
-        function getSemiAutoSizeParameters() {
-            return {
-                flowrate: parseFloat(document.getElementById('semi-flowrate').value) || 0,
-                lockedDimension: document.querySelector('input[name="locked-dimension"]:checked').value,
-                lockedValue: parseFloat(document.getElementById('locked-value').value) || 0,
-                flowUnits: 'L/s'
-            };
+        function clearCombinedForm() {
+            document.getElementById('combined-flow').value = '500';
+            document.getElementById('combined-velocity-max').value = '6';
+            document.getElementById('combined-pressure-max').value = '1.0';
+            showStatus('Form cleared');
         }
 
-        function validateInputs(params) {
-            return params.flowrate > 0 && params.width > 0 && params.height > 0;
-        }
+        // --- Core Calculation Engine ---
 
-        function performCalculation(params) {
-            // Convert flow rate to m³/s if needed
-            let flowRate = params.flowrate;
-            switch(params.flowUnits) {
-                case 'L/s':
-                    flowRate = flowRate / 1000;
-                    break;
-                case 'CFM':
-                    flowRate = flowRate * 0.000471947;
-                    break;
+        function calculateDuctProperties({ flowM3s, shape, widthM, heightM, diameterM }) {
+            const DENSITY = 1.2;
+            const VISCOSITY = 1.8e-5;
+            const ROUGHNESS = 0.00015; // Roughness for galvanized steel
+
+            let area = 0, hydraulicDiameter = 0, aspectRatio = 1;
+
+            if (shape === 'rectangular' && widthM > 0 && heightM > 0) {
+                area = widthM * heightM;
+                hydraulicDiameter = (2 * widthM * heightM) / (widthM + heightM);
+                aspectRatio = Math.max(widthM, heightM) / Math.min(widthM, heightM);
+            } else if (shape === 'circular' && diameterM > 0) {
+                area = Math.PI * Math.pow(diameterM / 2, 2);
+                hydraulicDiameter = diameterM;
             }
 
-            // Convert dimensions to meters
-            const width = params.width / 1000;
-            const height = params.height / 1000;
-            
-            // Calculate cross-sectional area
-            const area = width * height;
-            
-            // Calculate equivalent diameter
-            const equivalentDiameter = (4 * area / (2 * (width + height))) * 1000;
-            
-            // Calculate velocity
-            const velocity = flowRate / area;
-            
-            // Air density at given temperature
-            const airDensity = 1.225 * (293.15 / (273.15 + params.temperature));
-            
-            // Calculate velocity pressure
-            const velocityPressure = 0.5 * airDensity * Math.pow(velocity, 2);
-            
-            // Calculate Reynolds number
-            const kinematicViscosity = 1.5e-5;
-            const reynoldsNumber = velocity * (equivalentDiameter / 1000) / kinematicViscosity;
-            
-            // Determine flow type
-            const flowType = reynoldsNumber > 4000 ? 'Turbulent' : reynoldsNumber > 2300 ? 'Transitional' : 'Laminar';
-            
-            // Calculate friction factor
-            const roughness = 0.0015;
-            const relativeRoughness = roughness / equivalentDiameter;
+            if (area === 0) return null;
+
+            const velocity = flowM3s / area;
+            const reynolds = (DENSITY * velocity * hydraulicDiameter) / VISCOSITY;
+
+            // Using the Haaland equation for friction factor - more stable than Colebrook-White
             let frictionFactor;
-            
-            if (reynoldsNumber > 4000) {
-                frictionFactor = 0.25 / Math.pow(Math.log10(relativeRoughness/3.7 + 5.74/Math.pow(reynoldsNumber, 0.9)), 2);
+            if (reynolds > 0) {
+                 frictionFactor = Math.pow(-1.8 * Math.log10(Math.pow((ROUGHNESS / hydraulicDiameter) / 3.7, 1.11) + (6.9 / reynolds)), -2);
             } else {
-                frictionFactor = 64 / reynoldsNumber;
+                frictionFactor = 0;
             }
-            
-            // Calculate pressure drop per meter
-            const pressureDrop = frictionFactor * (airDensity * Math.pow(velocity, 2)) / (2 * (equivalentDiameter / 1000));
+
+            const pressureDrop = frictionFactor * (DENSITY / 2) * (Math.pow(velocity, 2) / hydraulicDiameter);
+
+            // Using the equivalent diameter formula for rectangular ducts
+            const equivalentDiameter = shape === 'rectangular' ? 1.30 * Math.pow( (widthM * heightM), 0.625) / Math.pow(widthM + heightM, 0.25) : diameterM;
+
 
             return {
-                input: params,
-                output: {
-                    equivalentDiameter: equivalentDiameter.toFixed(1),
-                    averageVelocity: velocity.toFixed(2),
-                    pressureDrop: pressureDrop.toFixed(2),
-                    velocityPressure: velocityPressure.toFixed(2),
-                    crossSectionalArea: (area * 1000000).toFixed(0),
-                    reynoldsNumber: Math.round(reynoldsNumber),
-                    flowType: flowType,
-                    frictionFactor: frictionFactor.toFixed(4),
-                    airDensity: airDensity.toFixed(3)
+                shape,
+                dimensions: shape === 'rectangular'
+                    ? `${Math.round(widthM * 1000)} mm × ${Math.round(heightM * 1000)} mm`
+                    : `${Math.round(diameterM * 1000)} mm diameter`,
+                velocity, pressureDrop, aspectRatio, equivalentDiameter
+            };
+        }
+
+
+        // --- Main Calculation Triggers ---
+
+        function getInputs(prefix) {
+            const shape = document.getElementById(`${prefix}-shape`).value;
+            const inputs = {
+                mode: prefix,
+                shape: shape,
+                flow: parseFloat(document.getElementById(`${prefix}-flow`).value),
+            };
+
+            if (prefix === 'single') {
+                if (shape === 'rectangular') {
+                    inputs.width = parseFloat(document.getElementById('single-width').value);
+                    inputs.height = parseFloat(document.getElementById('single-height').value);
+                } else {
+                    inputs.diameter = parseFloat(document.getElementById('single-diameter').value);
                 }
-            };
-        }
-
-        function findOptimalDuctSize(params) {
-            let flowRateM3S = params.flowrate;
-            if (params.flowUnits === 'L/s') {
-                flowRateM3S = params.flowrate / 1000;
-            } else if (params.flowUnits === 'CFM') {
-                flowRateM3S = params.flowrate * 0.000471947;
             }
-            
-            const minArea = flowRateM3S / params.maxVelocity;
-            let height = Math.sqrt(minArea / params.aspectRatio);
-            let width = height * params.aspectRatio;
-            
-            const increment = 50;
-            let heightMm = Math.ceil(height * 1000 / increment) * increment;
-            let widthMm = Math.ceil(width * 1000 / increment) * increment;
-            
-            return {
-                width: widthMm,
-                height: heightMm
-            };
+            return inputs;
         }
 
-        function findSemiOptimalSize(params) {
-            let flowRateM3S = params.flowrate;
-            if (params.flowUnits === 'L/s') {
-                flowRateM3S = params.flowrate / 1000;
-            }
-            
-            const lockedDimM = params.lockedValue / 1000;
-            const targetVelocity = 6; // m/s target
-            const requiredArea = flowRateM3S / targetVelocity;
-            
-            let width, height;
-            if (params.lockedDimension === 'width') {
-                width = params.lockedValue;
-                height = Math.round((requiredArea / lockedDimM) * 1000);
-            } else {
-                height = params.lockedValue;
-                width = Math.round((requiredArea / lockedDimM) * 1000);
-            }
-            
-            return { width, height };
-        }
 
-        function displaySingleResult(result) {
-            const container = document.getElementById('resultsContainer');
-            const output = result.output;
-
-            container.innerHTML = `
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-label">Duct Size</div>
-                        <div class="result-value">${result.input.width} × ${result.input.height} mm</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Velocity</div>
-                        <div class="result-value">${output.averageVelocity} m/s</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Pressure Drop</div>
-                        <div class="result-value">${output.pressureDrop} Pa/m</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Equivalent Diameter</div>
-                        <div class="result-value">${output.equivalentDiameter} mm</div>
-                    </div>
-                </div>
-            `;
-            
-            displayAdvancedResults(result);
-        }
-
-        function displayAdvancedResults(result) {
-            const container = document.getElementById('advancedResultsContainer');
-            const output = result.output;
-            
-            container.innerHTML = `
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-label">Velocity Pressure</div>
-                        <div class="result-value">${output.velocityPressure} Pa</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Cross-Sectional Area</div>
-                        <div class="result-value">${output.crossSectionalArea} mm²</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Reynolds Number</div>
-                        <div class="result-value">${output.reynoldsNumber}</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Flow Type</div>
-                        <div class="result-value">${output.flowType}</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Friction Factor</div>
-                        <div class="result-value">${output.frictionFactor}</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-label">Air Density</div>
-                        <div class="result-value">${output.airDensity} kg/m³</div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function toggleAdvancedResults() {
-            const container = document.getElementById('advancedResultsContainer');
-            const button = document.querySelector('#advancedToggle button');
-            
-            advancedResultsVisible = !advancedResultsVisible;
-            
-            if (advancedResultsVisible) {
-                container.style.display = 'block';
-                button.innerHTML = 'Hide Advanced Results ▲';
-            } else {
-                container.style.display = 'none';
-                button.innerHTML = 'Show Advanced Results ▼';
-            }
-        }
-
-        function addScenario() {
-            const container = document.getElementById('scenariosContainer');
-            const scenarioDiv = document.createElement('div');
-            scenarioDiv.className = 'scenario-card';
-            scenarioDiv.setAttribute('data-scenario', scenarioCount);
-            
-            scenarioDiv.innerHTML = `
-                <div class="scenario-header">
-                    <h4>Scenario ${scenarioCount + 1}</h4>
-                    <button type="button" class="remove-btn" onclick="removeScenario(${scenarioCount})">Remove</button>
-                </div>
-                <div class="form-row">
-                    <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
-                    <input type="number" placeholder="Width (mm)" class="scenario-width">
-                    <input type="number" placeholder="Height (mm)" class="scenario-height">
-                    <input type="number" placeholder="Temperature (°C)" class="scenario-temperature" value="20">
-                </div>
-            `;
-            
-            container.appendChild(scenarioDiv);
-            scenarioCount++;
-            updateRemoveButtons();
-        }
-
-        function removeScenario(index) {
-            const scenario = document.querySelector(`[data-scenario="${index}"]`);
-            if (scenario) {
-                scenario.remove();
-                updateRemoveButtons();
-            }
-        }
-
-        function updateRemoveButtons() {
-            const scenarios = document.querySelectorAll('.scenario-card');
-            const removeButtons = document.querySelectorAll('.remove-btn');
-            
-            removeButtons.forEach(btn => {
-                btn.style.display = scenarios.length > 1 ? 'block' : 'none';
-            });
-        }
-
-        async function runBatchCalculations() {
-            const loadingIcon = document.getElementById('batchLoadingIcon');
-            
+        function calculateSingle() {
             try {
-                loadingIcon.style.display = 'inline-block';
-                showStatus('Running batch calculations...', 'info');
-
-                const scenarios = [];
-                const scenarioElements = document.querySelectorAll('.scenario-card');
-                
-                scenarioElements.forEach((element, index) => {
-                    const flowrate = element.querySelector('.scenario-flowrate').value;
-                    const width = element.querySelector('.scenario-width').value;
-                    const height = element.querySelector('.scenario-height').value;
-                    const temperature = element.querySelector('.scenario-temperature').value || 20;
-                    
-                    if (flowrate && width && height) {
-                        scenarios.push({
-                            name: `Scenario ${index + 1}`,
-                            flowrate: parseFloat(flowrate),
-                            width: parseFloat(width),
-                            height: parseFloat(height),
-                            temperature: parseFloat(temperature),
-                            material: 'Galvanized Steel',
-                            flowUnits: 'L/s'
-                        });
-                    }
-                });
-
-                if (scenarios.length === 0) {
-                    showStatus('Please enter at least one complete scenario.', 'error');
+                const inputs = getInputs('single');
+                if (isNaN(inputs.flow) || inputs.flow <= 0) {
+                    showStatus('Please enter a valid flow rate', 'error');
                     return;
                 }
 
-                const results = scenarios.map(scenario => {
-                    const result = performCalculation(scenario);
-                    return { name: scenario.name, ...result };
-                });
+                const params = { flowM3s: inputs.flow / 1000, shape: inputs.shape };
+                if (inputs.shape === 'rectangular') {
+                    if(isNaN(inputs.width) || isNaN(inputs.height) || inputs.width <= 0 || inputs.height <= 0){
+                        showStatus('Please enter valid width and height', 'error');
+                        return;
+                    }
+                    params.widthM = inputs.width / 1000;
+                    params.heightM = inputs.height / 1000;
+                } else {
+                     if(isNaN(inputs.diameter) || inputs.diameter <= 0){
+                        showStatus('Please enter a valid diameter', 'error');
+                        return;
+                    }
+                    params.diameterM = inputs.diameter / 1000;
+                }
 
-                displayBatchResults(results);
-                currentResults = results;
-                showStatus(`Batch completed! ${scenarios.length} scenarios processed.`, 'success');
-                document.getElementById('exportBtn').disabled = false;
-
-            } catch (error) {
-                showStatus('Batch calculations failed.', 'error');
-            } finally {
-                loadingIcon.style.display = 'none';
+                const results = calculateDuctProperties(params);
+                if (results) {
+                    displayResults(results);
+                    updateHistory({ inputs: inputs, results: results });
+                    showStatus('Calculation complete');
+                } else {
+                    showStatus('Invalid dimensions provided', 'error');
+                }
+            } catch (e) {
+                console.error(e);
+                showStatus('An error occurred during calculation.', 'error');
             }
         }
 
-        function displayBatchResults(results) {
-            const container = document.getElementById('resultsContainer');
-            
-            let html = '<h3>Batch Results</h3>';
-            results.forEach(result => {
-                html += `
-                    <div style="margin-bottom: 20px; padding: 16px; border: 1px solid var(--border-color); border-radius: 12px;">
-                        <h4>${result.name}</h4>
-                        <div class="results-grid">
-                            <div class="result-card">
-                                <div class="result-label">Size</div>
-                                <div class="result-value">${result.input.width} × ${result.input.height} mm</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Velocity</div>
-                                <div class="result-value">${result.output.averageVelocity} m/s</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label">Pressure Drop</div>
-                                <div class="result-value">${result.output.pressureDrop} Pa/m</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
+        function calculateSizing(mode) {
+             try {
+                const shape = document.getElementById(`${mode}-shape`).value;
+                const flow = parseFloat(document.getElementById(`${mode}-flow`).value);
+                const flowM3s = flow / 1000;
+                const maxAspectRatio = parseFloat(document.getElementById('global-aspect-ratio').value);
+                const stepM = parseFloat(document.getElementById('global-step-size').value) / 1000;
+
+                const constraints = {
+                    velocity: mode !== 'pressure' ? parseFloat(document.getElementById(`${mode}-${mode === 'velocity' ? 'max' : 'velocity-max'}`).value) : Infinity,
+                    pressure: mode !== 'velocity' ? parseFloat(document.getElementById(`${mode}-${mode === 'pressure' ? 'max' : 'pressure-max'}`).value) : Infinity,
+                    method: mode === 'combined' ? document.getElementById('combined-method').value : mode,
+                };
+
+                if (isNaN(flow) || flow <= 0 || isNaN(constraints.velocity) || isNaN(constraints.pressure) || isNaN(maxAspectRatio) || isNaN(stepM)) {
+                    showStatus('Please enter valid numeric inputs for flow and constraints', 'error');
+                    return;
+                }
+
+                let bestOption = null;
+
+                if (shape === 'rectangular') {
+                    const minW = parseFloat(document.getElementById(`${mode}-min-width`).value) / 1000;
+                    const maxW = parseFloat(document.getElementById(`${mode}-max-width`).value) / 1000;
+                    const minH = parseFloat(document.getElementById(`${mode}-min-height`).value) / 1000;
+                    const maxH = parseFloat(document.getElementById(`${mode}-max-height`).value) / 1000;
+                    let solutions = [];
+
+                    for (let w = minW; w <= maxW; w += stepM) {
+                        for (let h = minH; h <= maxH; h += stepM) {
+                            const props = calculateDuctProperties({ flowM3s, shape, widthM: w, heightM: h });
+                            if (props && props.aspectRatio <= maxAspectRatio && isSizeValid(props, constraints)) {
+                                solutions.push(props);
+                            }
+                        }
+                    }
+                    if (solutions.length > 0) {
+                        solutions.sort((a, b) => {
+                            const areaA = a.equivalentDiameter; // Use equivalent diameter for a combined size metric
+                            const areaB = b.equivalentDiameter;
+                            if (Math.abs(areaA - areaB) > 0.001) return areaA - areaB;
+                            return a.aspectRatio - b.aspectRatio; // Then prefer lower aspect ratio
+                        });
+                        bestOption = solutions[0];
+                    }
+
+                } else { // Circular
+                    const minD = parseFloat(document.getElementById(`${mode}-min-diameter`).value) / 1000;
+                    const maxD = parseFloat(document.getElementById(`${mode}-max-diameter`).value) / 1000;
+                    for (let d = minD; d <= maxD; d += stepM) {
+                        const props = calculateDuctProperties({ flowM3s, shape, diameterM: d });
+                        if (isSizeValid(props, constraints)) {
+                            bestOption = props;
+                            break; // First valid size is the smallest
+                        }
+                    }
+                }
+
+                if (bestOption) {
+                    bestOption.sizingMethod = getSizingMethodLabel(bestOption, constraints);
+                    displayResults(bestOption);
+                    const inputs = { mode, shape, flow, constraints, maxAspectRatio, step: stepM * 1000 };
+                    updateHistory({ inputs, results: bestOption });
+                    showStatus('Duct sizing complete');
+                } else {
+                    displayResults(null);
+                    showStatus('No solution found with the given constraints.', 'error');
+                }
+            } catch (e) {
+                console.error(e);
+                showStatus('An error occurred during sizing.', 'error');
+            }
         }
 
-        function exportResults() {
-            if (!currentResults) {
-                showStatus('No results to export.', 'error');
+        function isSizeValid(props, constraints) {
+            if (!props) return false;
+            const meetsVelocity = props.velocity <= constraints.velocity;
+            const meetsPressure = props.pressureDrop <= constraints.pressure;
+            switch (constraints.method) {
+                case 'velocity': return meetsVelocity;
+                case 'pressure': return meetsPressure;
+                case 'both-restrictive': return meetsVelocity && meetsPressure;
+                case 'both-efficient': return meetsVelocity || meetsPressure;
+                default: return false;
+            }
+        }
+
+        function getSizingMethodLabel(props, constraints) {
+            if (!props || !constraints.method) return 'N/A';
+            switch(constraints.method) {
+                case 'velocity': return 'Velocity Constraint';
+                case 'pressure': return 'Pressure Drop Constraint';
+                case 'both-restrictive': return 'Combined (Restrictive)';
+                case 'both-efficient':
+                    const velRatio = props.velocity / constraints.velocity;
+                    const presRatio = props.pressureDrop / constraints.pressure;
+                    if (!isFinite(velRatio) && isFinite(presRatio)) return 'Combined (Efficient - Pressure Driven)';
+                    if (isFinite(velRatio) && !isFinite(presRatio)) return 'Combined (Efficient - Velocity Driven)';
+                    return velRatio > presRatio ? 'Combined (Efficient - Velocity Driven)' : 'Combined (Efficient - Pressure Driven)';
+                default: return 'N/A';
+            }
+        }
+
+
+        // --- Results & History Display ---
+
+        function displayResults(results) {
+            const container = document.getElementById('results-container');
+            if (!results) {
+                container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">❌</div><p>No solution found. Please adjust your constraints and try again.</p></div>`;
+                return;
+            }
+            container.innerHTML = '';
+            let resultsHTML = '<div class="results-grid">';
+            const resultItems = [
+                { label: 'Purposed Dimensions', value: results.dimensions, unit: '' },
+                { label: 'Velocity', value: results.velocity.toFixed(2), unit: 'm/s' },
+                { label: 'Pressure Drop', value: results.pressureDrop.toFixed(2), unit: 'Pa/m' },
+                { label: 'Aspect Ratio', value: results.aspectRatio.toFixed(2), unit: 'AR Best Practice: ≤ 4:1' },
+                { label: 'Equiv. Diameter', value: (results.equivalentDiameter * 1000).toFixed(0), unit: 'mm' },
+            ];
+
+            if(results.sizingMethod) {
+                 resultItems.push({ label: 'Sizing Method', value: results.sizingMethod, unit: '' });
+            }
+
+            resultItems.forEach(item => {
+                resultsHTML += `<div class="result-card"><div class="result-label">${item.label}</div><div class="result-value">${item.value}</div><div class="result-unit">${item.unit}</div></div>`;
+            });
+            resultsHTML += '</div>';
+            container.innerHTML = resultsHTML;
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('history-container');
+            container.innerHTML = '';
+            if (calculationHistory.length === 0) {
+                container.innerHTML = `<div class="empty-state"><p>Your calculation history will appear here.</p></div>`;
                 return;
             }
 
+            calculationHistory.slice().reverse().forEach(item => { // Render oldest first
+                const date = new Date(item.timestamp);
+                const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const historyItemHTML = `
+                    <div class="history-item">
+                        <div>
+                            <div class="history-details">
+                                <span class="history-detail"><strong>Dim:</strong> ${item.results.dimensions}</span>
+                                <span class="history-detail"><strong>Vel:</strong> ${item.results.velocity.toFixed(2)} m/s</span>
+                                <span class="history-detail"><strong>PD:</strong> ${item.results.pressureDrop.toFixed(2)} Pa/m</span>
+                            </div>
+                            <div class="history-timestamp">${date.toLocaleDateString()} ${timeString} (${item.inputs.mode})</div>
+                        </div>
+                        <button class="btn btn-sm btn-secondary" onclick="restoreFromHistory('${item.timestamp}')">Restore</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('afterbegin', historyItemHTML); // Add new items to the top
+            });
+        }
+
+        // --- History Management ---
+
+        function loadHistory() {
             try {
-                let csvContent = '';
-                
-                if (Array.isArray(currentResults)) {
-                    csvContent = 'Scenario,Flow Rate,Width,Height,Velocity,Pressure Drop\n';
-                    currentResults.forEach(result => {
-                        csvContent += `${result.name},${result.input.flowrate},${result.input.width},${result.input.height},${result.output.averageVelocity},${result.output.pressureDrop}\n`;
-                    });
-                } else {
-                    csvContent = 'Parameter,Value\n';
-                    csvContent += `Flow Rate,${currentResults.input.flowrate}\n`;
-                    csvContent += `Width,${currentResults.input.width} mm\n`;
-                    csvContent += `Height,${currentResults.input.height} mm\n`;
-                    csvContent += `Velocity,${currentResults.output.averageVelocity} m/s\n`;
-                    csvContent += `Pressure Drop,${currentResults.output.pressureDrop} Pa/m\n`;
+                const savedHistory = localStorage.getItem('ductCalcHistory');
+                if (savedHistory) {
+                    calculationHistory = JSON.parse(savedHistory);
                 }
-
-                const blob = new Blob([csvContent], { type: 'text/csv' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `duct_calculations_${new Date().toISOString().split('T')[0]}.csv`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-
-                showStatus('Results exported successfully!', 'success');
-            } catch (error) {
-                showStatus('Export failed.', 'error');
+            } catch (e) {
+                console.error("Could not load history:", e);
+                calculationHistory = [];
             }
         }
 
-        function clearForm() {
-            document.getElementById('flowrate').value = '';
-            document.getElementById('width').value = '';
-            document.getElementById('height').value = '';
-            document.getElementById('temperature').value = '20';
-            clearResults();
-        }
-
-        function clearAutoForm() {
-            document.getElementById('auto-flowrate').value = '';
-            document.getElementById('max-velocity').value = '7.5';
-            document.getElementById('aspect-ratio').value = '1.5';
-            hideStatus();
-        }
-
-        function clearSemiAutoForm() {
-            document.getElementById('semi-flowrate').value = '';
-            document.getElementById('locked-value').value = '300';
-            hideStatus();
-        }
-
-        function clearResults() {
-            document.getElementById('resultsContainer').innerHTML = `
-                <p style="text-align: center; color: var(--text-muted); padding: 40px;">
-                    Enter parameters and calculate to see results
-                </p>
-            `;
-            document.getElementById('exportBtn').disabled = true;
-            document.getElementById('advancedToggle').style.display = 'none';
-            currentResults = null;
-            hideStatus();
-        }
-
-        function showStatus(message, type) {
-            const statusElement = document.getElementById('statusMessage');
-            statusElement.textContent = message;
-            statusElement.className = `status-message status-${type}`;
-            statusElement.style.display = 'block';
-            
-            if (type === 'success') {
-                setTimeout(hideStatus, 3000);
+        function updateHistory(entry) {
+            entry.timestamp = new Date().toISOString();
+            calculationHistory.push(entry); // Add to the end
+            if (calculationHistory.length > 10) {
+                calculationHistory.shift(); // Remove the oldest
             }
+            try {
+                localStorage.setItem('ductCalcHistory', JSON.stringify(calculationHistory));
+            } catch (e) {
+                console.error("Could not save history:", e);
+            }
+            renderHistory();
         }
 
-        function hideStatus() {
-            document.getElementById('statusMessage').style.display = 'none';
+        function clearHistory() {
+            calculationHistory = [];
+            localStorage.removeItem('ductCalcHistory');
+            renderHistory();
+            showStatus('History cleared');
         }
+
+        function restoreFromHistory(timestamp) {
+            const historyItem = calculationHistory.find(item => item.timestamp === timestamp);
+            if (!historyItem) {
+                showStatus('Could not find history item.', 'error');
+                return;
+            }
+
+            const { inputs } = historyItem;
+            const prefix = inputs.mode;
+
+            switchTab(prefix);
+
+            if (prefix !== 'single') {
+                document.getElementById('global-aspect-ratio').value = inputs.maxAspectRatio || 1.5;
+                document.getElementById('global-step-size').value = inputs.step || 50;
+            }
+
+            document.getElementById(`${prefix}-shape`).value = inputs.shape;
+            document.getElementById(`${prefix}-flow`).value = inputs.flow;
+
+            if (prefix === 'single') {
+                 if (inputs.shape === 'rectangular') {
+                    document.getElementById('single-width').value = inputs.width;
+                    document.getElementById('single-height').value = inputs.height;
+                } else {
+                    document.getElementById('single-diameter').value = inputs.diameter;
+                }
+            }
+
+            if (inputs.constraints) {
+                const velMaxId = `${prefix}-${prefix === 'velocity' ? 'max' : 'velocity-max'}`;
+                const presMaxId = `${prefix}-${prefix === 'pressure' ? 'max' : 'pressure-max'}`;
+
+                if(inputs.constraints.velocity !== Infinity) {
+                    document.getElementById(velMaxId).value = inputs.constraints.velocity;
+                }
+                if(inputs.constraints.pressure !== Infinity) {
+                    document.getElementById(presMaxId).value = inputs.constraints.pressure;
+                }
+                if(prefix === 'combined') {
+                    document.getElementById('combined-method').value = inputs.constraints.method;
+                }
+            }
+
+            toggleShapeInputs(prefix);
+            displayResults(historyItem.results);
+            showStatus('Inputs restored from history.');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
     </script>
 </body>
 </html>
