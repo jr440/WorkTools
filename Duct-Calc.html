@@ -1,1 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duct Calculator Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .input-section, .results-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .result-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .batch-section {
+            grid-column: 1 / -1;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .scenario-input {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .remove-scenario {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .status-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ Duct Calculator</h1>
+            <p>Advanced HVAC Duct Sizing and Analysis Tool</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2 class="section-title">
+                    <span>⚙️</span> Input Parameters
+                </h2>
+
+                <form id="calculatorForm">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="flowrate">Flow Rate</label>
+                                <input type="number" id="flowrate" step="0.01" placeholder="Enter flow rate">
+                            </div>
+                            <div>
+                                <label for="flowUnits">Flow Units</label>
+                                <select id="flowUnits">
+                                    <option value="m³/s">m³/s</option>
+                                    <option value="L/s">L/s</option>
+                                    <option value="CFM">CFM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="width">Width (mm)</label>
+                                <input type="number" id="width" step="1" placeholder="Enter width">
+                            </div>
+                            <div>
+                                <label for="height">Height (mm)</label>
+                                <input type="number" id="height" step="1" placeholder="Enter height">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="temperature">Temperature (°C)</label>
+                                <input type="number" id="temperature" step="0.1" placeholder="Enter temperature">
+                            </div>
+                            <div>
+                                <label for="humidity">Humidity (%)</label>
+                                <input type="number" id="humidity" step="0.1" placeholder="Enter humidity">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="material">Duct Material</label>
+                        <select id="material">
+                            <option value="Galvanized Steel">Galvanized Steel</option>
+                            <option value="Aluminum">Aluminum</option>
+                            <option value="Stainless Steel">Stainless Steel</option>
+                            <option value="PVC">PVC</option>
+                            <option value="Fiberglass">Fiberglass</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn" onclick="calculateSingle()">
+                            <span id="calcLoadingIcon" class="loading" style="display: none;"></span>
+                            🧮 Calculate
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                            🗑️ Clear
+                        </button>
+                    </div>
+                </form>
+
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <h2 class="section-title">
+                    <span>📊</span> Results
+                </h2>
+
+                <div id="resultsContainer">
+                    <p style="text-align: center; color: #6c757d; padding: 40px;">
+                        Enter parameters and click Calculate to see results
+                    </p>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button type="button" class="btn btn-success" onclick="exportResults()" id="exportBtn" disabled>
+                        📄 Export to CSV
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Calculation Section -->
+        <div class="batch-section">
+            <h2 class="section-title">
+                <span>🚀</span> Batch Calculations
+            </h2>
+            
+            <div id="scenariosContainer">
+                <div class="scenario-input" data-scenario="0">
+                    <div class="scenario-header">
+                        <h4>Scenario 1</h4>
+                        <button type="button" class="remove-scenario" onclick="removeScenario(0)" style="display: none;">Remove</button>
+                    </div>
+                    <div class="form-row">
+                        <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
+                        <input type="number" placeholder="Width (mm)" class="scenario-width">
+                        <input type="number" placeholder="Height (mm)" class="scenario-height">
+                        <input type="number" placeholder="Temperature (°C)" class="scenario-temperature">
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button type="button" class="btn btn-secondary" onclick="addScenario()">
+                    ➕ Add Scenario
+                </button>
+                <button type="button" class="btn" onclick="runBatchCalculations()">
+                    <span id="batchLoadingIcon" class="loading" style="display: none;"></span>
+                    🎯 Run Batch Calculations
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="CALCULATOR.js"></script>
+    <script>
+        // Initialize the calculator
+        let calculator = new DuctCalculatorAutomator();
+        let scenarioCount = 1;
+
+        // Single calculation function
+        async function calculateSingle() {
+            const loadingIcon = document.getElementById('calcLoadingIcon');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            try {
+                loadingIcon.style.display = 'inline-block';
+                showStatus('Calculating...', 'info');
+
+                const params = {
+                    flowrate: document.getElementById('flowrate').value,
+                    width: document.getElementById('width').value,
+                    height: document.getElementById('height').value,
+                    temperature: document.getElementById('temperature').value,
+                    humidity: document.getElementById('humidity').value,
+                    material: document.getElementById('material').value,
+                    flowUnits: document.getElementById('flowUnits').value
+                };
+
+                // Check if we're on the calculator page
+                if (!document.getElementById('XLEW_3_4_2')) {
+                    showStatus('Please navigate to the duct calculator page first!', 'error');
+                    return;
+                }
+
+                const result = await calculator.calculateScenario(params);
+                displaySingleResult(result);
+                showStatus('Calculation completed successfully!', 'success');
+                document.getElementById('exportBtn').disabled = false;
+
+            } catch (error) {
+                console.error('Calculation error:', error);
+                showStatus('Calculation failed. Please check your inputs.', 'error');
+            } finally {
+                loadingIcon.style.display = 'none';
+            }
+        }
+
+        // Display single result
+        function displaySingleResult(result) {
+            const container = document.getElementById('resultsContainer');
+            const output = result.output;
+
+            container.innerHTML = `
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Equivalent Diameter</div>
+                        <div class="result-value">${output.equivalentDiameter || 'N/A'} mm</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Average Velocity</div>
+                        <div class="result-value">${output.averageVelocity || 'N/A'} m/s</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Effective Velocity</div>
+                        <div class="result-value">${output.effectiveVelocity || 'N/A'} m/s</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Pressure Drop</div>
+                        <div class="result-value">${output.pressureDrop || 'N/A'} Pa/m</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Velocity Pressure</div>
+                        <div class="result-value">${output.velocityPressure || 'N/A'} Pa</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Cross-Sectional Area</div>
+                        <div class="result-value">${output.crossSectionalArea || 'N/A'} m²</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Reynolds Number</div>
+                        <div class="result-value">${output.reynoldsNumber || 'N/A'}</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Flow Type</div>
+                        <div class="result-value">${output.flowType || 'N/A'}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Add new scenario
+        function addScenario() {
+            const container = document.getElementById('scenariosContainer');
+            const scenarioDiv = document.createElement('div');
+            scenarioDiv.className = 'scenario-input';
+            scenarioDiv.setAttribute('data-scenario', scenarioCount);
+            
+            scenarioDiv.innerHTML = `
+                <div class="scenario-header">
+                    <h4>Scenario ${scenarioCount + 1}</h4>
+                    <button type="button" class="remove-scenario" onclick="removeScenario(${scenarioCount})">Remove</button>
+                </div>
+                <div class="form-row">
+                    <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
+                    <input type="number" placeholder="Width (mm)" class="scenario-width">
+                    <input type="number" placeholder="Height (mm)" class="scenario-height">
+                    <input type="number" placeholder="Temperature (°C)" class="scenario-temperature">
+                </div>
+            `;
+            
+            container.appendChild(scenarioDiv);
+            scenarioCount++;
+            
+            // Show remove buttons if more than one scenario
+            updateRemoveButtons();
+        }
+
+        // Remove scenario
+        function removeScenario(index) {
+            const scenario = document.querySelector(`[data-scenario="${index}"]`);
+            if (scenario) {
+                scenario.remove();
+                updateRemoveButtons();
+            }
+        }
+
+        // Update remove button visibility
+        function updateRemoveButtons() {
+            const scenarios = document.querySelectorAll('.scenario-input');
+            const removeButtons = document.querySelectorAll('.remove-scenario');
+            
+            removeButtons.forEach(btn => {
+                btn.style.display = scenarios.length > 1 ? 'block' : 'none';
+            });
+        }
+
+        // Run batch calculations
+        async function runBatchCalculations() {
+            const loadingIcon = document.getElementById('batchLoadingIcon');
+            
+            try {
+                loadingIcon.style.display = 'inline-block';
+                showStatus('Running batch calculations...', 'info');
+
+                const scenarios = [];
+                const scenarioElements = document.querySelectorAll('.scenario-input');
+                
+                scenarioElements.forEach(element => {
+                    const flowrate = element.querySelector('.scenario-flowrate').value;
+                    const width = element.querySelector('.scenario-width').value;
+                    const height = element.querySelector('.scenario-height').value;
+                    const temperature = element.querySelector('.scenario-temperature').value;
+                    
+                    if (flowrate && width && height) {
+                        scenarios.push({
+                            flowrate: flowrate,
+                            width: width,
+                            height: height,
+                            temperature: temperature || 20,
+                            humidity: 50,
+                            material: 'Galvanized Steel',
+                            flowUnits: 'm³/s'
+                        });
+                    }
+                });
+
+                if (scenarios.length === 0) {
+                    showStatus('Please enter at least one complete scenario.', 'error');
+                    return;
+                }
+
+                await calculator.runBatchCalculations(scenarios);
+                showStatus(`Batch calculations completed! ${scenarios.length} scenarios processed.`, 'success');
+                document.getElementById('exportBtn').disabled = false;
+
+            } catch (error) {
+                console.error('Batch calculation error:', error);
+                showStatus('Batch calculations failed.', 'error');
+            } finally {
+                loadingIcon.style.display = 'none';
+            }
+        }
+
+        // Export results
+        function exportResults() {
+            try {
+                calculator.exportToCSV();
+                showStatus('Results exported successfully!', 'success');
+            } catch (error) {
+                console.error('Export error:', error);
+                showStatus('Export failed.', 'error');
+            }
+        }
+
+        // Clear form
+        function clearForm() {
+            document.getElementById('calculatorForm').reset();
+            document.getElementById('resultsContainer').innerHTML = `
+                <p style="text-align: center; color: #6c757d; padding: 40px;">
+                    Enter parameters and click Calculate to see results
+                </p>
+            `;
+            document.getElementById('exportBtn').disabled = true;
+            hideStatus();
+        }
+
+        // Show status message
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.textContent = message;
+            statusElement.className = `status-message status-${type === 'error' ? 'error' : type === 'success' ? 'success' : 'info'}`;
+            statusElement.style.display = 'block';
+        }
+
+        // Hide status message
+        function hideStatus() {
+            document.getElementById('statusMessage').style.display = 'none';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Duct Calculator Interface Loaded');
+            console.log('📋 Make sure to navigate to the calculator page and then use this interface');
+        });
+    </script>
+</body>
+</html>
 
