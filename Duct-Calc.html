@@ -29,8 +29,8 @@
             --danger-bg: #fff5f5;
             --danger-text: #c53030;
             --danger-border: #fed7d7;
+            --neon-glow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent-color), 0 0 20px var(--accent-color), 0 0 25px var(--accent-color), 0 0 30px var(--accent-color), 0 0 35px var(--accent-color);
         }
-
         [data-theme="dark"] {
             /* Dark Theme - Modern Professional */
             --bg-primary: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
@@ -124,7 +124,6 @@
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
         }
-
         .theme-btn {
             width: 32px;
             height: 32px;
@@ -133,22 +132,18 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
         .theme-btn.active {
             border-color: var(--accent-color);
             transform: scale(1.1);
         }
-
         .theme-light { background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
         .theme-dark { background: linear-gradient(135deg, #1a202c, #2d3748); }
         .theme-cyberpunk { background: linear-gradient(135deg, #ff00c8, #6fff00); }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 24px;
         }
-
         .header {
             background: var(--bg-card);
             border-radius: 16px;
@@ -158,9 +153,8 @@
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
         }
-
         .header h1 {
-            font-size: 0.5rem;
+            font-size: 3.0rem;
             font-weight: 400;
             margin-bottom: 8px;
             background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
@@ -168,19 +162,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .header p {
-            font-size: 5.0em;
+            font-size: 0.02rem;
             color: var(--text-muted);
         }
-
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
             margin-bottom: 24px;
         }
-
         .card {
             background: var(--bg-card);
             border-radius: 16px;
@@ -189,20 +180,17 @@
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
-
         .card:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-
         [data-theme="cyberpunk"] .card {
             border: 1px solid var(--border-color);
             box-shadow: var(--neon-glow);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 20px;
             display: flex;
@@ -218,7 +206,6 @@
             border-radius: 12px;
             padding: 4px;
         }
-
         .tab {
             flex: 1;
             padding: 12px 16px;
@@ -228,15 +215,13 @@
             text-align: center;
             color: var(--text-muted);
             transition: all 0.2s ease;
-            font-size: 0.875rem;
+            font-size: 1.5rem;
         }
-
         .tab.active {
             background: var(--accent-color);
             color: white;
             box-shadow: var(--shadow-sm);
         }
-
         .tab-content {
             display: none;
         }
@@ -244,17 +229,14 @@
         .tab-content.active {
             display: block;
         }
-
         .form-group {
             margin-bottom: 20px;
         }
-
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
-
         .form-row.single {
             grid-template-columns: 1fr;
         }
@@ -262,39 +244,35 @@
         .form-row.triple {
             grid-template-columns: 1fr 1fr 1fr;
         }
-
         label {
             display: block;
             margin-bottom: 6px;
             font-weight: 500;
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 1rem;
         }
-
         input, select {
             width: 100%;
             padding: 12px 16px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            font-size: 0.875rem;
+            font-size: 1.0rem;
             background: var(--bg-secondary);
             color: var(--text-primary);
             transition: all 0.2s ease;
         }
-
         input:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
         }
-
         .btn {
             background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
             color: white;
             border: none;
             padding: 12px 24px;
             border-radius: 8px;
-            font-size: 0.875rem;
+            font-size: 1.0rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -303,18 +281,15 @@
             gap: 8px;
             margin-right: 8px;
         }
-
         .btn:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
-
         [data-theme="cyberpunk"] .btn {
             text-shadow: 0 0 8px currentColor;
             position: relative;
             overflow: hidden;
         }
-
         [data-theme="cyberpunk"] .btn::after {
             content: '';
             position: absolute;
@@ -331,29 +306,24 @@
             transform: rotate(45deg);
             animation: scan 3s infinite linear;
         }
-
         @keyframes scan {
             0% { transform: translateY(-200%) rotate(45deg); }
             100% { transform: translateY(200%) rotate(45deg); }
         }
-
         .btn-secondary {
             background: var(--bg-tertiary);
             color: var(--text-secondary);
             border: 1px solid var(--border-color);
         }
-
         .btn-sm {
             padding: 6px 12px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
-
         .btn-danger {
             background: var(--danger-bg);
             color: var(--danger-text);
             border: 1px solid var(--danger-border);
         }
-
         .constraint-group {
             background: var(--bg-tertiary);
             padding: 16px;
@@ -361,20 +331,17 @@
             margin-top: 16px;
             border: 1px solid var(--border-color);
         }
-
         .constraint-title {
             font-weight: 600;
             margin-bottom: 12px;
             color: var(--text-primary);
-            font-size: 0.875rem;
+            font-size: 1.0rem;
         }
-
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
         }
-
         .result-card {
             background: var(--bg-secondary);
             padding: 16px;
@@ -384,14 +351,23 @@
             border: 1px solid var(--border-color);
             transition: all 0.2s ease;
         }
-
         .result-card:hover {
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
+        /* Add these CSS classes for result card status colors */
+        .result-card.status-optimal {
+            border-left: 4px solid var(--success-border);
+        }
+        .result-card.status-warning {
+            border-left: 4px solid var(--accent-secondary);
+        }
+        .result-card.status-critical {
+            border-left: 4px solid var(--error-border);
+        }
 
         .result-label {
-            font-size: 0.75rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -405,9 +381,8 @@
             color: var(--text-primary);
             margin-bottom: 2px;
         }
-
         .result-unit {
-            font-size: 0.875rem;
+            font-size: 1.0rem;
             color: var(--text-muted);
         }
 
@@ -423,17 +398,14 @@
             opacity: 0;
             transition: all 0.3s ease;
         }
-
         .status-message.show {
             opacity: 1;
         }
-
         .status-success {
             background: var(--success-bg);
             color: var(--success-text);
             border: 1px solid var(--success-border);
         }
-
         .status-error {
             background: var(--error-bg);
             color: var(--error-text);
@@ -445,22 +417,80 @@
             padding: 12px;
             border-radius: 8px;
             margin-top: 8px;
-            font-size: 0.8rem;
+            font-size: 1.0;
             color: var(--text-muted);
             border-left: 3px solid var(--accent-color);
         }
-
         .empty-state {
             text-align: center;
             color: var(--text-muted);
             padding: 40px 20px;
             font-size: 1rem;
         }
-
         .empty-state-icon {
             font-size: 3rem;
             margin-bottom: 16px;
             opacity: 0.5;
+        }
+
+        /* Toggle switch styles */
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-tertiary);
+            transition: .4s;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 2px;
+            background-color: var(--text-muted);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+            background-color: white;
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         /* History Panel Styles */
@@ -641,11 +671,11 @@
                         <div class="form-row">
                             <div>
                                 <label>Max Velocity (m/s)</label>
-                                <input type="number" id="velocity-max" value="6" step="0.1">
+                                <input type="number" id="velocity-max" value="12" step="0.1">
                             </div>
                             <div>
                                 <label>Preferred Velocity (m/s)</label>
-                                <input type="number" id="velocity-preferred" value="4" step="0.1">
+                                <input type="number" id="velocity-preferred" value="6" step="0.1">
                             </div>
                         </div>
                     </div>
@@ -720,11 +750,11 @@
                         <div class="form-row">
                             <div>
                                 <label>Max Pressure Drop (Pa/m)</label>
-                                <input type="number" id="pressure-max" value="1.0" step="0.1">
+                                <input type="number" id="pressure-max" value="0.8" step="0.1">
                             </div>
                             <div>
                                 <label>Preferred Pressure Drop (Pa/m)</label>
-                                <input type="number" id="pressure-preferred" value="0.8" step="0.1">
+                                <input type="number" id="pressure-preferred" value="0.5" step="0.1">
                             </div>
                         </div>
                     </div>
@@ -880,6 +910,13 @@
                 <div class="card-title">
                     <span>📈 Results & Analysis</span>
                 </div>
+                <div class="toggle-switch">
+                    <label class="switch">
+                        <input type="checkbox" id="colorCodeToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Enable color coding based on industry standards</span>
+                </div>
                 <div id="results-container">
                     <div class="empty-state">
                         <div class="empty-state-icon">🔧</div>
@@ -900,7 +937,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     <script>
         // --- Global State ---
@@ -920,6 +957,106 @@
             document.body.setAttribute('data-theme', theme);
             document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`.theme-${theme}`).classList.add('active');
+        }
+
+        function displayResults(results) {
+            const container = document.getElementById('results-container');
+            if (!results) {
+                container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">❌</div><p>No solution found. Please adjust your constraints and try again.</p></div>`;
+                return;
+            }
+            
+            // Define industry standards for color coding
+            const standards = {
+                velocity: {
+                    optimal: 5,    // m/s - typically 3-5 m/s is considered optimal for main ducts
+                    warning: 7.5,  // m/s - 5-7.5 m/s is acceptable but may have noise concerns
+                    critical: 10   // m/s - above 10 m/s is generally too high (noise, erosion)
+                },
+                pressureDrop: {
+                    optimal: 0.8,  // Pa/m - typically <0.8 Pa/m is considered good practice
+                    warning: 1.2,  // Pa/m - 0.8-1.2 Pa/m is acceptable
+                    critical: 1.5  // Pa/m - above 1.5 Pa/m is generally too high (energy concerns)
+                },
+                aspectRatio: {
+                    optimal: 3,    // Best practice is typically <3:1
+                    warning: 4,    // Up to 4:1 is acceptable
+                    critical: 8    // Above 8:1 is generally problematic
+                }
+            };
+            
+            // Function to determine status class based on value and thresholds
+            function getStatusClass(value, type) {
+                const threshold = standards[type];
+                if (!threshold) return '';
+                
+                if (value <= threshold.optimal) return 'status-optimal';
+                if (value <= threshold.warning) return 'status-warning';
+                return 'status-critical';
+            }
+            
+            const isColorCodingEnabled = document.getElementById('colorCodeToggle').checked;
+            
+            container.innerHTML = '';
+            let resultsHTML = '<div class="results-grid">';
+            
+            const resultItems = [
+                { 
+                    label: 'Purposed Dimensions', 
+                    value: results.dimensions, 
+                    unit: '',
+                    statusType: null // No color coding for dimensions
+                },
+                { 
+                    label: 'Velocity', 
+                    value: results.velocity.toFixed(2), 
+                    unit: 'm/s',
+                    statusType: 'velocity'
+                },
+                { 
+                    label: 'Pressure Drop', 
+                    value: results.pressureDrop.toFixed(2), 
+                    unit: 'Pa/m',
+                    statusType: 'pressureDrop'
+                },
+                { 
+                    label: 'Aspect Ratio', 
+                    value: results.aspectRatio.toFixed(2), 
+                    unit: 'AR Best Practice: ≤ 4:1',
+                    statusType: 'aspectRatio'
+                },
+                { 
+                    label: 'Equiv. Diameter', 
+                    value: (results.equivalentDiameter * 1000).toFixed(0), 
+                    unit: 'mm',
+                    statusType: null // No color coding for equivalent diameter
+                },
+            ];
+
+            if(results.sizingMethod) {
+                resultItems.push({ 
+                    label: 'Sizing Method', 
+                    value: results.sizingMethod, 
+                    unit: '',
+                    statusType: null // No color coding for sizing method
+                });
+            }
+
+            resultItems.forEach(item => {
+                let statusClass = '';
+                if (isColorCodingEnabled && item.statusType) {
+                    statusClass = getStatusClass(parseFloat(item.value), item.statusType);
+                }
+                
+                resultsHTML += `<div class="result-card ${statusClass}">
+                    <div class="result-label">${item.label}</div>
+                    <div class="result-value">${item.value}</div>
+                    <div class="result-unit">${item.unit}</div>
+                </div>`;
+            });
+            
+            resultsHTML += '</div>';
+            container.innerHTML = resultsHTML;
         }
 
         function switchTab(tab) {
@@ -1025,7 +1162,6 @@
 
             // Using the equivalent diameter formula for rectangular ducts
             const equivalentDiameter = shape === 'rectangular' ? 1.30 * Math.pow( (widthM * heightM), 0.625) / Math.pow(widthM + heightM, 0.25) : diameterM;
-
 
             return {
                 shape,
@@ -1203,32 +1339,103 @@
 
         // --- Results & History Display ---
 
-        function displayResults(results) {
-            const container = document.getElementById('results-container');
-            if (!results) {
-                container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">❌</div><p>No solution found. Please adjust your constraints and try again.</p></div>`;
-                return;
-            }
-            container.innerHTML = '';
-            let resultsHTML = '<div class="results-grid">';
-            const resultItems = [
-                { label: 'Purposed Dimensions', value: results.dimensions, unit: '' },
-                { label: 'Velocity', value: results.velocity.toFixed(2), unit: 'm/s' },
-                { label: 'Pressure Drop', value: results.pressureDrop.toFixed(2), unit: 'Pa/m' },
-                { label: 'Aspect Ratio', value: results.aspectRatio.toFixed(2), unit: 'AR Best Practice: ≤ 4:1' },
-                { label: 'Equiv. Diameter', value: (results.equivalentDiameter * 1000).toFixed(0), unit: 'mm' },
-            ];
-
-            if(results.sizingMethod) {
-                 resultItems.push({ label: 'Sizing Method', value: results.sizingMethod, unit: '' });
-            }
-
-            resultItems.forEach(item => {
-                resultsHTML += `<div class="result-card"><div class="result-label">${item.label}</div><div class="result-value">${item.value}</div><div class="result-unit">${item.unit}</div></div>`;
-            });
-            resultsHTML += '</div>';
-            container.innerHTML = resultsHTML;
+function displayResults(results) {
+    const container = document.getElementById('results-container');
+    if (!results) {
+        container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">❌</div><p>No solution found. Please adjust your constraints and try again.</p></div>`;
+        return;
+    }
+    
+    // Define industry standards for color coding
+    const standards = {
+        velocity: {
+            optimal: 5,    // m/s - typically 3-5 m/s is considered optimal for main ducts
+            warning: 7.5,  // m/s - 5-7.5 m/s is acceptable but may have noise concerns
+            critical: 10   // m/s - above 10 m/s is generally too high (noise, erosion)
+        },
+        pressureDrop: {
+            optimal: 0.8,  // Pa/m - typically <0.8 Pa/m is considered good practice
+            warning: 1.2,  // Pa/m - 0.8-1.2 Pa/m is acceptable
+            critical: 1.5  // Pa/m - above 1.5 Pa/m is generally too high (energy concerns)
+        },
+        aspectRatio: {
+            optimal: 3,    // Best practice is typically <3:1
+            warning: 4,    // Up to 4:1 is acceptable
+            critical: 8    // Above 8:1 is generally problematic
         }
+    };
+    
+    // Function to determine status class based on value and thresholds
+    function getStatusClass(value, type) {
+        const threshold = standards[type];
+        if (!threshold) return '';
+        
+        if (value <= threshold.optimal) return 'status-optimal';
+        if (value <= threshold.warning) return 'status-warning';
+        return 'status-critical';
+    }
+    
+    const isColorCodingEnabled = document.getElementById('colorCodeToggle').checked;
+    container.innerHTML = '';
+    let resultsHTML = '<div class="results-grid">';
+    const resultItems = [
+        { 
+            label: 'Purposed Dimensions', 
+            value: results.dimensions, 
+            unit: '',
+            statusType: null // No color coding for dimensions
+        },
+        { 
+            label: 'Velocity', 
+            value: results.velocity.toFixed(2), 
+            unit: 'm/s',
+            statusType: 'velocity'
+        },
+        { 
+            label: 'Pressure Drop', 
+            value: results.pressureDrop.toFixed(2), 
+            unit: 'Pa/m',
+            statusType: 'pressureDrop'
+        },
+        { 
+            label: 'Aspect Ratio', 
+            value: results.aspectRatio.toFixed(2), 
+            unit: 'AR Best Practice: ≤ 4:1',
+            statusType: 'aspectRatio'
+        },
+        { 
+            label: 'Equiv. Diameter', 
+            value: (results.equivalentDiameter * 1000).toFixed(0), 
+            unit: 'mm',
+            statusType: null // No color coding for equivalent diameter
+        },
+    ];
+
+    if(results.sizingMethod) {
+        resultItems.push({ 
+            label: 'Sizing Method', 
+            value: results.sizingMethod, 
+            unit: '',
+            statusType: null // No color coding for sizing method
+        });
+    }
+
+    resultItems.forEach(item => {
+        let statusClass = '';
+        if (isColorCodingEnabled && item.statusType) {
+            statusClass = getStatusClass(parseFloat(item.value), item.statusType);
+        }
+        
+        resultsHTML += `<div class="result-card ${statusClass}">
+            <div class="result-label">${item.label}</div>
+            <div class="result-value">${item.value}</div>
+            <div class="result-unit">${item.unit}</div>
+        </div>`;
+    });
+    
+    resultsHTML += '</div>';
+    container.innerHTML = resultsHTML;
+}
 
         function renderHistory() {
             const container = document.getElementById('history-container');
