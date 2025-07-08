@@ -3,75 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duct Calculator Interface</title>
+    <title>Professional Duct Calculator</title>
     <style>
         :root {
-            /* Light Theme (Default) */
-            --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Light Theme - Clean Professional */
+            --bg-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --bg-secondary: #ffffff;
-            --bg-tertiary: #f8f9fa;
-            --text-primary: #2c3e50;
-            --text-secondary: #495057;
-            --text-muted: #6c757d;
-            --border-color: #e9ecef;
-            --accent-color: #667eea;
-            --accent-secondary: #764ba2;
-            --card-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            --header-bg: linear-gradient(135deg, #2c3e50, #34495e);
-            --success-bg: #d4edda;
-            --success-border: #c3e6cb;
-            --success-text: #155724;
-            --error-bg: #f8d7da;
-            --error-border: #f5c6cb;
-            --error-text: #721c24;
-            --batch-bg: #fff3cd;
-            --batch-border: #ffeaa7;
+            --bg-tertiary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --accent-color: #4299e1;
+            --accent-secondary: #3182ce;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --success-bg: #f0fff4;
+            --success-border: #38a169;
+            --success-text: #2f855a;
+            --error-bg: #fed7d7;
+            --error-border: #e53e3e;
+            --error-text: #c53030;
         }
 
         [data-theme="dark"] {
-            /* Dark Theme */
-            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --bg-secondary: #0f0f23;
-            --bg-tertiary: #1a1a2e;
-            --text-primary: #e4e6ea;
-            --text-secondary: #b0b3b8;
-            --text-muted: #8a8d91;
-            --border-color: #3a3b3c;
-            --accent-color: #5865f2;
-            --accent-secondary: #4752c4;
-            --card-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            --header-bg: linear-gradient(135deg, #0f0f23, #1a1a2e);
-            --success-bg: #1f2937;
-            --success-border: #059669;
-            --success-text: #10b981;
-            --error-bg: #1f1b24;
-            --error-border: #dc2626;
-            --error-text: #f87171;
-            --batch-bg: #1f2937;
-            --batch-border: #d97706;
+            /* Dark Theme - Modern Professional */
+            --bg-primary: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            --bg-secondary: #1a202c;
+            --bg-tertiary: #2d3748;
+            --bg-card: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #e2e8f0;
+            --text-muted: #a0aec0;
+            --border-color: #4a5568;
+            --accent-color: #63b3ed;
+            --accent-secondary: #4299e1;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+            --success-bg: #1a202c;
+            --success-border: #48bb78;
+            --success-text: #68d391;
+            --error-bg: #1a202c;
+            --error-border: #f56565;
+            --error-text: #fc8181;
         }
 
         [data-theme="midnight"] {
-            /* Midnight Theme */
-            --bg-primary: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
-            --bg-secondary: #121212;
-            --bg-tertiary: #1e1e1e;
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
-            --text-muted: #b3b3b3;
-            --border-color: #333333;
-            --accent-color: #bb86fc;
-            --accent-secondary: #9c27b0;
-            --card-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            --header-bg: linear-gradient(135deg, #000000, #1a1a1a);
-            --success-bg: #1b2e1b;
-            --success-border: #4caf50;
-            --success-text: #81c784;
-            --error-bg: #2e1b1b;
-            --error-border: #f44336;
-            --error-text: #ef5350;
-            --batch-bg: #2e2a1b;
-            --batch-border: #ff9800;
+            /* Midnight Theme - Ultra Professional */
+            --bg-primary: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            --bg-secondary: #0d1117;
+            --bg-tertiary: #161b22;
+            --bg-card: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #c9d1d9;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --accent-color: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.5);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.6);
+            --success-bg: #0d1117;
+            --success-border: #3fb950;
+            --success-text: #56d364;
+            --error-bg: #0d1117;
+            --error-border: #f85149;
+            --error-text: #ff7b72;
         }
 
         * {
@@ -81,37 +81,35 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-primary);
             min-height: 100vh;
-            padding: 20px;
-            transition: all 0.3s ease;
             color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
         .theme-selector {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 24px;
+            right: 24px;
             z-index: 1000;
             display: flex;
-            gap: 10px;
-            background: var(--bg-secondary);
-            padding: 10px;
-            border-radius: 25px;
-            box-shadow: var(--card-shadow);
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
         }
 
         .theme-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             border: 2px solid transparent;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.2s ease;
         }
 
         .theme-btn.active {
@@ -119,76 +117,95 @@
             transform: scale(1.1);
         }
 
-        .theme-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .theme-light {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .theme-dark {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-
-        .theme-midnight {
-            background: linear-gradient(135deg, #0c0c0c 0%, #bb86fc 100%);
-        }
+        .theme-light { background: linear-gradient(135deg, #f5f7fa, #c3cfe2); }
+        .theme-dark { background: linear-gradient(135deg, #1a202c, #2d3748); }
+        .theme-midnight { background: linear-gradient(135deg, #0d1117, #161b22); }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: var(--bg-secondary);
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            padding: 24px;
         }
 
         .header {
-            background: var(--header-bg);
-            color: var(--text-primary);
-            padding: 30px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            color: var(--text-muted);
         }
 
-        .main-content {
+        .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 30px;
+            gap: 24px;
+            margin-bottom: 24px;
         }
 
-        .input-section, .results-section {
-            background: var(--bg-tertiary);
-            border-radius: 10px;
-            padding: 25px;
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
-        .section-title {
-            font-size: 1.5em;
-            color: var(--text-primary);
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 600;
+            gap: 8px;
+            color: var(--text-primary);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 24px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: var(--shadow-sm);
         }
 
         .form-group {
@@ -198,166 +215,164 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 16px;
+        }
+
+        .form-row.single {
+            grid-template-columns: 1fr;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
+            margin-bottom: 6px;
+            font-weight: 500;
             color: var(--text-secondary);
+            font-size: 0.875rem;
         }
 
         input, select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border-color);
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-size: 0.875rem;
             background: var(--bg-secondary);
             color: var(--text-primary);
+            transition: all 0.2s ease;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-            background: var(--bg-secondary);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
         }
 
         .btn {
             background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 0.875rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 5px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6c757d, #495057);
-            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
-        }
-
-        .btn-secondary:hover {
-            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            background: linear-gradient(135deg, #48bb78, #38a169);
         }
 
-        .btn-success:hover {
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        .constraint-group {
+            background: var(--bg-tertiary);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .constraint-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
         }
 
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
         }
 
         .result-card {
             background: var(--bg-secondary);
-            padding: 20px;
+            padding: 16px;
             border-radius: 12px;
             border-left: 4px solid var(--accent-color);
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
         }
 
         .result-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .result-label {
-            font-size: 0.9em;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
         .result-value {
-            font-size: 1.3em;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .batch-section {
-            grid-column: 1 / -1;
-            background: var(--batch-bg);
-            border: 1px solid var(--batch-border);
-            border-radius: 10px;
-            padding: 25px;
-            margin-top: 20px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
         }
 
-        .scenario-input {
+        .scenario-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .scenario-input:hover {
-            border-color: var(--accent-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
         }
 
         .scenario-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .scenario-header h4 {
-            color: var(--text-primary);
             font-weight: 600;
+            color: var(--text-primary);
         }
 
-        .remove-scenario {
-            background: linear-gradient(135deg, #dc3545, #c82333);
+        .remove-btn {
+            background: #ef4444;
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .remove-scenario:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
         }
 
         .status-message {
-            padding: 15px;
+            padding: 12px 16px;
             border-radius: 8px;
-            margin: 15px 0;
-            display: none;
+            margin: 16px 0;
+            font-size: 0.875rem;
             font-weight: 500;
+            display: none;
         }
 
         .status-success {
@@ -372,154 +387,54 @@
             color: var(--error-text);
         }
 
-        .status-info {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--accent-color);
-            color: var(--text-primary);
-        }
-
         .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid var(--accent-color);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        .tab-container {
-            display: flex;
-            margin-bottom: 20px;
-            gap: 5px;
-        }
-
-        .tab {
-            padding: 12px 20px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .tab:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
-            color: white;
-            border-color: var(--accent-color);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .constraint-group {
-            background: var(--bg-secondary);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid var(--border-color);
-        }
-
-        .constraint-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-        }
-
         .advanced-toggle {
-            margin-top: 20px;
             text-align: center;
+            margin: 16px 0;
         }
 
         .advanced-toggle button {
             background: none;
             border: none;
             color: var(--accent-color);
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            margin: 0 auto;
-            padding: 10px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
 
         .advanced-toggle button:hover {
             background: var(--bg-tertiary);
-            transform: scale(1.05);
-        }
-
-        .advanced-toggle .toggle-icon {
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .advanced-toggle.open .toggle-icon {
-            transform: rotate(180deg);
         }
 
         .advanced-results {
             display: none;
-            margin-top: 20px;
+            margin-top: 16px;
+            padding-top: 16px;
             border-top: 1px dashed var(--border-color);
-            padding-top: 20px;
         }
 
         .dimension-toggle {
             display: flex;
-            gap: 15px;
-            margin: 10px 0;
+            gap: 16px;
+            margin: 8px 0;
         }
 
         .dimension-toggle label {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             cursor: pointer;
-            color: var(--text-secondary);
-        }
-
-        .dimension-toggle input[type="radio"] {
-            accent-color: var(--accent-color);
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-tertiary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-secondary);
-        }
-
-        /* Selection styling */
-        ::selection {
-            background: var(--accent-color);
-            color: white;
+            font-size: 0.875rem;
         }
 
         @keyframes spin {
@@ -527,69 +442,16 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .container {
-            animation: fadeIn 0.6s ease-out;
-        }
-
         @media (max-width: 768px) {
-            .theme-selector {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 20px;
-                justify-content: center;
-            }
-
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .tab-container {
-                flex-wrap: wrap;
-            }
-
-            .tab {
-                flex: 1;
-                min-width: 120px;
-                text-align: center;
-            }
-        }
-
-        /* Enhanced focus states for accessibility */
-        .btn:focus,
-        input:focus,
-        select:focus,
-        .tab:focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
-
-        /* Improved contrast for better readability */
-        .result-value {
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-
-        /* Subtle animations */
-        .input-section:hover,
-        .results-section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            .container { padding: 16px; }
+            .main-grid { grid-template-columns: 1fr; gap: 16px; }
+            .form-row { grid-template-columns: 1fr; }
+            .tabs { flex-direction: column; }
+            .theme-selector { position: relative; top: 0; right: 0; margin-bottom: 16px; justify-content: center; }
         }
     </style>
 </head>
 <body data-theme="light">
-    <!-- Theme Selector -->
     <div class="theme-selector">
         <div class="theme-btn theme-light active" onclick="setTheme('light')" title="Light Theme"></div>
         <div class="theme-btn theme-dark" onclick="setTheme('dark')" title="Dark Theme"></div>
@@ -598,313 +460,191 @@
 
     <div class="container">
         <div class="header">
-            <h1>🏗️ Duct Calculator</h1>
-            <p>Advanced HVAC Duct Sizing and Analysis Tool</p>
+            <h1>🏗️ Professional Duct Calculator</h1>
+            <p>Advanced HVAC Duct Sizing & Analysis Tool</p>
         </div>
 
-        <div class="main-content">
+        <div class="main-grid">
             <!-- Input Section -->
-            <div class="input-section">
-                <h2 class="section-title">
-                    <span>⚙️</span> Input Parameters
-                </h2>
+            <div class="card">
+                <h2 class="card-title">⚙️ Input Parameters</h2>
 
-                <div class="tab-container">
-                    <div class="tab active" onclick="switchTab('manual-tab', ['auto-tab', 'semi-auto-tab'])">Manual Sizing</div>
-                    <div class="tab" onclick="switchTab('auto-tab', ['manual-tab', 'semi-auto-tab'])">Auto Sizing</div>
-                    <div class="tab" onclick="switchTab('semi-auto-tab', ['manual-tab', 'auto-tab'])">Semi-Auto</div>
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('manual-tab')">Manual</div>
+                    <div class="tab" onclick="switchTab('auto-tab')">Auto Size</div>
+                    <div class="tab" onclick="switchTab('semi-auto-tab')">Semi-Auto</div>
                 </div>
 
-                <!-- Manual Sizing Tab -->
+                <!-- Manual Tab -->
                 <div id="manual-tab" class="tab-content active">
-                    <form id="calculatorForm">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="flowrate">Flow Rate</label>
-                                    <input type="number" id="flowrate" step="0.01" placeholder="Enter flow rate">
-                                </div>
-                                <div>
-                                    <label for="flowUnits">Flow Units</label>
-                                    <select id="flowUnits">
-                                        <option value="m³/s">m³/s</option>
-                                        <option value="L/s" selected>L/s</option>
-                                        <option value="CFM">CFM</option>
-                                    </select>
-                                </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="flowrate">Flow Rate</label>
+                                <input type="number" id="flowrate" step="0.01" placeholder="500">
+                            </div>
+                            <div>
+                                <label for="flowUnits">Units</label>
+                                <select id="flowUnits">
+                                    <option value="L/s" selected>L/s</option>
+                                    <option value="m³/s">m³/s</option>
+                                    <option value="CFM">CFM</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="width">Width (mm)</label>
-                                    <input type="number" id="width" step="1" placeholder="Enter width">
-                                </div>
-                                <div>
-                                    <label for="height">Height (mm)</label>
-                                    <input type="number" id="height" step="1" placeholder="Enter height">
-                                </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="width">Width (mm)</label>
+                                <input type="number" id="width" step="1" placeholder="250">
+                            </div>
+                            <div>
+                                <label for="height">Height (mm)</label>
+                                <input type="number" id="height" step="1" placeholder="200">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="temperature">Temperature (°C)</label>
-                                    <input type="number" id="temperature" step="0.1" placeholder="Enter temperature" value="20">
-                                </div>
-                                <div>
-                                    <label for="humidity">Humidity (%)</label>
-                                    <input type="number" id="humidity" step="0.1" placeholder="Enter humidity" value="50">
-                                </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="temperature">Temperature (°C)</label>
+                                <input type="number" id="temperature" step="0.1" value="20">
+                            </div>
+                            <div>
+                                <label for="material">Material</label>
+                                <select id="material">
+                                    <option value="Galvanized Steel">Galvanized Steel</option>
+                                    <option value="Aluminum">Aluminum</option>
+                                    <option value="Stainless Steel">Stainless Steel</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="material">Duct Material</label>
-                            <select id="material">
-                                <option value="Galvanized Steel">Galvanized Steel</option>
-                                <option value="Aluminum">Aluminum</option>
-                                <option value="Stainless Steel">Stainless Steel</option>
-                                <option value="PVC">PVC</option>
-                                <option value="Fiberglass">Fiberglass</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="button" class="btn" onclick="calculateSingle()">
-                                <span id="calcLoadingIcon" class="loading" style="display: none;"></span>
-                                🧮 Calculate
-                            </button>
-                            <button type="button" class="btn btn-secondary" onclick="clearForm()">
-                                🗑️ Clear
-                            </button>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <button type="button" class="btn" onclick="calculateSingle()">
+                            <span id="calcLoadingIcon" class="loading" style="display: none;"></span>
+                            Calculate
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+                    </div>
                 </div>
 
-                <!-- Auto Sizing Tab -->
-                <div id="auto-tab" class="tab-content">
-                    <form id="autoSizeForm">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="auto-flowrate">Flow Rate</label>
-                                    <input type="number" id="auto-flowrate" step="0.01" placeholder="Enter flow rate">
-                                </div>
-                                <div>
-                                    <label for="auto-flowUnits">Flow Units</label>
-                                    <select id="auto-flowUnits">
-                                        <option value="m³/s">m³/s</option>
-                                        <option value="L/s" selected>L/s</option>
-                                        <option value="CFM">CFM</option>
-                                    </select>
-                                </div>
+                <!-- Auto Tab -->
+                <div id="auto-tab" class="tab-content" style="display: none;">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="auto-flowrate">Flow Rate</label>
+                                <input type="number" id="auto-flowrate" step="0.01" placeholder="500">
+                            </div>
+                            <div>
+                                <label for="auto-flowUnits">Units</label>
+                                <select id="auto-flowUnits">
+                                    <option value="L/s" selected>L/s</option>
+                                    <option value="m³/s">m³/s</option>
+                                    <option value="CFM">CFM</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="constraint-group">
-                            <div class="constraint-title">
-                                <span>⚡ Sizing Constraints</span>
+                    <div class="constraint-group">
+                        <div class="constraint-title">⚡ Constraints</div>
+                        <div class="form-row">
+                            <div>
+                                <label for="max-velocity">Max Velocity (m/s)</label>
+                                <input type="number" id="max-velocity" step="0.1" value="7.5">
                             </div>
-                            <div class="form-row">
-                                <div>
-                                    <label for="max-velocity">Maximum Velocity (m/s)</label>
-                                    <input type="number" id="max-velocity" step="0.1" value="7.5">
-                                </div>
-                                <div>
-                                    <label for="max-pressure-drop">Maximum Pressure Drop (Pa/m)</label>
-                                    <input type="number" id="max-pressure-drop" step="0.1" value="1.0">
-                                </div>
-                            </div>
-                            <div class="form-row" style="margin-top: 15px;">
-                                <div>
-                                    <label for="aspect-ratio">Aspect Ratio (Width/Height)</label>
-                                    <input type="number" id="aspect-ratio" step="0.1" value="1.5" min="1" max="4">
-                                </div>
-                                <div>
-                                    <label for="size-increment">Size Increment (mm)</label>
-                                    <select id="size-increment">
-                                        <option value="25">25 mm</option>
-                                        <option value="50" selected>50 mm</option>
-                                        <option value="100">100 mm</option>
-                                    </select>
-                                </div>
+                            <div>
+                                <label for="aspect-ratio">Aspect Ratio</label>
+                                <input type="number" id="aspect-ratio" step="0.1" value="1.5" min="1" max="4">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="auto-temperature">Temperature (°C)</label>
-                                    <input type="number" id="auto-temperature" step="0.1" value="20">
-                                </div>
-                                <div>
-                                    <label for="auto-humidity">Humidity (%)</label>
-                                    <input type="number" id="auto-humidity" step="0.1" value="50">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="auto-material">Duct Material</label>
-                            <select id="auto-material">
-                                <option value="Galvanized Steel">Galvanized Steel</option>
-                                <option value="Aluminum">Aluminum</option>
-                                <option value="Stainless Steel">Stainless Steel</option>
-                                <option value="PVC">PVC</option>
-                                <option value="Fiberglass">Fiberglass</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="button" class="btn" onclick="calculateAutoSize()">
-                                <span id="autoCalcLoadingIcon" class="loading" style="display: none;"></span>
-                                🔍 Find Optimal Size
-                            </button>
-                            <button type="button" class="btn btn-secondary" onclick="clearAutoForm()">
-                                🗑️ Clear
-                            </button>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <button type="button" class="btn" onclick="calculateAutoSize()">
+                            <span id="autoCalcLoadingIcon" class="loading" style="display: none;"></span>
+                            Find Optimal Size
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearAutoForm()">Clear</button>
+                    </div>
                 </div>
 
-                <!-- Semi-Auto Sizing Tab -->
-                <div id="semi-auto-tab" class="tab-content">
-                    <form id="semiAutoSizeForm">
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="semi-flowrate">Flow Rate</label>
-                                    <input type="number" id="semi-flowrate" step="0.01" placeholder="Enter flow rate">
-                                </div>
-                                <div>
-                                    <label for="semi-flowUnits">Flow Units</label>
-                                    <select id="semi-flowUnits">
-                                        <option value="m³/s">m³/s</option>
-                                        <option value="L/s" selected>L/s</option>
-                                        <option value="CFM">CFM</option>
-                                    </select>
-                                </div>
+                <!-- Semi-Auto Tab -->
+                <div id="semi-auto-tab" class="tab-content" style="display: none;">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div>
+                                <label for="semi-flowrate">Flow Rate</label>
+                                <input type="number" id="semi-flowrate" step="0.01" placeholder="500">
+                            </div>
+                            <div>
+                                <label for="locked-value">Fixed Dimension (mm)</label>
+                                <input type="number" id="locked-value" step="1" value="300">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="constraint-group">
-                            <div class="constraint-title">
-                                <span>📐 Dimension Constraints</span>
-                            </div>
-                            <div class="form-row">
-                                <div>
-                                    <label>Lock Dimension</label>
-                                    <div class="dimension-toggle">
-                                        <label><input type="radio" name="locked-dimension" value="width" checked> Width</label>
-                                        <label><input type="radio" name="locked-dimension" value="height"> Height</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="locked-value">Locked Value (mm)</label>
-                                    <input type="number" id="locked-value" step="1" value="300">
-                                </div>
-                            </div>
+                    <div class="constraint-group">
+                        <div class="constraint-title">📐 Lock Dimension</div>
+                        <div class="dimension-toggle">
+                            <label><input type="radio" name="locked-dimension" value="width" checked> Width</label>
+                            <label><input type="radio" name="locked-dimension" value="height"> Height</label>
                         </div>
+                    </div>
 
-                        <div class="constraint-group">
-                            <div class="constraint-title">
-                                <span>⚡ Performance Constraints</span>
-                            </div>
-                            <div class="form-row">
-                                <div>
-                                    <label for="semi-max-velocity">Maximum Velocity (m/s)</label>
-                                    <input type="number" id="semi-max-velocity" step="0.1" value="7.5">
-                                </div>
-                                <div>
-                                    <label for="semi-max-pressure-drop">Maximum Pressure Drop (Pa/m)</label>
-                                    <input type="number" id="semi-max-pressure-drop" step="0.1" value="1.0">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div>
-                                    <label for="semi-temperature">Temperature (°C)</label>
-                                    <input type="number" id="semi-temperature" step="0.1" value="20">
-                                </div>
-                                <div>
-                                    <label for="semi-humidity">Humidity (%)</label>
-                                    <input type="number" id="semi-humidity" step="0.1" value="50">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="semi-material">Duct Material</label>
-                            <select id="semi-material">
-                                <option value="Galvanized Steel">Galvanized Steel</option>
-                                <option value="Aluminum">Aluminum</option>
-                                <option value="Stainless Steel">Stainless Steel</option>
-                                <option value="PVC">PVC</option>
-                                <option value="Fiberglass">Fiberglass</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="button" class="btn" onclick="calculateSemiAutoSize()">
-                                <span id="semiAutoCalcLoadingIcon" class="loading" style="display: none;"></span>
-                                🔍 Calculate Optimal Size
-                            </button>
-                            <button type="button" class="btn btn-secondary" onclick="clearSemiAutoForm()">
-                                🗑️ Clear
-                            </button>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <button type="button" class="btn" onclick="calculateSemiAutoSize()">
+                            <span id="semiAutoCalcLoadingIcon" class="loading" style="display: none;"></span>
+                            Calculate Size
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearSemiAutoForm()">Clear</button>
+                    </div>
                 </div>
 
                 <div id="statusMessage" class="status-message"></div>
             </div>
 
             <!-- Results Section -->
-            <div class="results-section">
-                <h2 class="section-title">
-                    <span>📊</span> Results
-                </h2>
+            <div class="card">
+                <h2 class="card-title">📊 Results</h2>
 
                 <div id="resultsContainer">
-                    <p style="text-align: center; color: #6c757d; padding: 40px;">
-                        Enter parameters and click Calculate to see results
+                    <p style="text-align: center; color: var(--text-muted); padding: 40px;">
+                        Enter parameters and calculate to see results
                     </p>
                 </div>
 
-                <div class="advanced-toggle" id="advancedToggle">
+                <div class="advanced-toggle" id="advancedToggle" style="display: none;">
                     <button onclick="toggleAdvancedResults()">
-                        Show Advanced Results <span class="toggle-icon">▼</span>
+                        Show Advanced Results ▼
                     </button>
                 </div>
 
-                <div class="advanced-results" id="advancedResultsContainer">
-                    <!-- Advanced results will be inserted here -->
-                </div>
+                <div class="advanced-results" id="advancedResultsContainer"></div>
 
                 <div style="margin-top: 20px;">
                     <button type="button" class="btn btn-success" onclick="exportResults()" id="exportBtn" disabled>
-                        📄 Export to CSV
+                        📄 Export CSV
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Batch Calculation Section -->
+        <!-- Batch Section -->
         <div class="batch-section">
-            <h2 class="section-title">
-                <span>🚀</span> Batch Calculations
-            </h2>
+            <h2 class="card-title">🚀 Batch Calculations</h2>
             
             <div id="scenariosContainer">
-                <div class="scenario-input" data-scenario="0">
+                <div class="scenario-card" data-scenario="0">
                     <div class="scenario-header">
                         <h4>Scenario 1</h4>
-                        <button type="button" class="remove-scenario" onclick="removeScenario(0)" style="display: none;">Remove</button>
+                        <button type="button" class="remove-btn" onclick="removeScenario(0)" style="display: none;">Remove</button>
                     </div>
                     <div class="form-row">
                         <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
@@ -916,629 +656,296 @@
             </div>
 
             <div style="margin-top: 20px;">
-                <button type="button" class="btn btn-secondary" onclick="addScenario()">
-                    ➕ Add Scenario
-                </button>
+                <button type="button" class="btn btn-secondary" onclick="addScenario()">+ Add Scenario</button>
                 <button type="button" class="btn" onclick="runBatchCalculations()">
                     <span id="batchLoadingIcon" class="loading" style="display: none;"></span>
-                    🎯 Run Batch Calculations
+                    Run Batch
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="CALCULATOR.js"></script>
     <script>
-// Initialize the calculator
-let calculator;
-let scenarioCount = 1;
-let currentResults = null;
-let advancedResultsVisible = false;
-
-// Initialize calculator when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎯 Duct Calculator Interface Loaded');
-    
-    // Check if CALCULATOR.js is loaded
-    if (typeof DuctCalculatorAutomator !== 'undefined') {
-        calculator = new DuctCalculatorAutomator();
-        console.log('✅ Calculator initialized successfully');
-        checkCalculatorPage();
-    } else {
-        console.error('❌ CALCULATOR.js not found');
-        showStatus('Calculator script not loaded. Please ensure CALCULATOR.js is in the same directory.', 'error');
-    }
-    
-    // Hide advanced toggle initially
-    document.getElementById('advancedToggle').style.display = 'none';
-});
-
-// Switch between tabs
-function switchTab(activeTabId, inactiveTabIds) {
-    // Hide all tabs first
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Show the active tab
-    document.getElementById(activeTabId).classList.add('active');
-    
-    // Update tab buttons
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Find the tab button that corresponds to the active tab and activate it
-    const tabIndex = activeTabId === 'manual-tab' ? 0 : activeTabId === 'auto-tab' ? 1 : 2;
-    document.querySelectorAll('.tab')[tabIndex].classList.add('active');
-}
-
-// Check if we're on the calculator page
-function checkCalculatorPage() {
-    // Remove the page check for now - we'll make it work standalone
-    hideStatus();
-}
-
-// Toggle advanced results visibility
-function toggleAdvancedResults() {
-    const advancedContainer = document.getElementById('advancedResultsContainer');
-    const toggleButton = document.querySelector('#advancedToggle button');
-    const toggleIcon = document.querySelector('#advancedToggle .toggle-icon');
-    
-    advancedResultsVisible = !advancedResultsVisible;
-    
-    if (advancedResultsVisible) {
-        advancedContainer.style.display = 'block';
-        toggleButton.innerHTML = 'Hide Advanced Results <span class="toggle-icon">▲</span>';
-        document.getElementById('advancedToggle').classList.add('open');
-    } else {
-        advancedContainer.style.display = 'none';
-        toggleButton.innerHTML = 'Show Advanced Results <span class="toggle-icon">▼</span>';
-        document.getElementById('advancedToggle').classList.remove('open');
-    }
-    
-    // If we have current results, update the display
-    if (currentResults && !Array.isArray(currentResults)) {
-        displayAdvancedResults(currentResults);
-    }
-}
-
-// Single calculation function
-async function calculateSingle() {
-    const loadingIcon = document.getElementById('calcLoadingIcon');
-    
-    try {
-        loadingIcon.style.display = 'inline-block';
-        showStatus('Calculating...', 'info');
-
-        const params = getFormParameters();
-        
-        // Validate inputs
-        if (!validateInputs(params)) {
-            showStatus('Please fill in all required fields (Flow Rate, Width, Height).', 'error');
-            return;
+        // Theme Management
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.theme-${theme}`).classList.add('active');
+            localStorage.setItem('theme', theme);
         }
 
-        // Use calculator if available, otherwise fallback to direct calculation
-        let result;
-        if (calculator) {
-            result = calculator.performCalculation(params);
-        } else {
-            result = performCalculation(params);
-        }
-        
-        displaySingleResult(result);
-        currentResults = result;
-        showStatus('Calculation completed successfully!', 'success');
-        document.getElementById('exportBtn').disabled = false;
-        
-        // Show advanced toggle
-        document.getElementById('advancedToggle').style.display = 'block';
-        
-        // If advanced results were already visible, update them
-        if (advancedResultsVisible) {
-            displayAdvancedResults(result);
-        }
-
-    } catch (error) {
-        console.error('Calculation error:', error);
-        showStatus('Calculation failed. Please check your inputs.', 'error');
-    } finally {
-        loadingIcon.style.display = 'none';
-    }
-}
-
-// Auto sizing calculation function
-async function calculateAutoSize() {
-    const loadingIcon = document.getElementById('autoCalcLoadingIcon');
-    
-    try {
-        loadingIcon.style.display = 'inline-block';
-        showStatus('Finding optimal duct size...', 'info');
-
-        const params = getAutoSizeParameters();
-        
-        // Validate inputs
-        if (!params.flowrate) {
-            showStatus('Please enter a flow rate.', 'error');
-            return;
-        }
-
-        // Find optimal duct dimensions
-        const optimalDimensions = findOptimalDuctSize(params);
-        
-        // Apply the optimal dimensions to the manual form
-        document.getElementById('flowrate').value = params.flowrate;
-        document.getElementById('flowUnits').value = params.flowUnits;
-        document.getElementById('width').value = optimalDimensions.width;
-        document.getElementById('height').value = optimalDimensions.height;
-        document.getElementById('temperature').value = params.temperature;
-        document.getElementById('humidity').value = params.humidity;
-        document.getElementById('material').value = params.material;
-        
-        // Switch to manual tab
-        switchTab('manual-tab', ['auto-tab', 'semi-auto-tab']);
-        
-        // Calculate with the optimal dimensions
-        calculateSingle();
-        
-        showStatus('Optimal duct size calculated successfully!', 'success');
-
-    } catch (error) {
-        console.error('Auto sizing error:', error);
-        showStatus('Auto sizing failed. Please check your inputs.', 'error');
-    } finally {
-        loadingIcon.style.display = 'none';
-    }
-}
-
-// Semi-Auto sizing calculation function
-async function calculateSemiAutoSize() {
-    const loadingIcon = document.getElementById('semiAutoCalcLoadingIcon');
-    
-    try {
-        loadingIcon.style.display = 'inline-block';
-        showStatus('Calculating with locked dimension...', 'info');
-
-        const params = getSemiAutoSizeParameters();
-        
-        // Validate inputs
-        if (!params.flowrate || !params.lockedValue) {
-            showStatus('Please enter flow rate and locked dimension value.', 'error');
-            return;
-        }
-
-        // Calculate with the semi-auto parameters
-        let result;
-        if (calculator) {
-            result = calculator.findSemiOptimalSize(params);
-        } else {
-            throw new Error('Calculator not initialized');
-        }
-        
-        // Apply the calculated dimensions to the manual form
-        document.getElementById('flowrate').value = params.flowrate;
-        document.getElementById('flowUnits').value = params.flowUnits;
-        document.getElementById('width').value = result.width;
-        document.getElementById('height').value = result.height;
-        document.getElementById('temperature').value = params.temperature;
-        document.getElementById('humidity').value = params.humidity;
-        document.getElementById('material').value = params.material;
-        
-        // Switch to manual tab
-        switchTab('manual-tab', ['auto-tab', 'semi-auto-tab']);
-        
-        // Calculate with the new dimensions
-        calculateSingle();
-        
-        showStatus('Semi-auto sizing completed successfully!', 'success');
-
-    } catch (error) {
-        console.error('Semi-auto sizing error:', error);
-        showStatus('Semi-auto sizing failed: ' + error.message, 'error');
-    } finally {
-        loadingIcon.style.display = 'none';
-    }
-}
-
-// Find optimal duct size based on constraints
-function findOptimalDuctSize(params) {
-    // Convert flow rate to m³/s
-    let flowRateM3S = params.flowrate;
-    switch(params.flowUnits) {
-        case 'L/s':
-            flowRateM3S = params.flowrate / 1000;
-            break;
-        case 'CFM':
-            flowRateM3S = params.flowrate * 0.000471947;
-            break;
-    }
-    
-    // Calculate minimum area required based on maximum velocity
-    const minArea = flowRateM3S / params.maxVelocity;
-    
-    // Calculate initial dimensions based on aspect ratio
-    let height = Math.sqrt(minArea / params.aspectRatio);
-    let width = height * params.aspectRatio;
-    
-    // Convert to mm and round to size increment
-    const increment = parseInt(params.sizeIncrement);
-    let heightMm = Math.ceil(height * 1000 / increment) * increment;
-    let widthMm = Math.ceil(width * 1000 / increment) * increment;
-    
-    // Calculate initial velocity and pressure drop
-    const testParams = {
-        flowrate: params.flowrate,
-        width: widthMm,
-        height: heightMm,
-        temperature: params.temperature,
-        humidity: params.humidity,
-        material: params.material,
-        flowUnits: params.flowUnits
-    };
-    
-    let result;
-    if (calculator) {
-        result = calculator.performCalculation(testParams);
-    } else {
-        result = performCalculation(testParams);
-    }
-    
-    const velocity = parseFloat(result.output.averageVelocity);
-    const pressureDrop = parseFloat(result.output.pressureDrop);
-    
-    // If pressure drop is too high, increase duct size until it's within limits
-    if (pressureDrop > params.maxPressureDrop) {
-        // Iteratively increase duct size until pressure drop is acceptable
-        let iterations = 0;
-        const maxIterations = 20; // Prevent infinite loops
-        
-        while (pressureDrop > params.maxPressureDrop && iterations < maxIterations) {
-            // Increase both dimensions proportionally
-            heightMm += increment;
-            widthMm = Math.round(heightMm * params.aspectRatio / increment) * increment;
-            
-            const newParams = {
-                flowrate: params.flowrate,
-                width: widthMm,
-                height: heightMm,
-                temperature: params.temperature,
-                humidity: params.humidity,
-                material: params.material,
-                flowUnits: params.flowUnits
-            };
-            
-            if (calculator) {
-                result = calculator.performCalculation(newParams);
-            } else {
-                result = performCalculation(newParams);
-            }
-            
-            const newPressureDrop = parseFloat(result.output.pressureDrop);
-            
-            // If we've reached an acceptable pressure drop, break the loop
-            if (newPressureDrop <= params.maxPressureDrop) {
-                break;
-            }
-            
-            iterations++;
-        }
-    }
-    
-    return {
-        width: widthMm,
-        height: heightMm,
-        aspectRatio: params.aspectRatio,
-        velocity: velocity,
-        pressureDrop: pressureDrop
-    };
-}
-
-// Get form parameters for manual sizing
-function getFormParameters() {
-    return {
-        flowrate: parseFloat(document.getElementById('flowrate').value) || 0,
-        width: parseFloat(document.getElementById('width').value) || 0,
-        height: parseFloat(document.getElementById('height').value) || 0,
-        temperature: parseFloat(document.getElementById('temperature').value) || 20,
-        humidity: parseFloat(document.getElementById('humidity').value) || 50,
-        material: document.getElementById('material').value,
-        flowUnits: document.getElementById('flowUnits').value
-    };
-}
-
-// Get form parameters for auto sizing
-function getAutoSizeParameters() {
-    return {
-        flowrate: parseFloat(document.getElementById('auto-flowrate').value) || 0,
-        maxVelocity: parseFloat(document.getElementById('max-velocity').value) || 7.5,
-        maxPressureDrop: parseFloat(document.getElementById('max-pressure-drop').value) || 1.0,
-        aspectRatio: parseFloat(document.getElementById('aspect-ratio').value) || 1.5,
-        sizeIncrement: document.getElementById('size-increment').value,
-        temperature: parseFloat(document.getElementById('auto-temperature').value) || 20,
-        humidity: parseFloat(document.getElementById('auto-humidity').value) || 50,
-        material: document.getElementById('auto-material').value,
-        flowUnits: document.getElementById('auto-flowUnits').value
-    };
-}
-
-// Get form parameters for semi-auto sizing
-function getSemiAutoSizeParameters() {
-    return {
-        flowrate: parseFloat(document.getElementById('semi-flowrate').value) || 0,
-        lockedDimension: document.querySelector('input[name="locked-dimension"]:checked').value,
-        lockedValue: parseFloat(document.getElementById('locked-value').value) || 0,
-        maxVelocity: parseFloat(document.getElementById('semi-max-velocity').value) || 7.5,
-        maxPressureDrop: parseFloat(document.getElementById('semi-max-pressure-drop').value) || 1.0,
-        temperature: parseFloat(document.getElementById('semi-temperature').value) || 20,
-        humidity: parseFloat(document.getElementById('semi-humidity').value) || 50,
-        material: document.getElementById('semi-material').value,
-        flowUnits: document.getElementById('semi-flowUnits').value
-    };
-}
-
-// Validate inputs
-function validateInputs(params) {
-    return params.flowrate > 0 && params.width > 0 && params.height > 0;
-}
-
-// Perform calculation
-function performCalculation(params) {
-    // Convert flow rate to m³/s if needed
-    let flowRate = params.flowrate;
-    switch(params.flowUnits) {
-        case 'L/s':
-            flowRate = flowRate / 1000;
-            break;
-        case 'CFM':
-            flowRate = flowRate * 0.000471947;
-            break;
-        // m³/s is already correct
-    }
-
-    // Convert dimensions to meters
-    const width = params.width / 1000;
-    const height = params.height / 1000;
-    
-    // Calculate cross-sectional area
-    const area = width * height;
-    
-    // Calculate equivalent diameter
-    const equivalentDiameter = (4 * area / (2 * (width + height))) * 1000; // Convert back to mm
-    
-    // Calculate velocity
-    const velocity = flowRate / area;
-    
-    // Air density at given temperature (simplified)
-    const airDensity = 1.225 * (293.15 / (273.15 + params.temperature));
-    
-    // Calculate velocity pressure
-    const velocityPressure = 0.5 * airDensity * Math.pow(velocity, 2);
-    
-    // Calculate Reynolds number (simplified)
-    const kinematicViscosity = 1.5e-5; // m²/s at room temperature
-    const reynoldsNumber = velocity * (equivalentDiameter / 1000) / kinematicViscosity;
-    
-    // Determine flow type
-    const flowType = reynoldsNumber > 4000 ? 'Turbulent' : reynoldsNumber > 2300 ? 'Transitional' : 'Laminar';
-    
-    // Calculate friction factor (simplified Colebrook-White)
-    const roughness = 0.0015; // mm for galvanized steel
-    const relativeRoughness = roughness / equivalentDiameter;
-    let frictionFactor;
-    
-    if (reynoldsNumber > 4000) {
-        // Turbulent flow - simplified Colebrook-White
-        frictionFactor = 0.25 / Math.pow(Math.log10(relativeRoughness/3.7 + 5.74/Math.pow(reynoldsNumber, 0.9)), 2);
-    } else {
-        // Laminar flow
-        frictionFactor = 64 / reynoldsNumber;
-    }
-    
-    // Calculate pressure drop per meter
-    const pressureDrop = frictionFactor * (airDensity * Math.pow(velocity, 2)) / (2 * (equivalentDiameter / 1000));
-
-    return {
-        input: params,
-        output: {
-            equivalentDiameter: equivalentDiameter.toFixed(1),
-            averageVelocity: velocity.toFixed(2),
-            effectiveVelocity: velocity.toFixed(2),
-            pressureDrop: pressureDrop.toFixed(2),
-            velocityPressure: velocityPressure.toFixed(2),
-            crossSectionalArea: (area * 1000000).toFixed(0), // Convert to mm²
-            reynoldsNumber: Math.round(reynoldsNumber),
-            flowType: flowType,
-            frictionFactor: frictionFactor.toFixed(4),
-            airDensity: airDensity.toFixed(3)
-        }
-    };
-}
-
-// Display single result with only key metrics
-function displaySingleResult(result) {
-    const container = document.getElementById('resultsContainer');
-    const output = result.output;
-
-    // Display only the most important metrics in the main results section
-    container.innerHTML = `
-        <div class="results-grid">
-            <div class="result-card">
-                <div class="result-label">Duct Size</div>
-                <div class="result-value">${result.input.width} × ${result.input.height} mm</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Average Velocity</div>
-                <div class="result-value">${output.averageVelocity} m/s</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Pressure Drop</div>
-                <div class="result-value">${output.pressureDrop} Pa/m</div>
-            </div>
-        </div>
-    `;
-    
-    // Also prepare the advanced results
-    displayAdvancedResults(result);
-}
-
-// Display advanced results
-function displayAdvancedResults(result) {
-    const container = document.getElementById('advancedResultsContainer');
-    const output = result.output;
-    
-    container.innerHTML = `
-        <div class="results-grid">
-            <div class="result-card">
-                <div class="result-label">Equivalent Diameter</div>
-                <div class="result-value">${output.equivalentDiameter} mm</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Velocity Pressure</div>
-                <div class="result-value">${output.velocityPressure} Pa</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Cross-Sectional Area</div>
-                <div class="result-value">${output.crossSectionalArea} mm²</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Reynolds Number</div>
-                <div class="result-value">${output.reynoldsNumber}</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Flow Type</div>
-                <div class="result-value">${output.flowType}</div>
-            </div>
-            <div class="result-card">
-                <div class="result-label">Friction Factor</div>
-                <div class="result-value">${output.frictionFactor}</div>
-            </div>
-        </div>
-    `;
-}
-
-// Add new scenario
-function addScenario() {
-    const container = document.getElementById('scenariosContainer');
-    const scenarioDiv = document.createElement('div');
-    scenarioDiv.className = 'scenario-input';
-    scenarioDiv.setAttribute('data-scenario', scenarioCount);
-    
-    scenarioDiv.innerHTML = `
-        <div class="scenario-header">
-            <h4>Scenario ${scenarioCount + 1}</h4>
-            <button type="button" class="remove-scenario" onclick="removeScenario(${scenarioCount})">Remove</button>
-        </div>
-        <div class="form-row">
-            <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
-            <input type="number" placeholder="Width (mm)" class="scenario-width">
-            <input type="number" placeholder="Height (mm)" class="scenario-height">
-            <input type="number" placeholder="Temperature (°C)" class="scenario-temperature" value="20">
-        </div>
-    `;
-    
-    container.appendChild(scenarioDiv);
-    scenarioCount++;
-    
-    updateRemoveButtons();
-}
-
-// Remove scenario
-function removeScenario(index) {
-    const scenario = document.querySelector(`[data-scenario="${index}"]`);
-    if (scenario) {
-        scenario.remove();
-        updateRemoveButtons();
-    }
-}
-
-// Update remove button visibility
-function updateRemoveButtons() {
-    const scenarios = document.querySelectorAll('.scenario-input');
-    const removeButtons = document.querySelectorAll('.remove-scenario');
-    
-    removeButtons.forEach(btn => {
-        btn.style.display = scenarios.length > 1 ? 'block' : 'none';
-    });
-}
-
-// Run batch calculations
-async function runBatchCalculations() {
-    const loadingIcon = document.getElementById('batchLoadingIcon');
-    
-    try {
-        loadingIcon.style.display = 'inline-block';
-        showStatus('Running batch calculations...', 'info');
-
-        const scenarios = [];
-        const scenarioElements = document.querySelectorAll('.scenario-input');
-        
-        scenarioElements.forEach((element, index) => {
-            const flowrate = element.querySelector('.scenario-flowrate').value;
-            const width = element.querySelector('.scenario-width').value;
-            const height = element.querySelector('.scenario-height').value;
-            const temperature = element.querySelector('.scenario-temperature').value || 20;
-            
-            if (flowrate && width && height) {
-                scenarios.push({
-                    name: `Scenario ${index + 1}`,
-                    flowrate: parseFloat(flowrate),
-                    width: parseFloat(width),
-                    height: parseFloat(height),
-                    temperature: parseFloat(temperature),
-                    humidity: 50,
-                    material: 'Galvanized Steel',
-                    flowUnits: 'L/s'
-                });
-            }
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
         });
 
-        if (scenarios.length === 0) {
-            showStatus('Please enter at least one complete scenario.', 'error');
-            return;
+        // Calculator Variables
+        let scenarioCount = 1;
+        let currentResults = null;
+        let advancedResultsVisible = false;
+
+        // Tab Management
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(tabId).style.display = 'block';
+            
+            const tabIndex = tabId === 'manual-tab' ? 0 : tabId === 'auto-tab' ? 1 : 2;
+            document.querySelectorAll('.tab')[tabIndex].classList.add('active');
         }
 
-        // Calculate all scenarios
-        const results = scenarios.map(scenario => {
-            let result;
-            if (calculator) {
-                result = calculator.performCalculation(scenario);
-            } else {
-                result = performCalculation(scenario);
+        // Main Calculation Function
+        async function calculateSingle() {
+            const loadingIcon = document.getElementById('calcLoadingIcon');
+            
+            try {
+                loadingIcon.style.display = 'inline-block';
+                showStatus('Calculating...', 'info');
+
+                const params = getFormParameters();
+                
+                if (!validateInputs(params)) {
+                    showStatus('Please fill in all required fields.', 'error');
+                    return;
+                }
+
+                const result = performCalculation(params);
+                displaySingleResult(result);
+                currentResults = result;
+                showStatus('Calculation completed!', 'success');
+                document.getElementById('exportBtn').disabled = false;
+                document.getElementById('advancedToggle').style.display = 'block';
+
+            } catch (error) {
+                console.error('Calculation error:', error);
+                showStatus('Calculation failed. Please check inputs.', 'error');
+            } finally {
+                loadingIcon.style.display = 'none';
             }
+        }
+
+        // Auto Size Calculation
+        async function calculateAutoSize() {
+            const loadingIcon = document.getElementById('autoCalcLoadingIcon');
+            
+            try {
+                loadingIcon.style.display = 'inline-block';
+                showStatus('Finding optimal size...', 'info');
+
+                const params = getAutoSizeParameters();
+                
+                if (!params.flowrate) {
+                    showStatus('Please enter a flow rate.', 'error');
+                    return;
+                }
+
+                const optimalDimensions = findOptimalDuctSize(params);
+                
+                // Apply to manual form
+                document.getElementById('flowrate').value = params.flowrate;
+                document.getElementById('flowUnits').value = params.flowUnits;
+                document.getElementById('width').value = optimalDimensions.width;
+                document.getElementById('height').value = optimalDimensions.height;
+                
+                switchTab('manual-tab');
+                calculateSingle();
+                
+                showStatus('Optimal size found!', 'success');
+
+            } catch (error) {
+                showStatus('Auto sizing failed.', 'error');
+            } finally {
+                loadingIcon.style.display = 'none';
+            }
+        }
+
+        // Semi-Auto Calculation
+        async function calculateSemiAutoSize() {
+            const loadingIcon = document.getElementById('semiAutoCalcLoadingIcon');
+            
+            try {
+                loadingIcon.style.display = 'inline-block';
+                showStatus('Calculating with fixed dimension...', 'info');
+
+                const params = getSemiAutoSizeParameters();
+                
+                if (!params.flowrate || !params.lockedValue) {
+                    showStatus('Please enter flow rate and fixed dimension.', 'error');
+                    return;
+                }
+
+                const result = findSemiOptimalSize(params);
+                
+                // Apply to manual form
+                document.getElementById('flowrate').value = params.flowrate;
+                document.getElementById('width').value = result.width;
+                document.getElementById('height').value = result.height;
+                
+                switchTab('manual-tab');
+                calculateSingle();
+                
+                showStatus('Semi-auto sizing completed!', 'success');
+
+            } catch (error) {
+                showStatus('Semi-auto sizing failed.', 'error');
+            } finally {
+                loadingIcon.style.display = 'none';
+            }
+        }
+
+        // Helper Functions
+        function getFormParameters() {
             return {
-                name: scenario.name,
-                ...result
+                flowrate: parseFloat(document.getElementById('flowrate').value) || 0,
+                width: parseFloat(document.getElementById('width').value) || 0,
+                height: parseFloat(document.getElementById('height').value) || 0,
+                temperature: parseFloat(document.getElementById('temperature').value) || 20,
+                material: document.getElementById('material').value,
+                flowUnits: document.getElementById('flowUnits').value
             };
-        });
+        }
 
-        displayBatchResults(results);
-        currentResults = results;
-        showStatus(`Batch calculations completed! ${scenarios.length} scenarios processed.`, 'success');
-        document.getElementById('exportBtn').disabled = false;
-        
-        // Hide advanced toggle for batch results
-        document.getElementById('advancedToggle').style.display = 'none';
-        document.getElementById('advancedResultsContainer').style.display = 'none';
-        advancedResultsVisible = false;
+        function getAutoSizeParameters() {
+            return {
+                flowrate: parseFloat(document.getElementById('auto-flowrate').value) || 0,
+                maxVelocity: parseFloat(document.getElementById('max-velocity').value) || 7.5,
+                aspectRatio: parseFloat(document.getElementById('aspect-ratio').value) || 1.5,
+                flowUnits: document.getElementById('auto-flowUnits').value
+            };
+        }
 
-    } catch (error) {
-        console.error('Batch calculation error:', error);
-        showStatus('Batch calculations failed.', 'error');
-    } finally {
-        loadingIcon.style.display = 'none';
-    }
-}
+        function getSemiAutoSizeParameters() {
+            return {
+                flowrate: parseFloat(document.getElementById('semi-flowrate').value) || 0,
+                lockedDimension: document.querySelector('input[name="locked-dimension"]:checked').value,
+                lockedValue: parseFloat(document.getElementById('locked-value').value) || 0,
+                flowUnits: 'L/s'
+            };
+        }
 
-// Display batch results
-function displayBatchResults(results) {
-    const container = document.getElementById('resultsContainer');
-    
-    let html = '<h3>Batch Results</h3>';
-    results.forEach((result, index) => {
-        html += `
-            <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
-                <h4>${result.name}</h4>
+        function validateInputs(params) {
+            return params.flowrate > 0 && params.width > 0 && params.height > 0;
+        }
+
+        function performCalculation(params) {
+            // Convert flow rate to m³/s if needed
+            let flowRate = params.flowrate;
+            switch(params.flowUnits) {
+                case 'L/s':
+                    flowRate = flowRate / 1000;
+                    break;
+                case 'CFM':
+                    flowRate = flowRate * 0.000471947;
+                    break;
+            }
+
+            // Convert dimensions to meters
+            const width = params.width / 1000;
+            const height = params.height / 1000;
+            
+            // Calculate cross-sectional area
+            const area = width * height;
+            
+            // Calculate equivalent diameter
+            const equivalentDiameter = (4 * area / (2 * (width + height))) * 1000;
+            
+            // Calculate velocity
+            const velocity = flowRate / area;
+            
+            // Air density at given temperature
+            const airDensity = 1.225 * (293.15 / (273.15 + params.temperature));
+            
+            // Calculate velocity pressure
+            const velocityPressure = 0.5 * airDensity * Math.pow(velocity, 2);
+            
+            // Calculate Reynolds number
+            const kinematicViscosity = 1.5e-5;
+            const reynoldsNumber = velocity * (equivalentDiameter / 1000) / kinematicViscosity;
+            
+            // Determine flow type
+            const flowType = reynoldsNumber > 4000 ? 'Turbulent' : reynoldsNumber > 2300 ? 'Transitional' : 'Laminar';
+            
+            // Calculate friction factor
+            const roughness = 0.0015;
+            const relativeRoughness = roughness / equivalentDiameter;
+            let frictionFactor;
+            
+            if (reynoldsNumber > 4000) {
+                frictionFactor = 0.25 / Math.pow(Math.log10(relativeRoughness/3.7 + 5.74/Math.pow(reynoldsNumber, 0.9)), 2);
+            } else {
+                frictionFactor = 64 / reynoldsNumber;
+            }
+            
+            // Calculate pressure drop per meter
+            const pressureDrop = frictionFactor * (airDensity * Math.pow(velocity, 2)) / (2 * (equivalentDiameter / 1000));
+
+            return {
+                input: params,
+                output: {
+                    equivalentDiameter: equivalentDiameter.toFixed(1),
+                    averageVelocity: velocity.toFixed(2),
+                    pressureDrop: pressureDrop.toFixed(2),
+                    velocityPressure: velocityPressure.toFixed(2),
+                    crossSectionalArea: (area * 1000000).toFixed(0),
+                    reynoldsNumber: Math.round(reynoldsNumber),
+                    flowType: flowType,
+                    frictionFactor: frictionFactor.toFixed(4),
+                    airDensity: airDensity.toFixed(3)
+                }
+            };
+        }
+
+        function findOptimalDuctSize(params) {
+            let flowRateM3S = params.flowrate;
+            if (params.flowUnits === 'L/s') {
+                flowRateM3S = params.flowrate / 1000;
+            } else if (params.flowUnits === 'CFM') {
+                flowRateM3S = params.flowrate * 0.000471947;
+            }
+            
+            const minArea = flowRateM3S / params.maxVelocity;
+            let height = Math.sqrt(minArea / params.aspectRatio);
+            let width = height * params.aspectRatio;
+            
+            const increment = 50;
+            let heightMm = Math.ceil(height * 1000 / increment) * increment;
+            let widthMm = Math.ceil(width * 1000 / increment) * increment;
+            
+            return {
+                width: widthMm,
+                height: heightMm
+            };
+        }
+
+        function findSemiOptimalSize(params) {
+            let flowRateM3S = params.flowrate;
+            if (params.flowUnits === 'L/s') {
+                flowRateM3S = params.flowrate / 1000;
+            }
+            
+            const lockedDimM = params.lockedValue / 1000;
+            const targetVelocity = 6; // m/s target
+            const requiredArea = flowRateM3S / targetVelocity;
+            
+            let width, height;
+            if (params.lockedDimension === 'width') {
+                width = params.lockedValue;
+                height = Math.round((requiredArea / lockedDimM) * 1000);
+            } else {
+                height = params.lockedValue;
+                width = Math.round((requiredArea / lockedDimM) * 1000);
+            }
+            
+            return { width, height };
+        }
+
+        function displaySingleResult(result) {
+            const container = document.getElementById('resultsContainer');
+            const output = result.output;
+
+            container.innerHTML = `
                 <div class="results-grid">
                     <div class="result-card">
                         <div class="result-label">Duct Size</div>
@@ -1546,156 +953,278 @@ function displayBatchResults(results) {
                     </div>
                     <div class="result-card">
                         <div class="result-label">Velocity</div>
-                        <div class="result-value">${result.output.averageVelocity} m/s</div>
+                        <div class="result-value">${output.averageVelocity} m/s</div>
                     </div>
                     <div class="result-card">
                         <div class="result-label">Pressure Drop</div>
-                        <div class="result-value">${result.output.pressureDrop} Pa/m</div>
+                        <div class="result-value">${output.pressureDrop} Pa/m</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Equivalent Diameter</div>
+                        <div class="result-value">${output.equivalentDiameter} mm</div>
                     </div>
                 </div>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
+            `;
+            
+            displayAdvancedResults(result);
+        }
 
-// Export results
-function exportResults() {
-    if (!currentResults) {
-        showStatus('No results to export.', 'error');
-        return;
-    }
+        function displayAdvancedResults(result) {
+            const container = document.getElementById('advancedResultsContainer');
+            const output = result.output;
+            
+            container.innerHTML = `
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Velocity Pressure</div>
+                        <div class="result-value">${output.velocityPressure} Pa</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Cross-Sectional Area</div>
+                        <div class="result-value">${output.crossSectionalArea} mm²</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Reynolds Number</div>
+                        <div class="result-value">${output.reynoldsNumber}</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Flow Type</div>
+                        <div class="result-value">${output.flowType}</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Friction Factor</div>
+                        <div class="result-value">${output.frictionFactor}</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Air Density</div>
+                        <div class="result-value">${output.airDensity} kg/m³</div>
+                    </div>
+                </div>
+            `;
+        }
 
-    try {
-        let csvContent = '';
-        
-        if (Array.isArray(currentResults)) {
-            // Batch results
-            csvContent = 'Scenario,Flow Rate,Width,Height,Temperature,Equivalent Diameter,Velocity,Pressure Drop,Reynolds Number,Flow Type\n';
-            currentResults.forEach(result => {
-                csvContent += `${result.name},${result.input.flowrate},${result.input.width},${result.input.height},${result.input.temperature},${result.output.equivalentDiameter},${result.output.averageVelocity},${result.output.pressureDrop},${result.output.reynoldsNumber},${result.output.flowType}\n`;
+        function toggleAdvancedResults() {
+            const container = document.getElementById('advancedResultsContainer');
+            const button = document.querySelector('#advancedToggle button');
+            
+            advancedResultsVisible = !advancedResultsVisible;
+            
+            if (advancedResultsVisible) {
+                container.style.display = 'block';
+                button.innerHTML = 'Hide Advanced Results ▲';
+            } else {
+                container.style.display = 'none';
+                button.innerHTML = 'Show Advanced Results ▼';
+            }
+        }
+
+        function addScenario() {
+            const container = document.getElementById('scenariosContainer');
+            const scenarioDiv = document.createElement('div');
+            scenarioDiv.className = 'scenario-card';
+            scenarioDiv.setAttribute('data-scenario', scenarioCount);
+            
+            scenarioDiv.innerHTML = `
+                <div class="scenario-header">
+                    <h4>Scenario ${scenarioCount + 1}</h4>
+                    <button type="button" class="remove-btn" onclick="removeScenario(${scenarioCount})">Remove</button>
+                </div>
+                <div class="form-row">
+                    <input type="number" placeholder="Flow Rate" class="scenario-flowrate">
+                    <input type="number" placeholder="Width (mm)" class="scenario-width">
+                    <input type="number" placeholder="Height (mm)" class="scenario-height">
+                    <input type="number" placeholder="Temperature (°C)" class="scenario-temperature" value="20">
+                </div>
+            `;
+            
+            container.appendChild(scenarioDiv);
+            scenarioCount++;
+            updateRemoveButtons();
+        }
+
+        function removeScenario(index) {
+            const scenario = document.querySelector(`[data-scenario="${index}"]`);
+            if (scenario) {
+                scenario.remove();
+                updateRemoveButtons();
+            }
+        }
+
+        function updateRemoveButtons() {
+            const scenarios = document.querySelectorAll('.scenario-card');
+            const removeButtons = document.querySelectorAll('.remove-btn');
+            
+            removeButtons.forEach(btn => {
+                btn.style.display = scenarios.length > 1 ? 'block' : 'none';
             });
-        } else {
-            // Single result
-            csvContent = 'Parameter,Value\n';
-            csvContent += `Flow Rate,${currentResults.input.flowrate} ${currentResults.input.flowUnits}\n`;
-            csvContent += `Width,${currentResults.input.width} mm\n`;
-            csvContent += `Height,${currentResults.input.height} mm\n`;
-            csvContent += `Temperature,${currentResults.input.temperature} °C\n`;
-            csvContent += `Equivalent Diameter,${currentResults.output.equivalentDiameter} mm\n`;
-            csvContent += `Average Velocity,${currentResults.output.averageVelocity} m/s\n`;
-            csvContent += `Pressure Drop,${currentResults.output.pressureDrop} Pa/m\n`;
-            csvContent += `Velocity Pressure,${currentResults.output.velocityPressure} Pa\n`;
-            csvContent += `Reynolds Number,${currentResults.output.reynoldsNumber}\n`;
-            csvContent += `Flow Type,${currentResults.output.flowType}\n`;
         }
 
-        // Create and download file
-        const blob = new Blob([csvContent], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `duct_calculations_${new Date().toISOString().split('T')[0]}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
+        async function runBatchCalculations() {
+            const loadingIcon = document.getElementById('batchLoadingIcon');
+            
+            try {
+                loadingIcon.style.display = 'inline-block';
+                showStatus('Running batch calculations...', 'info');
 
-        showStatus('Results exported successfully!', 'success');
-    } catch (error) {
-        console.error('Export error:', error);
-        showStatus('Export failed.', 'error');
-    }
-}
+                const scenarios = [];
+                const scenarioElements = document.querySelectorAll('.scenario-card');
+                
+                scenarioElements.forEach((element, index) => {
+                    const flowrate = element.querySelector('.scenario-flowrate').value;
+                    const width = element.querySelector('.scenario-width').value;
+                    const height = element.querySelector('.scenario-height').value;
+                    const temperature = element.querySelector('.scenario-temperature').value || 20;
+                    
+                    if (flowrate && width && height) {
+                        scenarios.push({
+                            name: `Scenario ${index + 1}`,
+                            flowrate: parseFloat(flowrate),
+                            width: parseFloat(width),
+                            height: parseFloat(height),
+                            temperature: parseFloat(temperature),
+                            material: 'Galvanized Steel',
+                            flowUnits: 'L/s'
+                        });
+                    }
+                });
 
-// Clear form
-function clearForm() {
-    document.getElementById('calculatorForm').reset();
-    // Set default values
-    document.getElementById('temperature').value = '20';
-    document.getElementById('humidity').value = '50';
-    
-    document.getElementById('resultsContainer').innerHTML = `
-        <p style="text-align: center; color: #6c757d; padding: 40px;">
-            Enter parameters and click Calculate to see results
-        </p>
-    `;
-    document.getElementById('exportBtn').disabled = true;
-    document.getElementById('advancedToggle').style.display = 'none';
-    document.getElementById('advancedResultsContainer').style.display = 'none';
-    advancedResultsVisible = false;
-    currentResults = null;
-    hideStatus();
-}
+                if (scenarios.length === 0) {
+                    showStatus('Please enter at least one complete scenario.', 'error');
+                    return;
+                }
 
-// Clear auto sizing form
-function clearAutoForm() {
-    document.getElementById('autoSizeForm').reset();
-    // Set default values
-    document.getElementById('auto-temperature').value = '20';
-    document.getElementById('auto-humidity').value = '50';
-    document.getElementById('max-velocity').value = '7.5';
-    document.getElementById('max-pressure-drop').value = '1.0';
-    document.getElementById('aspect-ratio').value = '1.5';
-    hideStatus();
-}
+                const results = scenarios.map(scenario => {
+                    const result = performCalculation(scenario);
+                    return { name: scenario.name, ...result };
+                });
 
-// Clear semi-auto sizing form
-function clearSemiAutoForm() {
-    document.getElementById('semiAutoSizeForm').reset();
-    // Set default values
-    document.getElementById('semi-temperature').value = '20';
-    document.getElementById('semi-humidity').value = '50';
-    document.getElementById('semi-max-velocity').value = '7.5';
-    document.getElementById('semi-max-pressure-drop').value = '1.0';
-    document.getElementById('locked-value').value = '300';
-    document.querySelector('input[name="locked-dimension"][value="width"]').checked = true;
-    hideStatus();
-}
+                displayBatchResults(results);
+                currentResults = results;
+                showStatus(`Batch completed! ${scenarios.length} scenarios processed.`, 'success');
+                document.getElementById('exportBtn').disabled = false;
 
-// Show status message
-function showStatus(message, type) {
-    const statusElement = document.getElementById('statusMessage');
-    statusElement.textContent = message;
-    statusElement.className = `status-message status-${type === 'error' ? 'error' : type === 'success' ? 'success' : 'info'}`;
-    statusElement.style.display = 'block';
-    
-    // Auto-hide success messages after 3 seconds
-    if (type === 'success') {
-        setTimeout(() => {
+            } catch (error) {
+                showStatus('Batch calculations failed.', 'error');
+            } finally {
+                loadingIcon.style.display = 'none';
+            }
+        }
+
+        function displayBatchResults(results) {
+            const container = document.getElementById('resultsContainer');
+            
+            let html = '<h3>Batch Results</h3>';
+            results.forEach(result => {
+                html += `
+                    <div style="margin-bottom: 20px; padding: 16px; border: 1px solid var(--border-color); border-radius: 12px;">
+                        <h4>${result.name}</h4>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <div class="result-label">Size</div>
+                                <div class="result-value">${result.input.width} × ${result.input.height} mm</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Velocity</div>
+                                <div class="result-value">${result.output.averageVelocity} m/s</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Pressure Drop</div>
+                                <div class="result-value">${result.output.pressureDrop} Pa/m</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function exportResults() {
+            if (!currentResults) {
+                showStatus('No results to export.', 'error');
+                return;
+            }
+
+            try {
+                let csvContent = '';
+                
+                if (Array.isArray(currentResults)) {
+                    csvContent = 'Scenario,Flow Rate,Width,Height,Velocity,Pressure Drop\n';
+                    currentResults.forEach(result => {
+                        csvContent += `${result.name},${result.input.flowrate},${result.input.width},${result.input.height},${result.output.averageVelocity},${result.output.pressureDrop}\n`;
+                    });
+                } else {
+                    csvContent = 'Parameter,Value\n';
+                    csvContent += `Flow Rate,${currentResults.input.flowrate}\n`;
+                    csvContent += `Width,${currentResults.input.width} mm\n`;
+                    csvContent += `Height,${currentResults.input.height} mm\n`;
+                    csvContent += `Velocity,${currentResults.output.averageVelocity} m/s\n`;
+                    csvContent += `Pressure Drop,${currentResults.output.pressureDrop} Pa/m\n`;
+                }
+
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `duct_calculations_${new Date().toISOString().split('T')[0]}.csv`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+
+                showStatus('Results exported successfully!', 'success');
+            } catch (error) {
+                showStatus('Export failed.', 'error');
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('flowrate').value = '';
+            document.getElementById('width').value = '';
+            document.getElementById('height').value = '';
+            document.getElementById('temperature').value = '20';
+            clearResults();
+        }
+
+        function clearAutoForm() {
+            document.getElementById('auto-flowrate').value = '';
+            document.getElementById('max-velocity').value = '7.5';
+            document.getElementById('aspect-ratio').value = '1.5';
             hideStatus();
-        }, 3000);
-    }
-}
-
-// Hide status message
-function hideStatus() {
-    document.getElementById('statusMessage').style.display = 'none';
-}
-
-// Add some sample data for testing
-function loadSampleData() {
-    document.getElementById('flowrate').value = '500';
-    document.getElementById('width').value = '250';
-    document.getElementById('height').value = '200';
-    document.getElementById('temperature').value = '20';
-    document.getElementById('humidity').value = '50';
-}
-
-// Add keyboard shortcuts
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.key === 'Enter') {
-        // Determine which tab is active and run the appropriate calculation
-        if (document.getElementById('manual-tab').classList.contains('active')) {
-            calculateSingle();
-        } else if (document.getElementById('auto-tab').classList.contains('active')) {
-            calculateAutoSize();
-        } else if (document.getElementById('semi-auto-tab').classList.contains('active')) {
-            calculateSemiAutoSize();
         }
-    }
-});
+
+        function clearSemiAutoForm() {
+            document.getElementById('semi-flowrate').value = '';
+            document.getElementById('locked-value').value = '300';
+            hideStatus();
+        }
+
+        function clearResults() {
+            document.getElementById('resultsContainer').innerHTML = `
+                <p style="text-align: center; color: var(--text-muted); padding: 40px;">
+                    Enter parameters and calculate to see results
+                </p>
+            `;
+            document.getElementById('exportBtn').disabled = true;
+            document.getElementById('advancedToggle').style.display = 'none';
+            currentResults = null;
+            hideStatus();
+        }
+
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.textContent = message;
+            statusElement.className = `status-message status-${type}`;
+            statusElement.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(hideStatus, 3000);
+            }
+        }
+
+        function hideStatus() {
+            document.getElementById('statusMessage').style.display = 'none';
+        }
     </script>
 </body>
 </html>
