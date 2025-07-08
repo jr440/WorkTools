@@ -1,200 +1,263 @@
-// 🎯 COMPLETE DUCT CALCULATOR AUTOMATION SCRIPT
-// Copy this entire script and run it on the calculator page
+/**
+ * HVAC Duct Calculator Automator
+ * Advanced duct sizing and analysis tool
+ */
 
 class DuctCalculatorAutomator {
     constructor() {
-        this.baseUrl = 'https://ssccust1.spreadsheethosting.com/1/0c/12832d7e46eda9/cduct-rectSI170927/cduct-rectSI170927.htm';
-        this.results = [];
-    }
-
-    // 🔧 Set a field value and trigger updates
-    setField(fieldId, value) {
-        const field = document.getElementById(fieldId);
-        if (field) {
-            field.value = value;
-            field.dispatchEvent(new Event('input', { bubbles: true }));
-            field.dispatchEvent(new Event('change', { bubbles: true }));
-            field.dispatchEvent(new Event('blur', { bubbles: true }));
-            console.log(`✅ Set ${fieldId} to: ${value}`);
-            return true;
-        } else {
-            console.log(`❌ Field ${fieldId} not found`);
-            return false;
-        }
-    }
-
-    // 🔽 Set dropdown value
-    setDropdown(fieldId, value) {
-        const dropdown = document.getElementById(fieldId);
-        if (dropdown) {
-            dropdown.value = value;
-            dropdown.dispatchEvent(new Event('change', { bubbles: true }));
-            console.log(`✅ Set dropdown ${fieldId} to: ${value}`);
-            return true;
-        } else {
-            console.log(`❌ Dropdown ${fieldId} not found`);
-            return false;
-        }
-    }
-
-    // 📊 Get all calculated results
-    getResults() {
-        const resultFields = {
-            equivalentDiameter: 'XLEW_3_6_2',
-            averageVelocity: 'XLEW_3_8_2',
-            effectiveVelocity: 'XLEW_3_9_2',
-            pressureDrop: 'XLEW_3_10_2',
-            velocityPressure: 'XLEW_3_12_2',
-            crossSectionalArea: 'XLEW_3_15_2',
-            absoluteRoughness: 'XLEW_3_16_2',
-            relativeRoughness: 'XLEW_3_17_2',
-            density: 'XLEW_3_23_2',
-            dynamicViscosity: 'XLEW_3_24_2',
-            massFlow: 'XLEW_3_25_2',
-            reynoldsNumber: 'XLEW_3_26_2',
-            flowType: 'XLEW_3_27_1'
-        };
-
-        const results = {};
-        for (const [key, fieldId] of Object.entries(resultFields)) {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                results[key] = field.value;
-            }
-        }
-        return results;
-    }
-
-    // 🎯 Calculate single scenario
-    async calculateScenario(params) {
-        console.log(`🔥 Calculating scenario: ${JSON.stringify(params)}`);
+        console.log('Duct Calculator Automator initialized');
         
-        // Set input parameters
-        if (params.flowrate) this.setField('XLEW_3_4_2', params.flowrate);
-        if (params.width) this.setField('XLEW_3_5_2', params.width);
-        if (params.height) this.setField('XLEW_3_5_3', params.height);
-        if (params.temperature) this.setField('XLEW_3_19_2', params.temperature);
-        if (params.humidity) this.setField('XLEW_3_21_2', params.humidity);
-        if (params.material) this.setDropdown('XLEW_3_3_1', params.material);
-        if (params.flowUnits) this.setDropdown('XLEW_3_4_3', params.flowUnits);
+        // Material roughness values in mm
+        this.materialRoughness = {
+            'Galvanized Steel': 0.0015,
+            'Aluminum': 0.0015,
+            'Stainless Steel': 0.0015,
+            'PVC': 0.0015,
+            'Fiberglass': 0.003
+        };
+    }
+    
+    /**
+     * Perform duct calculations based on input parameters
+     * @param {Object} params - Input parameters
+     * @returns {Object} Calculation results
+     */
+    performCalculation(params) {
+        // Convert flow rate to m³/s if needed
+        let flowRate = params.flowrate;
+        switch(params.flowUnits) {
+            case 'L/s':
+                flowRate = flowRate / 1000;
+                break;
+            case 'CFM':
+                flowRate = flowRate * 0.000471947;
+                break;
+            // m³/s is already correct
+        }
 
-        // Wait for calculation to complete
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Convert dimensions to meters
+        const width = params.width / 1000;
+        const height = params.height / 1000;
+        
+        // Calculate cross-sectional area
+        const area = width * height;
+        
+        // Calculate hydraulic diameter (equivalent diameter)
+        const hydraulicDiameter = (4 * area / (2 * (width + height)));
+        const equivalentDiameter = hydraulicDiameter * 1000; // Convert to mm
+        
+        // Calculate velocity
+        const velocity = flowRate / area;
+        
+        // Calculate air properties
+        const airProperties = this.calculateAirProperties(params.temperature, params.humidity);
+        const airDensity = airProperties.density;
+        const kinematicViscosity = airProperties.kinematicViscosity;
+        
+        // Calculate velocity pressure
+        const velocityPressure = 0.5 * airDensity * Math.pow(velocity, 2);
+        
+        // Calculate Reynolds number
+        const reynoldsNumber = velocity * hydraulicDiameter / kinematicViscosity;
+        
+        // Determine flow type
+        const flowType = reynoldsNumber > 4000 ? 'Turbulent' : reynoldsNumber > 2300 ? 'Transitional' : 'Laminar';
+        
+        // Get material roughness
+        const roughness = this.materialRoughness[params.material] || 0.0015; // Default to galvanized steel
+        
+        // Calculate friction factor
+        const frictionFactor = this.calculateFrictionFactor(reynoldsNumber, roughness, equivalentDiameter);
+        
+        // Calculate pressure drop per meter
+        const pressureDrop = frictionFactor * (airDensity * Math.pow(velocity, 2)) / (2 * hydraulicDiameter);
+        
+        // Calculate effective velocity (accounting for boundary layer)
+        const effectiveVelocity = velocity * (1 - 0.02); // Simplified boundary layer effect
 
-        // Get results
-        const results = this.getResults();
-        const scenario = {
+        return {
             input: params,
-            output: results,
-            timestamp: new Date().toISOString()
+            output: {
+                equivalentDiameter: equivalentDiameter.toFixed(1),
+                averageVelocity: velocity.toFixed(2),
+                effectiveVelocity: effectiveVelocity.toFixed(2),
+                pressureDrop: pressureDrop.toFixed(2),
+                velocityPressure: velocityPressure.toFixed(2),
+                crossSectionalArea: (area * 1000000).toFixed(0), // Convert to mm²
+                reynoldsNumber: Math.round(reynoldsNumber),
+                flowType: flowType,
+                frictionFactor: frictionFactor.toFixed(4),
+                airDensity: airDensity.toFixed(3)
+            }
         };
-
-        this.results.push(scenario);
-        console.log('📊 Results:', results);
-        return scenario;
     }
-
-    // 🚀 Run multiple scenarios
-    async runBatchCalculations(scenarios) {
-        console.log(`🎯 Running ${scenarios.length} scenarios...`);
+    
+    /**
+     * Calculate air properties based on temperature and humidity
+     * @param {number} temperature - Air temperature in °C
+     * @param {number} humidity - Relative humidity in %
+     * @returns {Object} Air properties
+     */
+    calculateAirProperties(temperature, humidity) {
+        // Simplified air density calculation
+        const density = 1.225 * (293.15 / (273.15 + temperature));
         
-        for (let i = 0; i < scenarios.length; i++) {
-            console.log(`\n--- Scenario ${i + 1}/${scenarios.length} ---`);
-            await this.calculateScenario(scenarios[i]);
+        // Simplified kinematic viscosity calculation
+        const kinematicViscosity = 1.5e-5 * Math.pow((273.15 + temperature) / 293.15, 0.7);
+        
+        return {
+            density: density,
+            kinematicViscosity: kinematicViscosity
+        };
+    }
+    
+    /**
+     * Calculate friction factor using Colebrook-White equation
+     * @param {number} reynolds - Reynolds number
+     * @param {number} roughness - Material roughness in mm
+     * @param {number} diameter - Equivalent diameter in mm
+     * @returns {number} Friction factor
+     */
+    calculateFrictionFactor(reynolds, roughness, diameter) {
+        const relativeRoughness = roughness / diameter;
+        
+        if (reynolds < 2300) {
+            // Laminar flow
+            return 64 / reynolds;
+        } else if (reynolds < 4000) {
+            // Transitional flow - interpolate between laminar and turbulent
+            const laminarFactor = 64 / reynolds;
+            const turbulentFactor = this.calculateTurbulentFrictionFactor(reynolds, relativeRoughness);
+            const x = (reynolds - 2300) / (4000 - 2300);
+            return laminarFactor * (1 - x) + turbulentFactor * x;
+        } else {
+            // Turbulent flow
+            return this.calculateTurbulentFrictionFactor(reynolds, relativeRoughness);
+        }
+    }
+    
+    /**
+     * Calculate turbulent friction factor using Colebrook-White approximation
+     * @param {number} reynolds - Reynolds number
+     * @param {number} relativeRoughness - Relative roughness
+     * @returns {number} Friction factor
+     */
+    calculateTurbulentFrictionFactor(reynolds, relativeRoughness) {
+        // Haaland approximation of Colebrook-White equation
+        return Math.pow(-1.8 * Math.log10(Math.pow(relativeRoughness/3.7, 1.11) + 6.9/reynolds), -2);
+    }
+    
+    /**
+     * Find optimal duct size with one dimension locked
+     * @param {Object} params - Input parameters including locked dimension
+     * @returns {Object} Optimal dimensions
+     */
+    findSemiOptimalSize(params) {
+        // Convert flow rate to m³/s
+        let flowRateM3S = params.flowrate;
+        switch(params.flowUnits) {
+            case 'L/s':
+                flowRateM3S = params.flowrate / 1000;
+                break;
+            case 'CFM':
+                flowRateM3S = params.flowrate * 0.000471947;
+                break;
+        }
+        
+        // Get the locked dimension in meters
+        const lockedValue = params.lockedValue / 1000;
+        const isWidthLocked = params.lockedDimension === 'width';
+        
+        // Calculate the other dimension based on maximum velocity
+        let otherDimension = flowRateM3S / (params.maxVelocity * lockedValue);
+        
+        // Get size increment in meters
+        const increment = parseInt(params.sizeIncrement || 50) / 1000;
+        
+        // Convert to mm and round to size increment
+        otherDimension = otherDimension * 1000;
+        otherDimension = Math.ceil(otherDimension / params.sizeIncrement) * params.sizeIncrement;
+        
+        // Prepare result object with the dimensions
+        let width, height;
+        if (isWidthLocked) {
+            width = params.lockedValue;
+            height = otherDimension;
+        } else {
+            width = otherDimension;
+            height = params.lockedValue;
+        }
+        
+        // Check if the calculated dimensions meet the constraints
+        const testParams = {
+            flowrate: params.flowrate,
+            width: width,
+            height: height,
+            temperature: params.temperature,
+            humidity: params.humidity,
+            material: params.material,
+            flowUnits: params.flowUnits
+        };
+        
+        const result = this.performCalculation(testParams);
+        const velocity = parseFloat(result.output.averageVelocity);
+        const pressureDrop = parseFloat(result.output.pressureDrop);
+        
+        // If pressure drop is too high, try to adjust the other dimension
+        if (pressureDrop > params.maxPressureDrop) {
+            // Iteratively increase the non-locked dimension until pressure drop is acceptable
+            let iterations = 0;
+            const maxIterations = 20; // Prevent infinite loops
+            let currentOtherDimension = otherDimension;
             
-            // Small delay between calculations
-            await new Promise(resolve => setTimeout(resolve, 500));
+            while (pressureDrop > params.maxPressureDrop && iterations < maxIterations) {
+                // Increase by one increment each time
+                currentOtherDimension += parseInt(params.sizeIncrement);
+                
+                // Update dimensions
+                if (isWidthLocked) {
+                    height = currentOtherDimension;
+                } else {
+                    width = currentOtherDimension;
+                }
+                
+                // Recalculate with new dimensions
+                const newParams = {
+                    flowrate: params.flowrate,
+                    width: width,
+                    height: height,
+                    temperature: params.temperature,
+                    humidity: params.humidity,
+                    material: params.material,
+                    flowUnits: params.flowUnits
+                };
+                
+                const newResult = this.performCalculation(newParams);
+                const newPressureDrop = parseFloat(newResult.output.pressureDrop);
+                
+                // If we've reached an acceptable pressure drop, break the loop
+                if (newPressureDrop <= params.maxPressureDrop) {
+                    return {
+                        width: Math.round(width),
+                        height: Math.round(height),
+                        velocity: parseFloat(newResult.output.averageVelocity),
+                        pressureDrop: newPressureDrop
+                    };
+                }
+                
+                iterations++;
+            }
+            
+            // If we couldn't find a solution that meets constraints
+            throw new Error("Constraints not met - adjust parameters");
         }
-
-        console.log('\n🎉 All calculations complete!');
-        return this.results;
-    }
-
-    // 📋 Export results to CSV
-    exportToCSV() {
-        if (this.results.length === 0) {
-            console.log('❌ No results to export');
-            return;
-        }
-
-        const headers = [
-            'Flowrate', 'Width', 'Height', 'Temperature', 'Humidity', 'Material',
-            'Equivalent Diameter', 'Average Velocity', 'Pressure Drop', 'Reynolds Number'
-        ];
-
-        let csv = headers.join(',') + '\n';
-
-        this.results.forEach(result => {
-            const row = [
-                result.input.flowrate || '',
-                result.input.width || '',
-                result.input.height || '',
-                result.input.temperature || '',
-                result.input.humidity || '',
-                result.input.material || '',
-                result.output.equivalentDiameter || '',
-                result.output.averageVelocity || '',
-                result.output.pressureDrop || '',
-                result.output.reynoldsNumber || ''
-            ];
-            csv += row.join(',') + '\n';
-        });
-
-        // Download CSV
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `duct_calculations_${new Date().toISOString().slice(0,10)}.csv`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-
-        console.log('📁 CSV exported successfully!');
-    }
-
-    // 📊 Display results table
-    displayResults() {
-        if (this.results.length === 0) {
-            console.log('❌ No results to display');
-            return;
-        }
-
-        console.log('\n📊 === CALCULATION RESULTS ===');
-        console.table(this.results.map(r => ({
-            Flowrate: r.input.flowrate,
-            Dimensions: `${r.input.width}x${r.input.height}`,
-            'Equiv Diameter': r.output.equivalentDiameter,
-            'Avg Velocity': r.output.averageVelocity,
-            'Pressure Drop': r.output.pressureDrop,
-            'Reynolds No': r.output.reynoldsNumber
-        })));
+        
+        // Return the optimal dimensions
+        return {
+            width: Math.round(width),
+            height: Math.round(height),
+            velocity: velocity,
+            pressureDrop: pressureDrop
+        };
     }
 }
-
-// 🎯 READY TO USE!
-console.log('🎯 Duct Calculator Automator loaded!');
-console.log('📋 Usage examples:');
-console.log('');
-console.log('// Create automator instance');
-console.log('const calc = new DuctCalculatorAutomator();');
-console.log('');
-console.log('// Single calculation');
-console.log('await calc.calculateScenario({');
-console.log('    flowrate: 200,');
-console.log('    width: 300,');
-console.log('    height: 250,');
-console.log('    temperature: 25,');
-console.log('    material: "Galvanised steel"');
-console.log('});');
-console.log('');
-console.log('// Batch calculations');
-console.log('const scenarios = [');
-console.log('    {flowrate: 100, width: 200, height: 200},');
-console.log('    {flowrate: 150, width: 250, height: 200},');
-console.log('    {flowrate: 200, width: 300, height: 250}');
-console.log('];');
-console.log('await calc.runBatchCalculations(scenarios);');
-console.log('');
-console.log('// Export results');
-console.log('calc.exportToCSV();');
-console.log('calc.displayResults();');
