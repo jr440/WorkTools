@@ -173,10 +173,13 @@ class DuctCalculatorAutomator {
         
         // Get size increment in meters
         const increment = parseInt(params.sizeIncrement || 50) / 1000;
+        // Get size increment in meters (default to 50mm if not specified)
+        const sizeIncrement = parseInt(params.sizeIncrement || 50);
         
         // Convert to mm and round to size increment
         otherDimension = otherDimension * 1000;
         otherDimension = Math.ceil(otherDimension / params.sizeIncrement) * params.sizeIncrement;
+        otherDimension = Math.ceil(otherDimension / sizeIncrement) * sizeIncrement;
         
         // Prepare result object with the dimensions
         let width, height;
@@ -213,6 +216,7 @@ class DuctCalculatorAutomator {
             while (pressureDrop > params.maxPressureDrop && iterations < maxIterations) {
                 // Increase by one increment each time
                 currentOtherDimension += parseInt(params.sizeIncrement);
+                currentOtherDimension += sizeIncrement;
                 
                 // Update dimensions
                 if (isWidthLocked) {
