@@ -132,9 +132,27 @@
         // Event listener for the dismiss button
         dismissButton.addEventListener('click', dismissAlarm);
 
+        // Connect to WebSocket and handle dish status
+        const websocket = new WebSocket("ws://<RASPBERRY_PI_IP>:8765");
+
+        websocket.onmessage = (event) => {
+            const dishStatus = event.data;
+            alarmMessageElement.textContent = dishStatus;
+
+            if (dishStatus.includes("OFFLINE")) {
+                startFlashing();
+            } else {
+                stopFlashing();
+                body.style.backgroundColor = 'green';
+            }
+        };
+
+        websocket.onerror = (error) => {
+            console.error("WebSocket Error:", error);
+        };
+
         // Start flashing when the page loads
         window.onload = startFlashing;
-
         // Optional: Handle full screen (might require user interaction first)
         // document.documentElement.requestFullscreen(); // This usually needs a user gesture
     </script>
