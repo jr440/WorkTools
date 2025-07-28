@@ -133,7 +133,7 @@
         dismissButton.addEventListener('click', dismissAlarm);
 
         // Connect to WebSocket and handle dish status
-        const websocket = new WebSocket("ws://<RASPBERRY_PI_IP>:8765");
+        const websocket = new WebSocket("ws://192.168.1.100:8765");
 
         websocket.onmessage = (event) => {
             const dishStatus = event.data;
