@@ -141,9 +141,12 @@
 
             if (dishStatus.includes("OFFLINE")) {
                 startFlashing();
+            } else if (dishStatus.includes("ONLINE")) {
+                stopFlashing();
+                body.style.backgroundColor = 'green'; // Indicate online status
             } else {
                 stopFlashing();
-                body.style.backgroundColor = 'green';
+                body.style.backgroundColor = 'black'; // Reset to default for unknown statuses
             }
         };
 
