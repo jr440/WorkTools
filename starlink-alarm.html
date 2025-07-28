@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STARLINK ALERT!</title>
+    <style>
+        /* Basic reset for consistent styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+            font-family: 'Inter', sans-serif; /* Use Inter font */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black; /* Initial background */
+            color: white; /* Initial text color */
+            transition: background-color 0.5s ease-in-out; /* Smooth color transition */
+        }
+
+        /* Flashing animation */
+        .flash-red {
+            background-color: red;
+        }
+        .flash-black {
+            background-color: black;
+        }
+
+        /* Message styling */
+        #alarm-message {
+            font-size: 8vw; /* Responsive font size */
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 50px; /* Space below message */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Subtle glow */
+        }
+
+        /* Button styling */
+        #dismiss-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 20px 40px;
+            font-size: 3vw; /* Responsive font size */
+            font-weight: bold;
+            border: none;
+            border-radius: 15px; /* Rounded corners */
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Button shadow */
+            transition: all 0.3s ease; /* Smooth transitions for hover/active */
+        }
+
+        #dismiss-button:hover {
+            background-color: #45a049;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px); /* Lift effect on hover */
+        }
+
+        #dismiss-button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px); /* Press effect on click */
+        }
+    </style>
+</head>
+<body>
+    <h1 id="alarm-message">STARLINK OFFLINE! Check Dish!</h1>
+    <button id="dismiss-button">DISMISS ALARM</button>
+
+    <script>
+        const body = document.body;
+        const alarmMessageElement = document.getElementById('alarm-message');
+        const dismissButton = document.getElementById('dismiss-button');
+
+        let flashInterval;
+        let isFlashing = false;
+
+        // Function to start flashing
+        function startFlashing() {
+            if (isFlashing) return;
+            isFlashing = true;
+            let flashState = 0; // 0 for red, 1 for black
+            flashInterval = setInterval(() => {
+                if (flashState === 0) {
+                    body.classList.remove('flash-black');
+                    body.classList.add('flash-red');
+                    alarmMessageElement.style.backgroundColor = 'red';
+                } else {
+                    body.classList.remove('flash-red');
+                    body.classList.add('flash-black');
+                    alarmMessageElement.style.backgroundColor = 'black';
+                }
+                flashState = 1 - flashState; // Toggle state
+            }, 500); // Flash every 500ms
+        }
+
+        // Function to stop flashing
+        function stopFlashing() {
+            if (flashInterval) {
+                clearInterval(flashInterval);
+            }
+            isFlashing = false;
+            body.classList.remove('flash-red', 'flash-black');
+            body.style.backgroundColor = 'black'; // Reset to black
+            alarmMessageElement.style.backgroundColor = 'black';
+        }
+
+        // Function to dismiss the alarm
+        function dismissAlarm() {
+            stopFlashing();
+            // In a real scenario, you might close the browser tab/window here
+            // window.close(); // This might not work due to browser security policies
+            // A common way to "dismiss" in a web alarm is to redirect or just hide elements.
+            // For this use case, we'll just stop flashing and make it static.
+            alarmMessageElement.textContent = "ALARM DISMISSED.";
+            dismissButton.style.display = 'none'; // Hide the button
+            body.style.backgroundColor = 'green'; // Indicate dismissed state
+        }
+
+        // Set the alarm message from URL parameter if available
+        // This allows the Python script to pass the message
+        const urlParams = new URLSearchParams(window.location.search);
+        const messageFromUrl = urlParams.get('message');
+        if (messageFromUrl) {
+            alarmMessageElement.textContent = decodeURIComponent(messageFromUrl);
+        }
+
+        // Event listener for the dismiss button
+        dismissButton.addEventListener('click', dismissAlarm);
+
+        // Start flashing when the page loads
+        window.onload = startFlashing;
+
+        // Optional: Handle full screen (might require user interaction first)
+        // document.documentElement.requestFullscreen(); // This usually needs a user gesture
+    </script>
+</body>
+</html>
