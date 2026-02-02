@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>O.B & Co — Handmade 3D Prints</title>
+  <style>
+    :root{
+      --bg:#fafbff;
+      --surface:#ffffff;
+      --text:#1f2937;
+      --muted:#586172;
+      --border:#e9edf2;
+      --pill:#f2f5fb;
+      --accent:#8dd3c7;   /* mint */
+      --accent-2:#80b1d3; /* blue */
+      --accent-3:#fdb462; /* apricot */
+      --accent-4:#bebada; /* lavender */
+      --accent-5:#fb8072; /* coral */
+      --shadow: 0 10px 30px rgba(31,41,55,0.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 0% -10%, #f0f5ff, transparent 40%),
+        radial-gradient(900px 500px at 100% 0%, #f7fff9, transparent 40%),
+        var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:1200px; margin:0 auto; padding:12px 16px;
+      display:flex; align-items:center; gap:12px; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:800;
+    }
+    .logo{
+      width:42px; height:42px; border-radius:12px; border:1px solid var(--border);
+      background:
+        conic-gradient(from 210deg, var(--accent) 0deg, var(--accent-2) 120deg, var(--accent-4) 240deg, var(--accent) 360deg);
+      box-shadow: var(--shadow);
+    }
+    .searchbar{
+      flex:1; display:flex; gap:8px; align-items:center; margin:0 12px;
+      padding:8px 10px; background:var(--surface); border:1px solid var(--border); border-radius:999px;
+      box-shadow: 0 6px 20px rgba(31,41,55,0.05);
+    }
+    .searchbar input{
+      border:none; outline:none; flex:1; font-size:0.98rem; color:var(--text); background:transparent;
+    }
+    .filters{
+      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    }
+    .pill{
+      background:var(--pill); border:1px solid var(--border); color:#0f172a;
+      padding:8px 12px; border-radius:999px; font-weight:600; cursor:pointer;
+    }
+    .pill.active{ background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#0f172a; }
+    .cart-btn{
+      position:relative; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:8px 12px; font-weight:700;
+      box-shadow: 0 6px 20px rgba(31,41,55,0.05); cursor:pointer;
+    }
+    .cart-count{
+      position:absolute; top:-6px; right:-6px; background:var(--accent-5); color:#0f172a; border:1px solid var(--border);
+      font-size:0.76rem; padding:2px 6px; border-radius:999px; font-weight:800;
+    }
+
+    /* Hero banner */
+    .hero{
+      max-width:1200px; margin:16px auto 6px; padding:16px;
+      display:grid; grid-template-columns: 1.2fr 0.8fr; gap:16px; align-items:center;
+    }
+    .hero-card{
+      background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:22px; box-shadow: var(--shadow);
+    }
+    .hero h1{ margin:0 0 8px; font-size:2.1rem; }
+    .hero p{ color:var(--muted); margin:0 0 12px; }
+    .hero .cta{
+      display:inline-flex; align-items:center; gap:8px; font-weight:800;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      border:1px solid var(--border); color:#0f172a; padding:10px 14px; border-radius:12px;
+    }
+    .hero-img{
+      height:180px; border-radius:16px; border:1px solid var(--border);
+      background:
+        radial-gradient(circle at 25% 30%, rgba(141,211,199,0.35), transparent 45%),
+        radial-gradient(circle at 70% 60%, rgba(128,177,211,0.35), transparent 45%),
+        linear-gradient(180deg, #fff, #f6f8fc);
+    }
+
+    /* Layout */
+    .container{ max-width:1200px; margin:0 auto; padding:12px 16px 32px; }
+    .section-head{ display:flex; align-items:center; justify-content:space-between; margin:10px 0 8px; }
+    .section-head h2{ margin:0; font-size:1.3rem; }
+    .view-all{ color:#0f172a; font-weight:700; background:var(--pill); border:1px solid var(--border); padding:8px 12px; border-radius:999px; }
+
+    /* Product grid */
+    .grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; }
+    @media (max-width:1000px){ .grid{ grid-template-columns: repeat(3, 1fr);} .hero{ grid-template-columns:1fr; } }
+    @media (max-width:720px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width:460px){ .grid{ grid-template-columns: 1fr;} }
+
+    .card{
+      background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow: var(--shadow);
+      display:flex; flex-direction:column;
+    }
+    .thumb{
+      aspect-ratio:1/1; background:
+        radial-gradient(circle at 30% 20%, rgba(253,180,98,0.25), transparent 45%),
+        radial-gradient(circle at 70% 60%, rgba(190,186,218,0.25), transparent 45%),
+        linear-gradient(180deg, #ffffff, #f6f8fc);
+    }
+    .info{ padding:12px; display:flex; flex-direction:column; gap:8px; }
+    .title{ font-weight:700; line-height:1.2; }
+    .price{ font-weight:800; }
+    .stars{ color:#f59e0b; font-size:0.92rem; }
+    .variants{ display:flex; gap:6px; flex-wrap:wrap; }
+    .chip{
+      border:1px solid var(--border); background:#f5f7fb; color:#0f172a; padding:6px 10px; border-radius:999px; font-size:0.85rem; font-weight:600;
+    }
+    .actions{ display:flex; align-items:center; gap:8px; }
+    .btn{
+      flex:1;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#fff; font-weight:800; cursor:pointer;
+    }
+    .btn.primary{ background:linear-gradient(90deg, var(--accent-3), var(--accent-5)); color:#0f172a; }
+    .btn:hover{ filter: brightness(1.02); }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(0,0,0,0.35); display:none; align-items:center; justify-content:center; z-index:60;
+    }
+    .modal{
+      width:min(760px, 94vw); background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+      display:grid; grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width:760px){ .modal{ grid-template-columns:1fr; } }
+    .modal-img{ min-height:260px; background:#f6f8fc; }
+    .modal-body{ padding:16px; display:flex; flex-direction:column; gap:10px; }
+    .close{ position:absolute; top:10px; right:10px; background:#fff; border:1px solid var(--border); border-radius:999px; padding:6px 10px; cursor:pointer; font-weight:800; }
+
+    /* Cart drawer */
+    .cart-drawer{
+      position:fixed; top:0; right:-420px; width:min(380px, 92vw); height:100vh; background:var(--surface); border-left:1px solid var(--border);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index:70; transition: right 0.28s ease;
+      display:flex; flex-direction:column;
+    }
+    .cart-header{ display:flex; align-items:center; justify-content:space-between; padding:14px; border-bottom:1px solid var(--border); font-weight:800; }
+    .cart-items{ padding:10px; display:flex; flex-direction:column; gap:10px; overflow:auto; }
+    .cart-row{ display:grid; grid-template-columns: 64px 1fr auto; gap:10px; align-items:center; border:1px solid var(--border); border-radius:12px; padding:8px; }
+    .qty{
+      display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border); border-radius:999px; padding:4px 8px; background:#f6f8fc;
+    }
+    .qty button{ border:none; background:transparent; font-weight:800; cursor:pointer; padding:4px 6px; }
+    .cart-footer{ border-top:1px solid var(--border); padding:12px; display:flex; flex-direction:column; gap:10px; }
+    .summary{ display:flex; align-items:center; justify-content:space-between; font-weight:800; }
+    .checkout{ background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#0f172a; border:1px solid var(--border); padding:12px; border-radius:12px; font-weight:800; cursor:pointer; }
+    .shipping{ font-size:0.9rem; color:var(--muted); }
+
+    /* Footer */
+    footer{ border-top:1px solid var(--border); color:var(--muted); text-align:center; padding:20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>O.B & Co — Handmade 3D Prints</div>
+      </div>
+
+      <div class="searchbar" role="search">
+        <input id="searchInput" type="search" placeholder="Search vases, planters, organizers, toys..." aria-label="Search"/>
+        <button class="pill" id="clearSearch" title="Clear search">Clear</button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="filters">
+          <button class="pill active" data-filter="All">All</button>
+          <button class="pill" data-filter="Home">Home</button>
+          <button class="pill" data-filter="Decor">Decor</button>
+          <button class="pill" data-filter="Toys">Toys</button>
+          <button class="pill" data-filter="Organizer">Organizer</button>
+        </div>
+        <button class="cart-btn" id="openCart">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <h1>Handmade 3D Prints for Everyday Joy</h1>
+      <p>Small-batch, made-to-order pieces crafted in our home studio. Choose your color, size, and finish — we’ll print and pack with care.</p>
+      <a class="cta" href="#catalog">Browse Bestsellers →</a>
+    </div>
+    <div class="hero-card hero-img" aria-hidden="true"></div>
+  </section>
+
+  <main class="container" id="catalog">
+    <div class="section-head">
+      <h2>Featured & New</h2>
+      <a class="view-all" href="#catalog">View all</a>
+    </div>
+
+    <div class="grid" id="productGrid">
+      <!-- Products injected by JS -->
+    </div>
+  </main>
+
+  <!-- Product Quick View Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Product details">
+    <div class="modal" id="modal">
+      <div class="modal-img" id="modalImage"></div>
+      <div class="modal-body">
+        <button class="close" id="closeModal" aria-label="Close">×</button>
+        <h3 id="modalTitle">Title</h3>
+        <div class="stars" id="modalStars">★★★★★</div>
+        <div class="price" id="modalPrice">$00.00</div>
+        <p class="muted" id="modalDesc">Description here.</p>
+        <div class="variants" id="modalVariants"></div>
+        <div style="display:flex; gap:8px; margin-top:8px;">
+          <button class="btn primary" id="modalAdd">Add to Cart</button>
+          <button class="btn" id="modalCloseSecondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-header">
+      <span>Your Cart</span>
+      <button class="pill" id="closeCart">Close</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="summary">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="shipping">Shipping calculated at checkout. Free local pickup available.</div>
+      <button class="checkout" id="checkoutBtn">Checkout</button>
+    </div>
+  </aside>
+
+  <footer>
+    © O.B & Co — Handmade 3D Prints • Made in our home studio with care
+  </footer>
+
+  <script>
+    // Product data: replace image with real paths in /images when you have them
+    const products = [
+      {
+        id:'vase-aurora', title:'Aurora Ripple Vase', price:34.00, rating:5, category:'Decor',
+        tags:['Vase','Ripple','Tall'], colors:['Mint','Lavender','Soft Blue'], image:'images/vase_aurora.jpg',
+        desc:'A wavy silhouette vase for dry florals. Lightweight and elegant in pastel hues.'
+      },
+      {
+        id:'planter-orb', title:'Orb Planter (Small)', price:22.00, rating:4, category:'Home',
+        tags:['Planter','Round'], colors:['Apricot','Mint','Coral'], image:'images/planter_orb.jpg',
+        desc:'Rounded planter with drainage. Perfect for succulents and tiny herbs.'
+      },
+      {
+        id:'toy-dino', title:'Articulated Dino', price:18.00, rating:5, category:'Toys',
+        tags:['Toy','Articulated'], colors:['Mint','Soft Blue','Grey'], image:'images/dino.jpg',
+        desc:'Fidget-friendly articulated dinosaur. Great desk buddy for kids and adults.'
+      },
+      {
+        id:'tray-wave', title:'Wave Desk Tray', price:16.00, rating:4, category:'Organizer',
+        tags:['Tray','Desk','Keys'], colors:['Lavender','Soft Blue','Apricot'], image:'images/tray_wave.jpg',
+        desc:'Curved catch-all tray for keys, coins, and daily essentials.'
+      },
+      {
+        id:'pen-stand', title:'Hex Pen Stand', price:14.00, rating:4, category:'Organizer',
+        tags:['Pen','Hex'], colors:['Mint','Grey','Apricot'], image:'images/pen_stand.jpg',
+        desc:'Compact hexagonal stand to tidy your pens and brushes.'
+      },
+      {
+        id:'lamp-shell', title:'Shell Night Lamp Shade', price:29.00, rating:5, category:'Home',
+        tags:['Lamp','Shade'], colors:['Soft Blue','Apricot','Mint'], image:'images/lamp_shell.jpg',
+        desc:'Soft shell-pattern shade for a cozy night lamp (shade only).'
+      },
+      {
+        id:'vase-petal', title:'Petal Bud Vase', price:19.00, rating:4, category:'Decor',
+        tags:['Vase','Bud'], colors:['Coral','Mint','Lavender'], image:'images/vase_petal.jpg',
+        desc:'Small bud vase with petal texture—perfect for single stems.'
+      },
+      {
+        id:'toy-axolotl', title:'Articulated Axolotl', price:17.00, rating:5, category:'Toys',
+        tags:['Toy','Articulated'], colors:['Lavender','Soft Blue','Mint'], image:'images/axolotl.jpg',
+        desc:'Cute wiggly axolotl—endlessly posable and satisfying.'
+      }
+    ];
+
+    // State
+    let cart = [];
+    let activeFilter = 'All';
+    let searchQuery = '';
+
+    // Elements
+    const grid = document.getElementById('productGrid');
+    const pills = document.querySelectorAll('.filters .pill');
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    const cartCount = document.getElementById('cartCount');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const openCartBtn = document.getElementById('openCart');
+    const closeCartBtn = document.getElementById('closeCart');
+    const cartItems = document.getElementById('cartItems');
+    const cartSubtotalEl = document.getElementById('cartSubtotal');
+
+    // Modal Elements
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImage = document.getElementById('modalImage');
+    const modalStars = document.getElementById('modalStars');
+    const modalVariants = document.getElementById('modalVariants');
+    const closeModal = document.getElementById('closeModal');
+    const modalCloseSecondary = document.getElementById('modalCloseSecondary');
+    const modalAdd = document.getElementById('modalAdd');
+    let currentProduct = null;
+    let currentVariant = null;
+
+    // Helpers
+    const money = n => "$" + n.toFixed(2);
+    function stars(n){ return "★".repeat(n) + "☆".repeat(5-n); }
+
+    function renderProducts(){
+      grid.innerHTML = '';
+      const filtered = products.filter(p => {
+        const catOk = (activeFilter === 'All') || (p.category === activeFilter);
+        const q = searchQuery.trim().toLowerCase();
+        const qOk = !q || p.title.toLowerCase().includes(q) || p.tags.join(' ').toLowerCase().includes(q);
+        return catOk && qOk;
+      });
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const thumb = document.createElement('div');
+        thumb.className = 'thumb';
+        if (p.image){
+          thumb.style.background = `center/cover no-repeat url('${p.image}') , linear-gradient(180deg, #ffffff, #f6f8fc)`;
+        }
+        const info = document.createElement('div');
+        info.className = 'info';
+        const title = document.createElement('div');
+        title.className = 'title'; title.textContent = p.title;
+        const row = document.createElement('div');
+        row.style.display='flex'; row.style.justifyContent='space-between'; row.style.alignItems='center';
+        const price = document.createElement('div');
+        price.className = 'price'; price.textContent = money(p.price);
+        const rating = document.createElement('div');
+        rating.className = 'stars'; rating.textContent = stars(p.rating);
+        row.append(price, rating);
+
+        const variantWrap = document.createElement('div'); variantWrap.className = 'variants';
+        p.colors.forEach(c => {
+          const chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.textContent = c;
+          variantWrap.appendChild(chip);
+        });
+
+        const actions = document.createElement('div'); actions.className = 'actions';
+        const btnQuick = document.createElement('button'); btnQuick.className='btn'; btnQuick.textContent = 'Quick View';
+        btnQuick.addEventListener('click', () => openModal(p));
+        const btnAdd = document.createElement('button'); btnAdd.className='btn primary'; btnAdd.textContent='Add to Cart';
+        btnAdd.addEventListener('click', () => addToCart({ ...p, variant: p.colors[0] }));
+        actions.append(btnQuick, btnAdd);
+
+        info.append(title, row, variantWrap, actions);
+        card.append(thumb, info);
+        grid.appendChild(card);
+      });
+    }
+
+    // Modal logic
+    function openModal(p){
+      currentProduct = p;
+      currentVariant = p.colors[0] || null;
+      modalTitle.textContent = p.title;
+      modalPrice.textContent = money(p.price);
+      modalDesc.textContent = p.desc;
+      modalStars.textContent = stars(p.rating);
+      modalImage.style.background = p.image
+        ? `center/cover no-repeat url('${p.image}') , #f6f8fc`
+        : '#f6f8fc';
+      // variants
+      modalVariants.innerHTML = '';
+      p.colors.forEach(color => {
+        const button = document.createElement('button');
+        button.className = 'chip';
+        button.textContent = color;
+        button.addEventListener('click', () => {
+          currentVariant = color;
+          Array.from(modalVariants.children).forEach(el => el.style.outline='none');
+          button.style.outline='2px solid #80b1d3';
+        });
+        modalVariants.appendChild(button);
+      });
+      modalBackdrop.style.display = 'flex';
+    }
+    function closeModalFn(){ modalBackdrop.style.display='none'; currentProduct=null; currentVariant=null; }
+    closeModal.addEventListener('click', closeModalFn);
+    modalCloseSecondary.addEventListener('click', closeModalFn);
+    modalBackdrop.addEventListener('click', (e)=>{ if(e.target===modalBackdrop) closeModalFn(); });
+    modalAdd.addEventListener('click', ()=> {
+      if(!currentProduct) return;
+      addToCart({ ...currentProduct, variant: currentVariant || currentProduct.colors[0] });
+      closeModalFn();
+    });
+
+    // Cart logic
+    function addToCart(item){
+      const idx = cart.findIndex(x => x.id === item.id && x.variant === item.variant);
+      if (idx >= 0){ cart[idx].qty += 1; }
+      else { cart.push({ id:item.id, title:item.title, price:item.price, image:item.image, variant:item.variant, qty:1 }); }
+      renderCart();
+    }
+    function updateQty(index, delta){
+      cart[index].qty = Math.max(1, cart[index].qty + delta);
+      renderCart();
+    }
+    function removeItem(index){
+      cart.splice(index,1);
+      renderCart();
+    }
+    function subtotal(){
+      return cart.reduce((s, i)=> s + i.price * i.qty, 0);
+    }
+    function renderCart(){
+      cartItems.innerHTML='';
+      cart.forEach((i, idx) => {
+        const row = document.createElement('div'); row.className='cart-row';
+        const img = document.createElement('div');
+        img.style.width='64px'; img.style.height='64px';
+        img.style.border='1px solid var(--border)'; img.style.borderRadius='8px';
+        img.style.background = i.image ? `center/cover no-repeat url('${i.image}') , #f6f8fc` : '#f6f8fc';
+        const meta = document.createElement('div');
+        meta.innerHTML = `<div style="font-weight:800">${i.title}</div>
+                          <div style="color:var(--muted); font-size:0.9rem">${i.variant}</div>
+                          <div style="font-weight:700">${money(i.price)}</div>`;
+        const controls = document.createElement('div');
+        controls.style.display='flex'; controls.style.flexDirection='column'; controls.style.alignItems='end'; controls.style.gap='6px';
+        const qty = document.createElement('div'); qty.className='qty';
+        const minus = document.createElement('button'); minus.textContent='−'; minus.addEventListener('click', ()=>updateQty(idx,-1));
+        const num = document.createElement('span'); num.textContent = i.qty;
+        const plus = document.createElement('button'); plus.textContent='+'; plus.addEventListener('click', ()=>updateQty(idx,1));
+        qty.append(minus, num, plus);
+        const remove = document.createElement('button'); remove.className='pill'; remove.textContent='Remove';
+        remove.addEventListener('click', ()=>removeItem(idx));
+        controls.append(qty, remove);
+
+        row.append(img, meta, controls);
+        cartItems.appendChild(row);
+      });
+      cartSubtotalEl.textContent = money(subtotal());
+      cartCount.textContent = cart.reduce((n,i)=> n + i.qty, 0);
+    }
+
+    // Drawer open/close
+    function openCart(){ cartDrawer.style.right = '0'; }
+    function closeCart(){ cartDrawer.style.right = '-420px'; }
+    openCartBtn.addEventListener('click', openCart);
+    document.getElementById('closeCart').addEventListener('click', closeCart);
+
+    // Filters and search
+    pills.forEach(p => {
+      p.addEventListener('click', () => {
+        pills.forEach(pp => pp.classList.remove('active'));
+        p.classList.add('active');
+        activeFilter = p.dataset.filter;
+        renderProducts();
+      });
+    });
+    searchInput.addEventListener('input', () => { searchQuery = searchInput.value; renderProducts(); });
+    clearSearch.addEventListener('click', () => { searchInput.value=''; searchQuery=''; renderProducts(); });
+
+    // Checkout placeholder
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (!cart.length) { alert('Your cart is empty.'); return; }
+      alert('Checkout: You can link this button to Etsy product pages or a payment link. For now this is a demo.');
+    });
+
+    // Init
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
