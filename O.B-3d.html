@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>O.B & Co — Home Manufacturing & Design</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171b24;
+      --text: #f7f9fc;
+      --muted: #c7d0da;
+      --accent: #ff6a00;   /* Safety Orange */
+      --accent-2: #1e88e5; /* Deep Blue */
+      --border: #2a2f3a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+      background: radial-gradient(1200px 600px at 10% 10%, #111420, #0b0d12);
+      color: var(--text);
+    }
+    a { color: var(--accent-2); text-decoration: none; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(15, 17, 21, 0.75);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 1.05rem; letter-spacing: 0.8px;
+    }
+    .logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      background:
+        conic-gradient(from 200deg, var(--accent) 0deg, var(--accent-2) 120deg, #444 220deg, var(--accent) 360deg);
+      border: 2px solid #222;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.04), 0 6px 16px rgba(0,0,0,0.35);
+    }
+    .menu {
+      display: flex; gap: 18px; align-items: center;
+    }
+    .menu a {
+      color: var(--muted);
+      padding: 8px 12px; border-radius: 8px;
+    }
+    .menu a:hover {
+      color: var(--text);
+      background: rgba(30, 136, 229, 0.12);
+    }
+    .cta {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #fff; padding: 10px 14px; border-radius: 10px; font-weight: 700;
+      box-shadow: 0 8px 20px rgba(30,136,229,0.35);
+    }
+    .cta:hover { filter: brightness(1.05); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    /* Hero */
+    .hero {
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px;
+      align-items: center; padding: 40px 24px;
+    }
+    .hero h1 {
+      font-size: 2.6rem; line-height: 1.1; margin: 0 0 14px;
+      letter-spacing: 0.4px;
+    }
+    .sub {
+      color: var(--muted); font-size: 1.06rem; margin-bottom: 20px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 16px; border-radius: 10px; font-weight: 700; border: 1px solid var(--border);
+      color: var(--text); background: #111520;
+    }
+    .btn:hover { background: #142033; }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--accent-2); color: var(--text);
+    }
+    .hero-card {
+      background: linear-gradient(145deg, #121624, #0c101a);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px; position: relative; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .printer-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .fake-img {
+      aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; border: 1px solid #222;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,106,0,0.3), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(30,136,229,0.35), transparent 45%),
+        linear-gradient(180deg, #0a0d12, #111622);
+    }
+    .fake-img::after {
+      content: "3D Print Showcase";
+      position: absolute; bottom: 10px; right: 12px;
+      color: rgba(255,255,255,0.7); font-size: 0.9rem;
+      background: rgba(0,0,0,0.35); padding: 6px 10px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .chip {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(255,106,0,0.12); color: var(--text);
+      border: 1px solid rgba(255,106,0,0.35);
+      padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+    }
+    /* Services */
+    .section { padding: 40px 24px; }
+    .section h2 { font-size: 1.8rem; margin: 0 0 10px; }
+    .section p.lead { color: var(--muted); margin: 0 0 20px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.2rem; }
+    .card p { color: var(--muted); margin: 0 0 12px; }
+    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; margin-right: 8px; border: 1px solid var(--border); color: var(--muted); }
+    /* Gallery */
+    .gallery {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .gallery .fake-img { aspect-ratio: 1/1; }
+    .gallery .fake-img::after { content: "Sample Print"; }
+    /* Quote */
+    .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .input, textarea {
+      width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border);
+      background: #101522; color: var(--text);
+    }
+    textarea { min-height: 120px; }
+    .note { color: var(--muted); font-size: 0.92rem; }
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border); color: var(--muted);
+      padding: 24px; text-align: center;
+    }
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .quote-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .cards { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <span>O.B & Co | Home Manufacturing & Design</span>
+      </div>
+      <nav class="menu">
+        <a href="#home">Home</a>
+        <a href="#shop">Shop Custom Parts</a>
+        <a href="#quote" class="cta">Request a Quote</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <section class="hero">
+      <div>
+        <h1>Turn Ideas into Reality.</h1>
+        <p class="sub">
+          Precision 3D Printing & Custom Design Services.
+          Whether you need a replacement part for a vehicle, a custom enclosure for electronics,
+          or a personalized gift, we print it with industrial-grade precision right here in our workshop.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#shop">Shop Sample Parts</a>
+          <a class="btn btn-outline" href="#quote">Get a Fast Quote</a>
+        </div>
+        <p class="note" style="margin-top:12px;">
+          Flashforge Adventurer 5M for rapid prototyping • Bambu Lab P1S for multi-color, high-detail production.
+        </p>
+      </div>
+      <div class="hero-card">
+        <div class="printer-grid">
+          <div class="fake-img">
+            <div class="chip">Flashforge A5M — Prototyping</div>
+          </div>
+          <div class="fake-img">
+            <div class="chip">Bambu Lab P1S — Production</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <h2>What We Offer</h2>
+      <p class="lead">From concept to finished part — CAD design, functional prototypes, and production prints.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>Custom CAD Design</h3>
+          <p>Bring your idea or problem — we’ll model it for fit and function. Ideal for 4x4 mods, brackets, enclosures.</p>
+          <span class="tag">STL/STEP</span><span class="tag">Tolerance Fit</span><span class="tag">Iterative Design</span>
+        </div>
+        <div class="card">
+          <h3>Rapid Prototyping</h3>
+          <p>Fast turnaround prints for testing dimensions and ergonomics before final production.</p>
+          <span class="tag">PLA/PLA+ </span><span class="tag">Draft & Fine</span><span class="tag">Same-Day Options</span>
+        </div>
+        <div class="card">
+          <h3>Production Printing</h3>
+          <p>High-quality parts with strength and detail, including multi-color and functional materials.</p>
+          <span class="tag">PETG/ABS/TPU</span><span class="tag">Multi-Color</span><span class="tag">Batch Runs</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="section">
+      <h2>Sample Products</h2>
+      <p class="lead">Visual placeholders — swap with real photos later.</p>
+      <div class="gallery">
+        <div class="fake-img"><div class="chip">Enclosure</div></div>
+        <div class="fake-img"><div class="chip">Cable Guide</div></div>
+        <div class="fake-img"><div class="chip">Dash Clip</div></div>
+        <div class="fake-img"><div class="chip">Camera Mount</div></div>
+        <div class="fake-img"><div class="chip">Badge</div></div>
+        <div class="fake-img"><div class="chip">Bracket</div></div>
+        <div class="fake-img"><div class="chip">Knob</div></div>
+        <div class="fake-img"><div class="chip">Vent Trim</div></div>
+      </div>
+    </section>
+
+    <section id="quote" class="section">
+      <h2>Request a Quote</h2>
+      <p class="lead">Upload your file or describe your idea. We’ll respond with options and pricing.</p>
+      <div class="quote-grid">
+        <form>
+          <label>Full Name</label>
+          <input class="input" type="text" placeholder="Your name"/>
+          <label>Email</label>
+          <input class="input" type="email" placeholder="you@example.com"/>
+          <label>Project Details</label>
+          <textarea placeholder="Material, size, quantity, use case..."></textarea>
+          <label>File (optional)</label>
+          <input class="input" type="file" />
+          <div style="margin-top:10px; display:flex; gap:10px;">
+            <button class="btn" type="submit">Submit</button>
+            <span class="note">We’ll reply within 24–48 hours.</span>
+          </div>
+        </form>
+        <div class="card">
+          <h3>Typical Pricing</h3>
+          <p class="note">Pricing varies by material, size, and complexity. Ballpark:</p>
+          <ul class="note">
+            <li>Draft Prototype: $15–$40</li>
+            <li>Production Part: $35–$120</li>
+            <li>CAD Design (hourly): $45/hr</li>
+          </ul>
+          <h3 style="margin-top:16px;">Material Options</h3>
+          <p class="note">PLA/PLA+ for quick tests • PETG for strength • ABS for heat • TPU for flexible parts.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p class="lead">Based in our home workshop. Local pickup or shipping available.</p>
+      <div class="cards" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h3>Reach Us</h3>
+          <p class="note">Email: hello@obco.workshop</p>
+          <p class="note">Phone: 04xx xxx xxx</p>
+        </div>
+        <div class="card">
+          <h3>Social</h3>
+          <p class="note">Instagram: @obco.prints</p>
+          <p class="note">Facebook: O.B & Co</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © O.B & Co — Home Manufacturing & Design • Fast Prototyping • High-Quality Production
+  </footer>
+</body>
+</html>
