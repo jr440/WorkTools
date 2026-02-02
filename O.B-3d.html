@@ -5,167 +5,218 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>O.B & Co — Home Manufacturing & Design</title>
   <style>
-    :root {
-      --bg: #0f1115;
-      --card: #171b24;
-      --text: #f7f9fc;
-      --muted: #c7d0da;
-      --accent: #ff6a00;   /* Safety Orange */
-      --accent-2: #1e88e5; /* Deep Blue */
-      --border: #2a2f3a;
+    :root{
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --glass: rgba(255,255,255,0.65);
+      --text: #1f2937;
+      --muted: #5b6475;
+      --border: #e7e9f0;
+      --shadow: 0 10px 30px rgba(31,41,55,0.07);
+      --accent: #8dd3c7;   /* mint */
+      --accent-2: #80b1d3; /* blue */
+      --accent-3: #bebada; /* lavender */
+      --accent-4: #fb8072; /* coral */
+      --accent-5: #fdb462; /* apricot */
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
-      background: radial-gradient(1200px 600px at 10% 10%, #111420, #0b0d12);
+    html, body { margin:0; padding:0; }
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
       color: var(--text);
+      background:
+        radial-gradient(800px 400px at 10% 0%, #eef2fb, transparent 40%),
+        radial-gradient(1000px 500px at 90% 10%, #f2fbf7, transparent 40%),
+        var(--bg);
     }
-    a { color: var(--accent-2); text-decoration: none; }
+
+    /* Header */
     header {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(15, 17, 21, 0.75);
+      position: sticky; top: 0; z-index: 100;
+      padding: 14px 0;
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
     }
-    .nav {
-      max-width: 1200px; margin: 0 auto; padding: 14px 20px;
+    .nav-wrap {
+      max-width: 1120px; margin: 0 auto; padding: 0 20px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .brand {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 800; font-size: 1.05rem; letter-spacing: 0.8px;
+      display: flex; align-items: center; gap: 10px; font-weight: 800;
     }
     .logo {
-      width: 36px; height: 36px; border-radius: 8px;
+      width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border);
       background:
-        conic-gradient(from 200deg, var(--accent) 0deg, var(--accent-2) 120deg, #444 220deg, var(--accent) 360deg);
-      border: 2px solid #222;
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.04), 0 6px 16px rgba(0,0,0,0.35);
+        conic-gradient(from 200deg, var(--accent) 0deg, var(--accent-2) 120deg, var(--accent-3) 240deg, var(--accent) 360deg);
+      box-shadow: var(--shadow);
     }
-    .menu {
-      display: flex; gap: 18px; align-items: center;
+    .nav {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px;
+      box-shadow: var(--shadow);
     }
-    .menu a {
+    .nav a {
       color: var(--muted);
-      padding: 8px 12px; border-radius: 8px;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
     }
-    .menu a:hover {
-      color: var(--text);
-      background: rgba(30, 136, 229, 0.12);
-    }
-    .cta {
+    .nav a:hover { background: #eff4ff; color: #0f172a; }
+    .nav .cta {
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #fff; padding: 10px 14px; border-radius: 10px; font-weight: 700;
-      box-shadow: 0 8px 20px rgba(30,136,229,0.35);
+      color: #0f172a; border: 1px solid var(--border);
     }
-    .cta:hover { filter: brightness(1.05); }
-    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
     /* Hero */
     .hero {
-      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px;
-      align-items: center; padding: 40px 24px;
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: center;
+      padding: 28px 0 8px;
     }
-    .hero h1 {
-      font-size: 2.6rem; line-height: 1.1; margin: 0 0 14px;
-      letter-spacing: 0.4px;
-    }
-    .sub {
-      color: var(--muted); font-size: 1.06rem; margin-bottom: 20px;
-    }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero h1 { font-size: 2.6rem; line-height: 1.1; margin: 0 0 10px; }
+    .sub { color: var(--muted); font-size: 1.06rem; margin: 0 0 18px; }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn {
-      padding: 12px 16px; border-radius: 10px; font-weight: 700; border: 1px solid var(--border);
-      color: var(--text); background: #111520;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 16px; border-radius: 14px; font-weight: 700;
+      border: 1px solid var(--border); background: var(--surface); color: #0f172a;
+      box-shadow: var(--shadow);
     }
-    .btn:hover { background: #142033; }
-    .btn-outline {
-      background: transparent; border: 1px solid var(--accent-2); color: var(--text);
-    }
+    .btn:hover { background: #f3f6fb; }
+    .btn-outline { background: transparent; border: 1px solid var(--accent-2); }
     .hero-card {
-      background: linear-gradient(145deg, #121624, #0c101a);
-      border: 1px solid var(--border);
-      border-radius: 14px; padding: 14px; position: relative; overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      position: relative; border-radius: 20px;
+      border: 1px solid var(--border); background: var(--surface);
+      padding: 14px; box-shadow: var(--shadow); overflow: hidden;
     }
-    .printer-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    }
-    .fake-img {
-      aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; border: 1px solid #222;
-      position: relative;
+    .blob {
+      position: absolute; inset: -30% -20% auto auto; width: 70%; height: 70%;
       background:
-        radial-gradient(circle at 30% 20%, rgba(255,106,0,0.3), transparent 40%),
-        radial-gradient(circle at 70% 60%, rgba(30,136,229,0.35), transparent 45%),
-        linear-gradient(180deg, #0a0d12, #111622);
+        radial-gradient(circle at 35% 35%, rgba(141,211,199,0.35), transparent 45%),
+        radial-gradient(circle at 65% 60%, rgba(128,177,211,0.35), transparent 50%),
+        radial-gradient(circle at 55% 20%, rgba(190,186,218,0.25), transparent 45%);
+      filter: blur(8px);
     }
-    .fake-img::after {
-      content: "3D Print Showcase";
-      position: absolute; bottom: 10px; right: 12px;
-      color: rgba(255,255,255,0.7); font-size: 0.9rem;
-      background: rgba(0,0,0,0.35); padding: 6px 10px; border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.12);
+    .printer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fake-img{
+      aspect-ratio: 16/10; border-radius: 16px; border:1px solid var(--border); overflow: hidden; position: relative;
+      background:
+        linear-gradient(180deg, #ffffff, #f6f8fc);
+    }
+    .fake-img::before{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(300px 200px at 25% 25%, rgba(141,211,199,0.35), transparent 60%),
+        radial-gradient(320px 220px at 75% 60%, rgba(128,177,211,0.35), transparent 60%);
     }
     .chip {
       position: absolute; top: 10px; left: 10px;
-      background: rgba(255,106,0,0.12); color: var(--text);
-      border: 1px solid rgba(255,106,0,0.35);
       padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+      color: #0f172a; background: #f2f6ff; border: 1px solid var(--border);
     }
+    .note { color: var(--muted); font-size: 0.92rem; }
+
+    /* Section wrapper: stacked cards */
+    .stack { display: grid; gap: 18px; padding: 22px 0 40px; }
+    .section-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 22px; box-shadow: var(--shadow);
+    }
+    .section-card h2 { margin: 0 0 8px; font-size: 1.6rem; }
+    .section-card p.lead { margin: 0 0 16px; color: var(--muted); }
+
     /* Services */
-    .section { padding: 40px 24px; }
-    .section h2 { font-size: 1.8rem; margin: 0 0 10px; }
-    .section p.lead { color: var(--muted); margin: 0 0 20px; }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+      background: #ffffff; border: 1px solid var(--border); border-radius: 16px;
+      padding: 16px; box-shadow: var(--shadow);
     }
-    .card h3 { margin: 0 0 8px; font-size: 1.2rem; }
-    .card p { color: var(--muted); margin: 0 0 12px; }
-    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; margin-right: 8px; border: 1px solid var(--border); color: var(--muted); }
-    /* Gallery */
+    .card h3 { margin: 0 0 6px; font-size: 1.14rem; }
+    .card p { margin: 0 0 10px; color: var(--muted); }
+    .tag {
+      display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem;
+      border: 1px solid var(--border); color: var(--muted); background: #f8fafc; margin-right: 6px;
+    }
+
+    /* Gallery: rounded tiles */
     .gallery {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
     }
-    .gallery .fake-img { aspect-ratio: 1/1; }
-    .gallery .fake-img::after { content: "Sample Print"; }
-    /* Quote */
-    .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .input, textarea {
-      width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border);
-      background: #101522; color: var(--text);
+    .tile {
+      position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+      background: #ffffff; box-shadow: var(--shadow);
     }
-    textarea { min-height: 120px; }
-    .note { color: var(--muted); font-size: 0.92rem; }
+    .tile .img {
+      aspect-ratio: 1 / 1;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(253,180,98,0.28), transparent 40%),
+        radial-gradient(circle at 70% 65%, rgba(190,186,218,0.28), transparent 45%),
+        linear-gradient(180deg, #f2f5fb, #ffffff);
+    }
+    .tile .label {
+      position: absolute; top: 10px; left: 10px;
+      background: #ffffffaa; backdrop-filter: blur(4px);
+      border: 1px solid var(--border); border-radius: 999px; padding: 6px 10px; font-weight: 700; color:#0f172a;
+    }
+
+    /* Calculator */
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .input, select, textarea {
+      width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border);
+      background: #ffffff; color: var(--text); box-shadow: 0 4px 10px rgba(31,41,55,0.03);
+    }
+    .calc-result {
+      margin-top: 10px; padding: 12px; border-radius: 12px; border: 1px solid var(--border);
+      background: #f8fafc; color: #0f172a;
+    }
+    .price-badge {
+      display: inline-block; margin-top: 8px;
+      background: linear-gradient(90deg, var(--accent-4), var(--accent-5));
+      color: #0f172a; font-weight: 800; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border);
+    }
+
+    /* Quote layout */
+    .quote {
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px;
+    }
+
     /* Footer */
     footer {
-      border-top: 1px solid var(--border); color: var(--muted);
-      padding: 24px; text-align: center;
+      margin-top: 24px;
+      color: var(--muted); text-align: center; padding: 22px 0;
     }
+
     /* Responsive */
-    @media (max-width: 960px) {
+    @media (max-width: 1000px){
       .hero { grid-template-columns: 1fr; }
+      .quote { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 800px){
       .cards { grid-template-columns: 1fr 1fr; }
       .gallery { grid-template-columns: 1fr 1fr; }
-      .quote-grid { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 640px) {
-      .cards { grid-template-columns: 1fr; }
-      .gallery { grid-template-columns: 1fr; }
+    @media (max-width: 520px){
+      .cards, .gallery { grid-template-columns: 1fr; }
+      .nav { display:none; } /* keep header minimal on small screens */
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="nav">
+    <div class="nav-wrap">
       <div class="brand">
         <div class="logo"></div>
-        <span>O.B & Co | Home Manufacturing & Design</span>
+        <div>O.B & Co | Home Manufacturing & Design</div>
       </div>
-      <nav class="menu">
+      <nav class="nav">
         <a href="#home">Home</a>
-        <a href="#shop">Shop Custom Parts</a>
-        <a href="#quote" class="cta">Request a Quote</a>
+        <a href="#shop">Shop</a>
+        <a href="#quote" class="cta">Quote</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -180,115 +231,256 @@
           Whether you need a replacement part for a vehicle, a custom enclosure for electronics,
           or a personalized gift, we print it with industrial-grade precision right here in our workshop.
         </p>
-        <div class="hero-actions">
+        <div class="buttons">
           <a class="btn" href="#shop">Shop Sample Parts</a>
           <a class="btn btn-outline" href="#quote">Get a Fast Quote</a>
         </div>
         <p class="note" style="margin-top:12px;">
-          Flashforge Adventurer 5M for rapid prototyping • Bambu Lab P1S for multi-color, high-detail production.
+          Flashforge Adventurer 5M for rapid prototyping • Bambu Lab P2S for multi-color, high-detail production.
         </p>
       </div>
       <div class="hero-card">
+        <div class="blob" aria-hidden="true"></div>
         <div class="printer-grid">
           <div class="fake-img">
             <div class="chip">Flashforge A5M — Prototyping</div>
           </div>
           <div class="fake-img">
-            <div class="chip">Bambu Lab P1S — Production</div>
+            <div class="chip">Bambu Lab P2S — Production</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="services" class="section">
-      <h2>What We Offer</h2>
-      <p class="lead">From concept to finished part — CAD design, functional prototypes, and production prints.</p>
-      <div class="cards">
-        <div class="card">
-          <h3>Custom CAD Design</h3>
-          <p>Bring your idea or problem — we’ll model it for fit and function. Ideal for 4x4 mods, brackets, enclosures.</p>
-          <span class="tag">STL/STEP</span><span class="tag">Tolerance Fit</span><span class="tag">Iterative Design</span>
-        </div>
-        <div class="card">
-          <h3>Rapid Prototyping</h3>
-          <p>Fast turnaround prints for testing dimensions and ergonomics before final production.</p>
-          <span class="tag">PLA/PLA+ </span><span class="tag">Draft & Fine</span><span class="tag">Same-Day Options</span>
-        </div>
-        <div class="card">
-          <h3>Production Printing</h3>
-          <p>High-quality parts with strength and detail, including multi-color and functional materials.</p>
-          <span class="tag">PETG/ABS/TPU</span><span class="tag">Multi-Color</span><span class="tag">Batch Runs</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="shop" class="section">
-      <h2>Sample Products</h2>
-      <p class="lead">Visual placeholders — swap with real photos later.</p>
-      <div class="gallery">
-        <div class="fake-img"><div class="chip">Enclosure</div></div>
-        <div class="fake-img"><div class="chip">Cable Guide</div></div>
-        <div class="fake-img"><div class="chip">Dash Clip</div></div>
-        <div class="fake-img"><div class="chip">Camera Mount</div></div>
-        <div class="fake-img"><div class="chip">Badge</div></div>
-        <div class="fake-img"><div class="chip">Bracket</div></div>
-        <div class="fake-img"><div class="chip">Knob</div></div>
-        <div class="fake-img"><div class="chip">Vent Trim</div></div>
-      </div>
-    </section>
-
-    <section id="quote" class="section">
-      <h2>Request a Quote</h2>
-      <p class="lead">Upload your file or describe your idea. We’ll respond with options and pricing.</p>
-      <div class="quote-grid">
-        <form>
-          <label>Full Name</label>
-          <input class="input" type="text" placeholder="Your name"/>
-          <label>Email</label>
-          <input class="input" type="email" placeholder="you@example.com"/>
-          <label>Project Details</label>
-          <textarea placeholder="Material, size, quantity, use case..."></textarea>
-          <label>File (optional)</label>
-          <input class="input" type="file" />
-          <div style="margin-top:10px; display:flex; gap:10px;">
-            <button class="btn" type="submit">Submit</button>
-            <span class="note">We’ll reply within 24–48 hours.</span>
+    <div class="stack">
+      <section id="services" class="section-card">
+        <h2>What We Offer</h2>
+        <p class="lead">From concept to finished part — CAD design, functional prototypes, and production prints.</p>
+        <div class="cards">
+          <div class="card">
+            <h3>Custom CAD Design</h3>
+            <p>Bring your idea or problem — we’ll model it for fit and function. Ideal for 4x4 mods, brackets, enclosures.</p>
+            <span class="tag">STL/STEP</span><span class="tag">Tolerance Fit</span><span class="tag">Iterative Design</span>
           </div>
-        </form>
-        <div class="card">
-          <h3>Typical Pricing</h3>
-          <p class="note">Pricing varies by material, size, and complexity. Ballpark:</p>
-          <ul class="note">
-            <li>Draft Prototype: $15–$40</li>
-            <li>Production Part: $35–$120</li>
-            <li>CAD Design (hourly): $45/hr</li>
-          </ul>
-          <h3 style="margin-top:16px;">Material Options</h3>
-          <p class="note">PLA/PLA+ for quick tests • PETG for strength • ABS for heat • TPU for flexible parts.</p>
+          <div class="card">
+            <h3>Rapid Prototyping</h3>
+            <p>Fast turnaround prints for testing dimensions and ergonomics before final production.</p>
+            <span class="tag">PLA/PLA+</span><span class="tag">Draft & Fine</span><span class="tag">Same-Day Options</span>
+          </div>
+          <div class="card">
+            <h3>Production Printing</h3>
+            <p>High-quality parts with strength and detail, including multi-color and functional materials.</p>
+            <span class="tag">PETG/ABS/TPU</span><span class="tag">Multi-Color</span><span class="tag">Batch Runs</span>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p class="lead">Based in our home workshop. Local pickup or shipping available.</p>
-      <div class="cards" style="grid-template-columns: 1fr 1fr;">
-        <div class="card">
-          <h3>Reach Us</h3>
-          <p class="note">Email: hello@obco.workshop</p>
-          <p class="note">Phone: 04xx xxx xxx</p>
+      <section id="shop" class="section-card">
+        <h2>Sample Products</h2>
+        <p class="lead">Visual placeholders — swap with real photos later.</p>
+        <div class="gallery">
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Enclosure</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Cable Guide</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Dash Clip</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Camera Mount</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Badge</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Bracket</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Knob</div>
+          </div>
+          <div class="tile">
+            <div class="img"></div>
+            <div class="label">Vent Trim</div>
+          </div>
         </div>
-        <div class="card">
-          <h3>Social</h3>
-          <p class="note">Instagram: @obco.prints</p>
-          <p class="note">Facebook: O.B & Co</p>
+      </section>
+
+      <section id="calculator" class="section-card">
+        <h2>Pricing Calculator</h2>
+        <p class="lead">Estimate based on material, volume, and print time. Final quotes may vary.</p>
+        <div class="cards" style="grid-template-columns: 1.2fr 0.8fr;">
+          <div class="card">
+            <div class="calc-grid">
+              <div>
+                <label>Material</label>
+                <select id="material">
+                  <option value="PLA">PLA / PLA+</option>
+                  <option value="PETG">PETG</option>
+                  <option value="ABS">ABS</option>
+                  <option value="TPU">TPU (flex)</option>
+                </select>
+              </div>
+              <div>
+                <label>Estimated Volume (cm³)</label>
+                <input id="volume" class="input" type="number" placeholder="e.g. 35" />
+              </div>
+              <div>
+                <label>Estimated Print Time (hrs)</label>
+                <input id="hours" class="input" type="number" step="0.1" placeholder="e.g. 3.5" />
+              </div>
+              <div>
+                <label>Finish Quality</label>
+                <select id="quality">
+                  <option value="draft">Draft</option>
+                  <option value="standard">Standard</option>
+                  <option value="fine">Fine</option>
+                </select>
+              </div>
+            </div>
+            <div id="calcOut" class="calc-result">Enter details and click Calculate.</div>
+            <div style="margin-top:10px; display:flex; gap:10px;">
+              <button class="btn" id="calcBtn" type="button">Calculate</button>
+              <button class="btn btn-outline" id="copyBtn" type="button" title="Copy to clipboard">Copy</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Typical Pricing</h3>
+            <p class="note">Pricing varies by material, size, and complexity. Ballpark:</p>
+            <ul class="note">
+              <li>Draft Prototype: $15–$40</li>
+              <li>Production Part: $35–$120</li>
+              <li>CAD Design (hourly): $45/hr</li>
+            </ul>
+            <h3 style="margin-top:12px;">Material Notes</h3>
+            <p class="note">PLA/PLA+ for quick tests • PETG for strength • ABS for heat • TPU for flexible parts.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section id="quote" class="section-card">
+        <h2>Request a Quote</h2>
+        <p class="lead">Upload your file or describe your idea. We’ll respond with options and pricing.</p>
+        <div class="quote">
+          <form action="https://formspree.io/f/your_form_id" method="POST" class="card" style="border-radius:16px;">
+            <label>Full Name</label>
+            <input class="input" name="name" type="text" placeholder="Your name" required/>
+            <label>Email</label>
+            <input class="input" name="email" type="email" placeholder="you@example.com" required/>
+            <label>Project Details</label>
+            <textarea name="details" placeholder="Material, size, quantity, use case..." required></textarea>
+            <label>Reference URL (optional)</label>
+            <input class="input" name="url" type="url" placeholder="Link to similar part or inspiration"/>
+            <div style="margin-top:10px; display:flex; gap:10px; align-items:center;">
+              <button class="btn" type="submit">Submit</button>
+              <span class="note">We’ll reply within 24–48 hours.</span>
+            </div>
+          </form>
+          <div class="card" style="border-radius:16px;">
+            <h3>How to get the best quote</h3>
+            <ul class="note">
+              <li>Include dimensions or a rough size reference (e.g., “about the size of a deck of cards”).</li>
+              <li>Tell us the intended use: cosmetic, load-bearing, heat exposure.</li>
+              <li>Quantity and finish preference (draft, standard, fine).</li>
+              <li>Attach a link to sketches or photos for context.</li>
+            </ul>
+            <h3 style="margin-top:12px;">Turnaround</h3>
+            <p class="note">Prototypes typically 24–72 hrs. Batch runs vary by quantity and complexity.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section-card">
+        <h2>Contact</h2>
+        <p class="lead">Based in our home workshop. Local pickup or shipping available.</p>
+        <div class="cards" style="grid-template-columns: 1fr 1fr;">
+          <div class="card">
+            <h3>Reach Us</h3>
+            <p class="note">Email: hello@obco.workshop</p>
+            <p class="note">Phone: 04xx xxx xxx</p>
+          </div>
+          <div class="card">
+            <h3>Photo Guide (for real product shots)</h3>
+            <ul class="note">
+              <li>Daylight near a window; turn off ceiling lights.</li>
+              <li>Neutral background (white card or wood table).</li>
+              <li>One 45° angle shot + a macro detail.</li>
+              <li>Remove stringing; wipe surfaces with isopropyl if safe.</li>
+              <li>Tap to focus; lower exposure a touch.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer>
     © O.B & Co — Home Manufacturing & Design • Fast Prototyping • High-Quality Production
   </footer>
+
+  <script>
+    // Simple pricing calculator + copy-to-clipboard
+    (function(){
+      const materialRates = {
+        PLA: { base: 0.12, hourly: 8 },
+        PETG: { base: 0.16, hourly: 10 },
+        ABS: { base: 0.18, hourly: 11 },
+        TPU: { base: 0.20, hourly: 12 }
+      };
+      const qualityMultiplier = { draft: 0.9, standard: 1.0, fine: 1.25 };
+      const out = document.getElementById('calcOut');
+
+      const format = n => "$" + n.toFixed(2);
+
+      document.getElementById('calcBtn').addEventListener('click', () => {
+        const mat = document.getElementById('material').value;
+        const vol = parseFloat(document.getElementById('volume').value || "0");
+        const hrs = parseFloat(document.getElementById('hours').value || "0");
+        const qual = document.getElementById('quality').value;
+
+        if (vol <= 0 || hrs <= 0) {
+          out.textContent = "Please enter positive values for volume and hours.";
+          return;
+        }
+        const rates = materialRates[mat];
+        const mult = qualityMultiplier[qual];
+
+        const materialCost = vol * rates.base;
+        const timeCost = hrs * rates.hourly;
+        const serviceFee = 5;
+        let subtotal = (materialCost + timeCost + serviceFee) * mult;
+        if (hrs > 6) subtotal *= 0.95;
+
+        const gst = subtotal * 0.10;
+        const total = subtotal + gst;
+
+        out.innerHTML =
+          "<div><strong>Estimate:</strong> " + format(total) + " (incl. GST)</div>" +
+          "<div style='margin-top:6px'>Material: " + mat + " • Volume: " + vol + " cm³ • Time: " + hrs + " hrs • Quality: " + qual + "</div>" +
+          "<div class='price-badge'>Subtotal " + format(subtotal) + " • GST " + format(gst) + "</div>";
+      });
+
+      document.getElementById('copyBtn').addEventListener('click', async () => {
+        const text = out.innerText.trim();
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          const original = document.getElementById('copyBtn').textContent;
+          document.getElementById('copyBtn').textContent = "Copied!";
+          setTimeout(() => document.getElementById('copyBtn').textContent = original, 1200);
+        } catch(e) {
+          alert("Copy failed. You can select the text and copy manually.");
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
